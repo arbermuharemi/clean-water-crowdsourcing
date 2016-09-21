@@ -6,24 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
 
 public class Main extends Application {
-
-    private Stage welcomeStage;
+    private Stage window;
     private GridPane welcomeLayout;
-
-    private Stage loginStage;
     private AnchorPane loginLayout;
+    private VBox applicationLayout;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        welcomeStage = primaryStage;
+        window = primaryStage;
         loadWelcome();
-        loginStage = new Stage();
     }
 
     public void loadWelcome() {
@@ -35,10 +33,30 @@ public class Main extends Application {
             WelcomeController controller = loader.getController();
             controller.setMainApp(this);
 
-            welcomeStage.setTitle("Welcome Page");
+            window.setTitle("Welcome Page");
             Scene welcomeScene = new Scene(welcomeLayout);
-            welcomeStage.setScene(welcomeScene);
-            welcomeStage.show();
+            window.setScene(welcomeScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadApplication() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/ApplicationScreen.fxml"));
+            applicationLayout = loader.load();
+
+            ApplicationController controller = loader.getController();
+            controller.setMainApp(this);
+
+            window.setTitle("Login Page");
+            Scene applicationScene = new Scene(applicationLayout);
+            window.setScene(applicationScene);
+            window.show();
         } catch(IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
@@ -55,10 +73,10 @@ public class Main extends Application {
             LoginScreenController controller = loader.getController();
             controller.setMainApp(this);
 
-            loginStage.setTitle("Login Page");
+            window.setTitle("Login Page");
             Scene loginScene = new Scene(loginLayout);
-            loginStage.setScene(loginScene);
-            loginStage.show();
+            window.setScene(loginScene);
+            window.show();
         } catch(IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
