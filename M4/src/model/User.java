@@ -4,8 +4,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class User {
-    private StringProperty _username = new StringProperty();
-    private StringProperty _password = new StringProperty();
+    private StringProperty _username = new SimpleStringProperty();
+    private StringProperty _password = new SimpleStringProperty();
 
     public String getUserName() { return _username.get(); }
     public void setUserName(String name) { _username.set(name); }
