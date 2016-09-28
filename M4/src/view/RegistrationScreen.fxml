@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegistrationScreenContoller">
     <GridPane prefHeight="500.0" prefWidth="600.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
@@ -28,6 +28,7 @@
             <RowConstraints minHeight="10.0" prefHeight="50" />
         </rowConstraints>
         <children>
+            <Label fx:id= "applicationMessage" GridPane.columnIndex="1" GridPane.rowIndex="0" prefHeight="23.0" prefWidth="221.0" text="Sign Up"/>
             <Label fx:id="FirstLabel" text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <TextField fx:id="FirstField" text="Enter First Name Here" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="LastLabel" text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -37,15 +38,9 @@
             <Label fx:id="PassLabel" text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
             <TextField fx:id="passField" promptText="Enter Password Here" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="typeLabel" text="User Type:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <ComboBox fx:id="typeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" />
-
-
-
-
-
-            <Button fx:id="homeButton" onAction="#handleHomePressed" text="Home" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-
-            <Button fx:id="handleRegisterSubmit" onAction="#handleRegisterSubmitPressed" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ComboBox fx:id="typeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" promptText="User Type"/>
+            <Button fx:id="cancelButton" onAction="#handleCancelPressed" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Button fx:id="registerSubmitButton" onAction="#handleRegisterSubmitPressed" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="6" />
 
 
         </children>

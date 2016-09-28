@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert;
@@ -18,6 +19,9 @@ public class LoginScreenController {
 
     @FXML
     private TextField passField;
+
+    /*@FXML
+    private Button*/
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -40,6 +44,13 @@ public class LoginScreenController {
             alert.showAndWait();
         }
     }
+
+    @FXML
+    private void handleSignUpPressed() {
+        myApp.loadRegister();
+    }
+
+
 
 
 }

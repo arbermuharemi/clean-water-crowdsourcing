@@ -3,6 +3,7 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 /**
@@ -11,6 +12,12 @@ import javafx.scene.control.ComboBox;
 public class RegistrationScreenContoller {
 
     private Main myApp;
+
+    @FXML
+    private Button registerSubmitButton;
+
+    @FXML
+    private Button cancelButton;
 
     private ObservableList<String> typeList = FXCollections.observableArrayList("User", "Worker", "Manager", "Admin");
 
@@ -26,10 +33,15 @@ public class RegistrationScreenContoller {
         myApp = mainApp;
     }
 
+    @FXML
     private void handleRegisterSubmitPressed() {
         myApp.loadApplication();
     }
 
+    @FXML
+    private void handleCancelPressed() {
+        myApp.loadWelcome();
+    }
 
 
 

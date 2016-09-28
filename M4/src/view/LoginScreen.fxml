@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginScreenController">
     <GridPane prefHeight="214.0" prefWidth="600.0">
         <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="120.0" minWidth="10.0" prefWidth="100.0" />
@@ -28,7 +28,7 @@
             <TextField fx:id="userField" prefWidth="313.0" promptText="Enter Username Here" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="passField" promptText="Enter Password Here" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="homeButton" onAction="#handleHomePressed" text="Home" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <Button fx:id="signupButton" text="Sign Up" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Button fx:id="signupButton" onAction="#handleSignUpPressed" text="Sign Up" GridPane.columnIndex="2" GridPane.rowIndex="0" />
             <Button fx:id="submitButton" onAction="#handleSubmitPressed" text="Submit" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         </children>
     </GridPane>
