@@ -90,10 +90,10 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../view/RegistrationScreen.fxml"));
             registrationLayout = loader.load();
 
-            RegistrationScreenController controller = loader.getController();
+            RegistrationScreenContoller controller = loader.getController();
             controller.setMainApp(this);
 
-            window.setTitle("Regitration Page");
+            window.setTitle("Registration Page");
             Scene registrationScene = new Scene(registrationLayout);
             window.setScene(registrationScene);
             window.show();
