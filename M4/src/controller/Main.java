@@ -16,6 +16,7 @@ public class Main extends Application {
     private Stage window;
     private GridPane welcomeLayout;
     private AnchorPane loginLayout;
+    private AnchorPane registrationLayout;
     private VBox applicationLayout;
 
     @Override
@@ -76,6 +77,25 @@ public class Main extends Application {
             window.setTitle("Login Page");
             Scene loginScene = new Scene(loginLayout);
             window.setScene(loginScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void loadRegister() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/RegistrationScreen.fxml"));
+            registrationLayout = loader.load();
+
+            RegistrationScreenController controller = loader.getController();
+            controller.setMainApp(this);
+
+            window.setTitle("Regitration Page");
+            Scene registrationScene = new Scene(registrationLayout);
+            window.setScene(registrationScene);
             window.show();
         } catch(IOException e) {
             System.out.println(e.getMessage());

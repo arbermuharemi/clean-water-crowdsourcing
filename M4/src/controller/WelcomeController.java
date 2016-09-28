@@ -31,5 +31,12 @@ public class WelcomeController implements Initializable {
         myApp.loadLogin();
     }
 
+    @FXML
+    private void handleRegisterPressed() {
+        myApp.loadRegister();
+    }
+
+
+
 
 }

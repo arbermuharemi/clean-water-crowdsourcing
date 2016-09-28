@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="welcomePage" alignment="center" hgap="30" prefHeight="432.0" prefWidth="421.0" vgap="10" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
+<GridPane fx:id="welcomePage" alignment="center" hgap="30" prefHeight="432.0" prefWidth="421.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WelcomeController">
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
     <children>
        <Label fx:id="welcomeMessage" alignment="CENTER" prefHeight="23.0" prefWidth="221.0" text="Welcome" GridPane.columnIndex="1" GridPane.rowIndex="0">
@@ -16,7 +16,7 @@
             <Font name="System Bold" size="18.0" />
          </font></Label>
        <Button fx:id="loginButton" alignment="CENTER" onAction="#handleLoginPressed" prefHeight="27.0" prefWidth="70.0" GridPane.columnIndex="1" GridPane.rowIndex="1">Login</Button>
-       <Button fx:id="registerButton" alignment="CENTER" prefHeight="2.0" prefWidth="71.0" GridPane.columnIndex="1" GridPane.rowIndex="2">Register</Button>
+       <Button fx:id="registerButton" alignment="CENTER" onAction="#handleRegisterPressed" prefHeight="2.0" prefWidth="71.0" GridPane.columnIndex="1" GridPane.rowIndex="2">Register</Button>
     </children>
    <columnConstraints>
        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
