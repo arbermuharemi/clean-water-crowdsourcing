@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
+import java.io.File;
 
 import java.io.IOException;
 
@@ -18,10 +19,20 @@ public class Main extends Application {
     private AnchorPane loginLayout;
     private AnchorPane registrationLayout;
     private VBox applicationLayout;
+    private File newFile;
+
+    public Main() {
+        newFile = new File("credentials.txt");
+    }
+
+    public File getFile() {
+        return newFile;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
+        File newFile = new File("credentials.txt");
         loadWelcome();
     }
 
