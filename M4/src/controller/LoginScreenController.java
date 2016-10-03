@@ -41,10 +41,7 @@ public class LoginScreenController {
         if (checkCredentials(userField.getText(), passField.getText())) {
             myApp.loadApplication();
         } else {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Credentials Error");
-            alert.setContentText("Your login credentials are incorrect");
-            alert.showAndWait();
+            model.AlertMessage.sendMessage("Credentials Error", "You have entered invalid credentials so you cannot login to the application");
         }
     }
 
@@ -60,7 +57,7 @@ public class LoginScreenController {
                 }
             }
         } catch(FileNotFoundException e) {
-            System.out.println("Could not find the appropriate credentials file");
+            model.AlertMessage.sendMessage("File Not Found Error", "The file containing valid credentials was not found so credentials couldn't be validated");
         }
         return output;
     }

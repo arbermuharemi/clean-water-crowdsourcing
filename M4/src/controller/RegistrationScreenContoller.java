@@ -55,7 +55,7 @@ public class RegistrationScreenContoller {
             myWriter.write(userField.getText() + "," + passField.getText() + "\n");
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("The system couldn't find the appropriate credentials file");
+            model.AlertMessage.sendMessage("File Not Found Error", "The file containing valid credentials was not found so registration failed");
         }
         myApp.loadApplication();
     }
