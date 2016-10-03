@@ -52,7 +52,7 @@ public class RegistrationScreenContoller {
         try {
             FileWriter writer = new FileWriter("credentials.txt", true);
             BufferedWriter myWriter = new BufferedWriter(writer);
-            myWriter.write(userField.getText() + "," + passField.getText() + "\n");
+            myWriter.write(userField.getText() + "," + passField.getText() + "," + typeBox.getValue() + "\n");
             myWriter.close();
         } catch (IOException e) {
             model.AlertMessage.sendMessage("File Not Found Error", "The file containing valid credentials was not found so registration failed");
