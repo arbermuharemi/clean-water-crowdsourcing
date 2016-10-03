@@ -16,6 +16,8 @@
             <font>
                 <Font name="System Bold" size="18.0" />
             </font></Label>
-        <Button fx:id="logoutButton" alignment="BOTTOM_CENTER" onAction="#handleLogoutPressed" prefHeight="27.0" prefWidth="70.0">Logout</Button>
+        <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreatePressed" prefHeight="27.0" prefWidth="90.0">Create Profile</Button>
+        <Button fx:id="editButton" alignment="CENTER" onAction="#handleEditPressed" prefHeight="27.0" prefWidth="80.0">Edit Profile</Button>
+        <Button fx:id="logoutButton" alignment="BOTTOM_CENTER" onAction="#handleLogoutPressed" prefHeight="27.0" prefWidth="80.0">Logout</Button>
     </children>
 </VBox>

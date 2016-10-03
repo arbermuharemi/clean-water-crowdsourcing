@@ -29,13 +29,13 @@
         </rowConstraints>
         <children>
             <Label fx:id= "applicationMessage" GridPane.columnIndex="1" GridPane.rowIndex="0" prefHeight="23.0" prefWidth="221.0" text="Sign Up"/>
-            <Label fx:id="FirstLabel" text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="FirstField" text="Enter First Name Here" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="LastLabel" text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <TextField fx:id="LastField" text="Enter Last Name Here" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="UserLabel" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+            <Label fx:id="firstLabel" text="First Name:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <TextField fx:id="firstField" promptText="Enter First Name Here" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label fx:id="lastLabel" text="Last Name:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <TextField fx:id="lastField" promptText="Enter Last Name Here" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="userLabel" text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
             <TextField fx:id="userField" prefWidth="313.0" promptText="Enter Username Here" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="PassLabel" text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+            <Label fx:id="passLabel" text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
             <TextField fx:id="passField" promptText="Enter Password Here" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="typeLabel" text="User Type:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
             <ComboBox fx:id="typeBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="5" promptText="User Type"/>

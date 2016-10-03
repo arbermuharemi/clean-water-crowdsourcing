@@ -1,6 +1,10 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import model.User;
 
 /**
  * Created by chitramahajani on 9/20/16.
@@ -8,6 +12,17 @@ import javafx.fxml.FXML;
 public class ApplicationController {
 
     private Main myApp;
+
+    private User currentUser;
+
+    @FXML
+    private Label applicationMessage;
+
+    @FXML
+    private Button createButton;
+
+    @FXML
+    private Button editButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -17,5 +32,31 @@ public class ApplicationController {
     private void handleLogoutPressed() {
         myApp.loadWelcome();
     }
+
+    public void setCurrentUser(User user) {
+        currentUser = user;
+        applicationMessage.setText("Welcome " + currentUser.getFirstName());
+        if(currentUser.hasProfile()) {
+            createButton.setDisable(true);
+        } else {
+            editButton.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void handleEditPressed() {
+        if(currentUser.getProfile() == null) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Profile to Edit");
+            alert.setContentText("You have to make a profile to edit it. Click 'Create Profile' to make a profile.");
+            alert.showAndWait();
+        } else {
+            myApp.loadEditProfile(currentUser);
+        }
+
+    }
+
+    @FXML
+    private void handleCreatePressed() { myApp.loadCreateProfile(currentUser);}
 
 }

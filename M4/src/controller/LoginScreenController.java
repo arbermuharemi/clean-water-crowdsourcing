@@ -6,10 +6,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import model.User;
 
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /**
  * Created by Yash on 9/20/2016.
@@ -24,8 +23,13 @@ public class LoginScreenController {
     @FXML
     private TextField passField;
 
-    /*@FXML
-    private Button*/
+    @FXML
+    private Button homeButton;
+
+    @FXML
+    private Button signupButton;
+
+    @FXML Button submitButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -38,28 +42,27 @@ public class LoginScreenController {
 
     @FXML
     private void handleSubmitPressed() {
-        if (checkCredentials(userField.getText(), passField.getText())) {
-            myApp.loadApplication();
-        } else {
-            model.AlertMessage.sendMessage("Credentials Error", "You have entered invalid credentials so you cannot login to the application");
-        }
-    }
+        boolean loadApp = false;
+        User currentUser = new User(null, null, null, null, null);
+        String username = userField.getText();
+        String password = passField.getText();
+        ArrayList<User> userList = myApp.getUserList();
+        for(int j = 0; j < userList.size() && !loadApp; j++) {
+            User user = userList.get(j);
+            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                loadApp = true;
+                currentUser = user;
 
-    private boolean checkCredentials(String username, String password) {
-        boolean output = false;
-        try {
-            Scanner scanCredentials = new Scanner(new File("credentials.txt"));
-            while (scanCredentials.hasNext()) {
-                String credentialsLine = scanCredentials.nextLine();
-                String[] credentialsArr = credentialsLine.split(",");
-                if (credentialsArr[0].equals(username) && credentialsArr[1].equals(password)) {
-                    output = true;
-                }
             }
-        } catch(FileNotFoundException e) {
-            model.AlertMessage.sendMessage("File Not Found Error", "The file containing valid credentials was not found so credentials couldn't be validated");
         }
-        return output;
+        if (loadApp) {
+            myApp.loadApplication(currentUser);
+        } else {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("Credentials Error");
+            alert.setContentText("No user with these credentials exists. Please reenter your information, or if you have no made an account, click 'Sign Up'.");
+            alert.showAndWait();
+        }
     }
 
     @FXML

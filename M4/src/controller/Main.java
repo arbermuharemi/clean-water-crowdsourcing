@@ -9,9 +9,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXML;
-import java.io.File;
+import model.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main extends Application {
     private Stage window;
@@ -19,20 +20,13 @@ public class Main extends Application {
     private AnchorPane loginLayout;
     private AnchorPane registrationLayout;
     private VBox applicationLayout;
-    private File newFile;
-
-    public Main() {
-        newFile = new File("credentials.txt");
-    }
-
-    public File getFile() {
-        return newFile;
-    }
+    private AnchorPane editProfileLayout;
+    private AnchorPane createProfileLayout;
+    private static ArrayList<User> userArr = new ArrayList<User>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
-        File newFile = new File("credentials.txt");
         loadWelcome();
     }
 
@@ -55,7 +49,7 @@ public class Main extends Application {
         }
     }
 
-    public void loadApplication() {
+    public void loadApplication(User currentUser) {
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -64,6 +58,9 @@ public class Main extends Application {
 
             ApplicationController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setCurrentUser(currentUser);
+
+            System.out.println(currentUser.toString());
 
             window.setTitle("Login Page");
             Scene applicationScene = new Scene(applicationLayout);
@@ -114,7 +111,56 @@ public class Main extends Application {
         }
     }
 
+    public void loadEditProfile(User user) {
+        try {
 
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/EditProfileScreen.fxml"));
+            editProfileLayout = loader.load();
+
+            EditProfileScreenController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Edit Profile");
+            Scene editProfileScene = new Scene(editProfileLayout);
+            window.setScene(editProfileScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadCreateProfile(User user) {
+        try {
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/CreateProfileScreen.fxml"));
+            createProfileLayout = loader.load();
+
+            CreateProfileScreenController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Create Profile");
+            Scene createProfileScene = new Scene(createProfileLayout);
+            window.setScene(createProfileScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
+    public void addUser(User user) {
+        userArr.add(user);
+    }
+
+    public ArrayList<User> getUserList() {
+        return userArr;
+    }
 
     public static void main(String[] args) {
         launch(args);

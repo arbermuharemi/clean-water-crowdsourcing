@@ -6,26 +6,20 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import model.User;
 
 /**
  * Created by Yash on 9/28/2016.
  */
 public class RegistrationScreenContoller {
 
-    private Main myApp = new Main();
-    File newFile = myApp.getFile();
+    private Main myApp;
 
     @FXML
-    private Button registerSubmitButton;
+    private TextField firstField;
 
     @FXML
-    private Button cancelButton;
+    private TextField lastField;
 
     @FXML
     private TextField userField;
@@ -33,10 +27,17 @@ public class RegistrationScreenContoller {
     @FXML
     private TextField passField;
 
-    private ObservableList<String> typeList = FXCollections.observableArrayList("User", "Worker", "Manager", "Admin");
-
     @FXML
     private ComboBox<String> typeBox;
+
+    @FXML
+    private Button registerSubmitButton;
+
+    @FXML
+    private Button cancelButton;
+
+    private ObservableList<String> typeList = FXCollections.observableArrayList("User", "Worker", "Manager", "Admin");
+
 
     @FXML
     private void initialize() {
@@ -49,15 +50,10 @@ public class RegistrationScreenContoller {
 
     @FXML
     private void handleRegisterSubmitPressed() {
-        try {
-            FileWriter writer = new FileWriter("credentials.txt", true);
-            BufferedWriter myWriter = new BufferedWriter(writer);
-            myWriter.write(userField.getText() + "," + passField.getText() + "," + typeBox.getValue() + "\n");
-            myWriter.close();
-        } catch (IOException e) {
-            model.AlertMessage.sendMessage("File Not Found Error", "The file containing valid credentials was not found so registration failed");
-        }
-        myApp.loadApplication();
+        User newUser = new User(firstField.getText(), lastField.getText(), userField.getText(), passField.getText(), typeBox.getValue());
+        myApp.addUser(newUser);
+        myApp.loadApplication(newUser);
+
     }
 
     @FXML
