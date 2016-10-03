@@ -67,7 +67,4 @@ public class LoginScreenController {
         myApp.loadRegister();
     }
 
-
-
-
 }
