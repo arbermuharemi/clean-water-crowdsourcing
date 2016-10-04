@@ -38,10 +38,10 @@ public class RegistrationScreenContoller {
 
     private ObservableList<String> typeList = FXCollections.observableArrayList("User", "Worker", "Manager", "Admin");
 
-
     @FXML
     private void initialize() {
         typeBox.setItems(typeList);
+        typeBox.setValue("User");
     }
 
     public void setMainApp(Main mainApp) {
