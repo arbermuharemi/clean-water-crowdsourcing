@@ -4,3 +4,4 @@
 .gradle/
 out
 M2/build
+credentials.txt
