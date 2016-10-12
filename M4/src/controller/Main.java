@@ -22,6 +22,7 @@ public class Main extends Application {
     private VBox applicationLayout;
     private AnchorPane editProfileLayout;
     private AnchorPane createProfileLayout;
+    private AnchorPane sourceReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
 
     @Override
@@ -145,6 +146,26 @@ public class Main extends Application {
 
             window.setTitle("Create Profile");
             Scene createProfileScene = new Scene(createProfileLayout);
+            window.setScene(createProfileScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSourceReportPage(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/SubmitSourceReportScreen.fxml"));
+            sourceReportLayout = loader.load();
+
+            SubmitSourceReportScreenController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Submit Source Report");
+            Scene createProfileScene = new Scene(sourceReportLayout);
             window.setScene(createProfileScene);
             window.show();
         } catch(IOException e) {
