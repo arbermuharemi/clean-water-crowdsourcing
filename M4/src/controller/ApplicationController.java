@@ -24,6 +24,9 @@ public class ApplicationController {
     @FXML
     private Button editButton;
 
+    @FXML
+    private Button submitSourceReportButton;
+
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
     }
@@ -53,7 +56,11 @@ public class ApplicationController {
         } else {
             myApp.loadEditProfile(currentUser);
         }
+    }
 
+    @FXML
+    private void handleSubmitSourcePressed() {
+        myApp.loadSourceReportPage(currentUser);
     }
 
     @FXML
