@@ -4,7 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import model.SourceReport;
 import model.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by chitramahajani on 9/20/16.
@@ -61,6 +64,14 @@ public class ApplicationController {
     @FXML
     private void handleSubmitSourcePressed() {
         myApp.loadSourceReportPage(currentUser);
+    }
+
+    @FXML
+    private void handleViewReportsPressed() {
+        ArrayList<SourceReport> list = myApp.getSourceReportList();
+        for (SourceReport report: list) {
+            System.out.println(report.toString() + "\n");
+        }
     }
 
     @FXML

@@ -32,7 +32,7 @@
         <children>
             <Label fx:id= "applicationMessage" GridPane.columnIndex="1" GridPane.rowIndex="0" prefHeight="23.0" prefWidth="221.0">Submit Water Report</Label>
             <Label fx:id="latitudeLabel" text="Latitude:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <TextField fx:id="latitutdeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="latitudeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="latDirectionLabel" text="Direction:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <ComboBox fx:id="latBox" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="LEFT"/>
             <Label fx:id="longitudeLabel" text="Longitude:" GridPane.columnIndex="0" GridPane.rowIndex="3" />

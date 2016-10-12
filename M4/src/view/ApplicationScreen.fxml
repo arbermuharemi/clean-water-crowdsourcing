@@ -17,6 +17,7 @@
                 <Font name="System Bold" size="18.0" />
             </font></Label>
         <Button fx:id="submitSourceReportButton" alignment="CENTER" onAction="#handleSubmitSourcePressed" prefHeight="27.0" prefWidth="110.0">Submit Source Report</Button>
+        <Button fx:id="viewReportsButton" alignment="CENTER" onAction="#handleViewReportsPressed" prefHeight="27.0" prefWidth="110.0">View Reports</Button>
         <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreatePressed" prefHeight="27.0" prefWidth="90.0">Create Profile</Button>
         <Button fx:id="editButton" alignment="CENTER" onAction="#handleEditPressed" prefHeight="27.0" prefWidth="80.0">Edit Profile</Button>
         <Button fx:id="logoutButton" alignment="BOTTOM_CENTER" onAction="#handleLogoutPressed" prefHeight="27.0" prefWidth="80.0">Logout</Button>

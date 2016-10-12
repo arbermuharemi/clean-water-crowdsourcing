@@ -2,13 +2,12 @@ package controller;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.fxml.FXML;
+import model.SourceReport;
 import model.User;
 
 import java.io.IOException;
@@ -24,6 +23,7 @@ public class Main extends Application {
     private AnchorPane createProfileLayout;
     private AnchorPane sourceReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
+    private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -179,9 +179,13 @@ public class Main extends Application {
         userArr.add(user);
     }
 
+    public void addSourceReport(SourceReport report) { sourceReportList.add(report); }
+
     public ArrayList<User> getUserList() {
         return userArr;
     }
+
+    public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
 
     public static void main(String[] args) {
         launch(args);
