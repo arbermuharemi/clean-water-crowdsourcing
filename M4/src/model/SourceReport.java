@@ -83,4 +83,8 @@ public class SourceReport {
         _longitude.set(longitude);
 
     }
+
+    public String toString(){
+        return "Report Number: " +  _reportNumber + "\n" + "Reporter Name: " +  _reporterName + "\n" + "Date: " +  _date + "\n" + "Longitude: " +  _longitude + "\n" + "Latitude: " + _latitude +"\n" +"Water Type: " + _waterType + "\n" + "Water Condition: " + _waterCondition;
+    }
 }
