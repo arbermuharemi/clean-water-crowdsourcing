@@ -75,6 +75,7 @@ public class SubmitSourceReportScreenController {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
         SourceReport report = new SourceReport(reportCounter, name, date.toString(), longitudeField.getText() + longBox.getValue(), latitudeField.getText() + latBox.getValue(), typeField.getText(), conditionField.getText());
+        reportCounter++;
         myApp.addSourceReport(report);
         myApp.loadApplication(currentUser);
     }
