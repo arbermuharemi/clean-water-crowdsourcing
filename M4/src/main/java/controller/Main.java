@@ -38,8 +38,8 @@ public class Main extends Application {
         window = primaryStage;
         loadWelcome();
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setServiceAccount(new FileInputStream("path/to/serviceAccountCredentials.json"))
-                .setDatabaseUrl("https://databaseName.firebaseio.com/")
+                .setServiceAccount(new FileInputStream("cs2340-software-smiths-52b69024dd13.json"))
+                .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         firebase = FirebaseApp.initializeApp(options);
         database = FirebaseDatabase.getInstance(firebase);
