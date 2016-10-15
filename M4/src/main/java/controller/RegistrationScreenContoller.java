@@ -8,6 +8,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import main.java.model.User;
 
+
+import java.io.FileInputStream;
+
 /**
  * Created by Yash on 9/28/2016.
  */
@@ -42,7 +45,12 @@ public class RegistrationScreenContoller {
     private void initialize() {
         typeBox.setItems(typeList);
         typeBox.setValue("User");
-    }
+        FirebaseOptions options = new FirebaseOptions.Builder()
+            .setServiceAccount(new FileInputStream("../../../../../cs2340-software-smiths-52b69024dd13.json"))
+            .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
+            .build();
+        FirebaseApp.initializeApp(options);
+}
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
