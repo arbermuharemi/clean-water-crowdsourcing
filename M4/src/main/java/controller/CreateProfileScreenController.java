@@ -1,10 +1,10 @@
-package controller;
+package main.java.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import model.Profile;
-import model.User;
+import main.java.model.Profile;
+import main.java.model.User;
 
 /**
  * Created by Yash on 10/3/2016.

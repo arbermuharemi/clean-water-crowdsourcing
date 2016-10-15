@@ -1,4 +1,4 @@
-package controller;
+package main.java.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import model.User;
+import main.java.model.User;
 
 /**
  * Created by Yash on 9/28/2016.

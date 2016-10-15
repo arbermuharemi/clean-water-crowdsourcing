@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.layout.VBox?>
-<VBox fx:id="applicationPage" alignment="center" prefHeight="432.0" prefWidth="421.0" spacing = "40" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationController">
+<VBox fx:id="applicationPage" alignment="center" prefHeight="432.0" prefWidth="421.0" spacing = "40" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ApplicationController">
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
     <children>
         <Label fx:id= "applicationMessage" alignment="TOP_CENTER" prefHeight="23.0" prefWidth="221.0" text="Application">

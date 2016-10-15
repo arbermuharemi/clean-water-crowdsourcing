@@ -2,17 +2,5 @@ defaultTasks 'jar'
 apply plugin: 'java'
 
 dependencies {
-    compile fileTree(dir: 'lib', include: 'resources.jar')
-    runtime files('lib/resources.jar')
-    runtime fileTree(dir: 'lib', include: 'resources.jar')
-}
-
-jar {
-    manifest {
-        attributes(
-                'Class-Path': '../../lib/resources.jar',
-                'Main-Class': 'edu.gatech.oad.antlab.pkg1.AntLabMain',
-                'Implementation-Title': 'Gradle Quickstart'
-        )
-    }
+    compile 'com.google.firebase:firebase-server-sdk:3.0.1'
 }
