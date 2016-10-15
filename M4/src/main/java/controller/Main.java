@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import com.google.firebase.database.FirebaseDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,8 +11,11 @@ import javafx.stage.Stage;
 import main.java.model.SourceReport;
 import main.java.model.User;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import com.google.firebase.*;
 
 public class Main extends Application {
     private Stage window;
@@ -25,10 +29,21 @@ public class Main extends Application {
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
 
+
+    private static FirebaseApp firebase;
+    private static FirebaseDatabase database;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         window = primaryStage;
         loadWelcome();
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setServiceAccount(new FileInputStream("path/to/serviceAccountCredentials.json"))
+                .setDatabaseUrl("https://databaseName.firebaseio.com/")
+                .build();
+        firebase = FirebaseApp.initializeApp(options);
+        database = FirebaseDatabase.getInstance(firebase);
+        database.getReference("server/users");
     }
 
     public void loadWelcome() {
@@ -174,6 +189,9 @@ public class Main extends Application {
         }
     }
 
+    public FirebaseDatabase getDatabase () {
+        return database;
+    }
 
     public void addUser(User user) {
         userArr.add(user);
