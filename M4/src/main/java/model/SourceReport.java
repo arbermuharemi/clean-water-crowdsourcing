@@ -85,6 +85,12 @@ public class SourceReport {
     }
 
     public String toString(){
-        return "Report Number: " +  _reportNumber + "\n" + "Reporter Name: " +  _reporterName + "\n" + "Date: " +  _date + "\n" + "Longitude: " +  _longitude + "\n" + "Latitude: " + _latitude +"\n" +"Water Type: " + _waterType + "\n" + "Water Condition: " + _waterCondition;
+        return "Report Number: " +  get_reportNumber() + "\n" +
+                "Reporter Name: " + get_reporterName() + "\n" +
+                "Date: " +  get_date() + "\n" +
+                "Longitude: " + get_longitude() + "\n" +
+                "Latitude: " + get_latitude() +"\n" +
+                "Water Type: " + get_waterType() + "\n" +
+                "Water Condition: " + get_waterCondition();
     }
 }
