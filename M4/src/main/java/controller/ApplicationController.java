@@ -33,6 +33,8 @@ public class ApplicationController {
     @FXML
     private Button viewMapButton;
 
+
+
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
     }
@@ -42,6 +44,7 @@ public class ApplicationController {
         myApp.loadWelcome();
     }
 
+    @FXML
     public void setCurrentUser(User user) {
         currentUser = user;
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
@@ -49,6 +52,10 @@ public class ApplicationController {
             createButton.setDisable(true);
         } else {
             editButton.setDisable(true);
+        }
+        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
+        if (myReports.size() == 0) {
+            viewMapButton.setDisable(true);
         }
     }
 

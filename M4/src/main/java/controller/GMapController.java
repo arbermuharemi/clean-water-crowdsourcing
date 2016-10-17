@@ -33,9 +33,11 @@ public class GMapController implements Initializable, MapComponentInitializedLis
     @Override
     public void mapInitialized() {
         MapOptions mapOptions = new MapOptions();
-        LatLong center = new LatLong(34, -88);
-        mapOptions.center(center)
-                .zoom(9)
+        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
+        double latDefault = myReports.get(myReports.size() - 1).get_latitude();
+        double longDefault = myReports.get(myReports.size() - 1).get_longitude();
+        LatLong center = new LatLong(latDefault, longDefault);
+        mapOptions.center(center).zoom(8)
                 .overviewMapControl(false)
                 .panControl(false)
                 .rotateControl(false)
@@ -44,14 +46,13 @@ public class GMapController implements Initializable, MapComponentInitializedLis
                 .zoomControl(false)
                 .mapType(MapTypeIdEnum.TERRAIN);
         map = mapView.createMap(mapOptions);
-
-        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
         for (SourceReport report : myReports) {
             MarkerOptions option = new MarkerOptions();
             double latitude = report.get_latitude();
             double longitude = report.get_longitude();
             LatLong posPair = new LatLong(latitude, longitude);
             option.position(posPair);
+            mapOptions.center(posPair);
             Marker myMarker = new Marker(option);
             map.addMarker(myMarker);
             map.addUIEventHandler(myMarker,
