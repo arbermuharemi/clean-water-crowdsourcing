@@ -8,11 +8,15 @@ import com.lynden.gmapsfx.GoogleMapView;
         import com.lynden.gmapsfx.javascript.object.Marker;
         import com.lynden.gmapsfx.javascript.object.MarkerOptions;
         import java.net.URL;
-        import java.util.ResourceBundle;
-        import javafx.fxml.FXML;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+import com.sun.tools.javac.code.Source;
+import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.control.Button;
         import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import main.java.model.SourceReport;
 
 
 public class GMapController implements Initializable, MapComponentInitializedListener {
@@ -42,6 +46,17 @@ public class GMapController implements Initializable, MapComponentInitializedLis
                 .zoomControl(false)
                 .mapType(MapTypeIdEnum.TERRAIN);
         map = mapView.createMap(mapOptions);
+
+        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
+        for (SourceReport report : myReports) {
+            MarkerOptions option = new MarkerOptions();
+            double latitude = report.get_latitude();
+            double longitude = report.get_longitude();
+            LatLong posPair = new LatLong(latitude, longitude);
+            option.position(posPair);
+            Marker myMarker = new Marker(option);
+            map.addMarker(myMarker);
+        }
     }
 
     @Override
