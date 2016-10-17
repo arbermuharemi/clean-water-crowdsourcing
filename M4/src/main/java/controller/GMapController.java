@@ -1,13 +1,11 @@
 package main.java.controller;
 
 import com.lynden.gmapsfx.GoogleMapView;
-        import com.lynden.gmapsfx.MapComponentInitializedListener;
-        import com.lynden.gmapsfx.javascript.object.GoogleMap;
-        import com.lynden.gmapsfx.javascript.object.LatLong;
-        import com.lynden.gmapsfx.javascript.object.MapOptions;
-        import com.lynden.gmapsfx.javascript.object.Marker;
-        import com.lynden.gmapsfx.javascript.object.MarkerOptions;
-        import java.net.URL;
+import com.lynden.gmapsfx.MapComponentInitializedListener;
+import com.lynden.gmapsfx.javascript.event.UIEventType;
+import com.lynden.gmapsfx.javascript.object.*;
+
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -15,7 +13,7 @@ import com.sun.tools.javac.code.Source;
 import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.control.Button;
-        import com.lynden.gmapsfx.javascript.object.MapTypeIdEnum;
+import netscape.javascript.JSObject;
 import main.java.model.SourceReport;
 
 
@@ -56,6 +54,15 @@ public class GMapController implements Initializable, MapComponentInitializedLis
             option.position(posPair);
             Marker myMarker = new Marker(option);
             map.addMarker(myMarker);
+            map.addUIEventHandler(myMarker,
+                    UIEventType.click,
+                    (JSObject obj) -> {
+                        InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
+                        infoWindowOptions.content(report.toString());
+
+                        InfoWindow window = new InfoWindow(infoWindowOptions);
+                        window.open(map, myMarker);
+                    });
         }
     }
 
