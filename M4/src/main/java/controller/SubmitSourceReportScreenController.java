@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -42,19 +43,7 @@ public class SubmitSourceReportScreenController {
     private Button doneButton;
 
     @FXML
-    private ComboBox latBox;
-
-    @FXML
-    private ComboBox longBox;
-
-    private ObservableList<String> northList = FXCollections.observableArrayList("N", "S");
-
-    private ObservableList<String> westList = FXCollections.observableArrayList("E", "W");
-
-    @FXML
     private void initialize() {
-        latBox.setItems(northList);
-        longBox.setItems(westList);
     }
 
     public void setCurrentUser(User user) {
@@ -74,7 +63,10 @@ public class SubmitSourceReportScreenController {
     private void handleDonePressed() {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        SourceReport report = new SourceReport(reportCounter, name, date.toString(), longitudeField.getText() + longBox.getValue(), latitudeField.getText() + latBox.getValue(), typeField.getText(), conditionField.getText());
+        SourceReport report = new SourceReport(reportCounter, name, date
+                .toString(), Double.parseDouble(longitudeField.getText()),
+                Double.parseDouble(latitudeField.getText()),
+                typeField.getText(), conditionField.getText());
         reportCounter++;
         myApp.addSourceReport(report);
         myApp.loadApplication(currentUser);

@@ -1,9 +1,6 @@
 package main.java.model;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.*;
 
 /**
  * Created by vijay on 10/12/2016.
@@ -14,8 +11,8 @@ public class SourceReport {
     private StringProperty _waterType = new SimpleStringProperty();
     private StringProperty _waterCondition = new SimpleStringProperty();
     private IntegerProperty _reportNumber = new SimpleIntegerProperty();
-    private StringProperty _latitude = new SimpleStringProperty();
-    private StringProperty _longitude = new SimpleStringProperty();
+    private DoubleProperty _latitude = new SimpleDoubleProperty();
+    private DoubleProperty _longitude = new SimpleDoubleProperty();
 
     public String get_date() {
         return _date.get();
@@ -57,23 +54,25 @@ public class SourceReport {
         return _reportNumber;
     }
 
-    public String get_latitude() {
+    public double get_latitude() {
         return _latitude.get();
     }
 
-    public StringProperty _latitudeProperty() {
+    public DoubleProperty _latitudeProperty() {
         return _latitude;
     }
 
-    public String get_longitude() {
+    public double get_longitude() {
         return _longitude.get();
     }
 
-    public StringProperty _longitudeProperty() {
+    public DoubleProperty _longitudeProperty() {
         return _longitude;
     }
 
-    public SourceReport(int reportNumber, String reporterName, String date, String longitude, String latitude, String waterType, String waterCondition){
+    public SourceReport(int reportNumber, String reporterName, String date,
+                        double longitude, double latitude, String waterType,
+                        String waterCondition){
         _date.set(date);
         _reporterName.set(reporterName);
         _waterType.set(waterType);
