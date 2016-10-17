@@ -1,5 +1,6 @@
 package main.java.controller;
-        import com.lynden.gmapsfx.GoogleMapView;
+
+import com.lynden.gmapsfx.GoogleMapView;
         import com.lynden.gmapsfx.MapComponentInitializedListener;
         import com.lynden.gmapsfx.javascript.object.GoogleMap;
         import com.lynden.gmapsfx.javascript.object.LatLong;
@@ -21,6 +22,12 @@ public class GMapController implements Initializable, MapComponentInitializedLis
 
     private GoogleMap map;
 
+    private Main myApp;
+
+    public void setMainApp(Main mainApp) {
+        myApp = mainApp;
+    }
+
     @Override
     public void mapInitialized() {
         MapOptions mapOptions = new MapOptions();
@@ -40,5 +47,10 @@ public class GMapController implements Initializable, MapComponentInitializedLis
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         mapView.addMapInializedListener(this);
+    }
+
+    @FXML
+    public void onCloseMenu() {
+        myApp.closeMapView();
     }
 }

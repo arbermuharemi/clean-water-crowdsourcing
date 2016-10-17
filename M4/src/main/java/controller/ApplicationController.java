@@ -16,7 +16,7 @@ public class ApplicationController {
 
     private Main myApp;
 
-    private User currentUser;
+    private static User currentUser;
 
     @FXML
     private Label applicationMessage;
@@ -29,6 +29,9 @@ public class ApplicationController {
 
     @FXML
     private Button submitSourceReportButton;
+
+    @FXML
+    private Button viewMapButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -47,6 +50,10 @@ public class ApplicationController {
         } else {
             editButton.setDisable(true);
         }
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
     }
 
     @FXML
@@ -72,6 +79,11 @@ public class ApplicationController {
         for (SourceReport report: list) {
             System.out.println(report.toString() + "\n");
         }
+    }
+
+    @FXML
+    private void handleViewMapPressed() {
+        myApp.loadMap();
     }
 
     @FXML

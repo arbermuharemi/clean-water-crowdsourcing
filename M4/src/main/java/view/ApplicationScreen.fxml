@@ -3,21 +3,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.layout.VBox?>
-<VBox fx:id="applicationPage" alignment="center" prefHeight="432.0" prefWidth="421.0" spacing = "40" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ApplicationController">
+<VBox fx:id="applicationPage" alignment="center" prefHeight="432.0" prefWidth="421.0" spacing="40" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.ApplicationController">
     <padding><Insets bottom="10" left="25" right="25" top="25" /></padding>
     <children>
-        <Label fx:id= "applicationMessage" alignment="TOP_CENTER" prefHeight="23.0" prefWidth="221.0" text="Application">
+        <Label fx:id="applicationMessage" alignment="TOP_CENTER" prefHeight="23.0" prefWidth="221.0" text="Application">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font></Label>
-        <Button fx:id="submitSourceReportButton" alignment="CENTER" onAction="#handleSubmitSourcePressed" prefHeight="27.0" prefWidth="110.0">Submit Source Report</Button>
-        <Button fx:id="viewReportsButton" alignment="CENTER" onAction="#handleViewReportsPressed" prefHeight="27.0" prefWidth="110.0">View Reports</Button>
+        <Button fx:id="submitSourceReportButton" alignment="CENTER" minWidth="0.0" onAction="#handleSubmitSourcePressed" text="Submit Source Report" textOverrun="CLIP">Submit Source Report</Button>
+        <Button fx:id="viewReportsButton" alignment="CENTER" onAction="#handleViewReportsPressed">View Reports</Button>
+        <Button id="viewMapButton" mnemonicParsing="false" text="View Map Report" onAction="#handleViewMapPressed"/>
         <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreatePressed" prefHeight="27.0" prefWidth="90.0">Create Profile</Button>
         <Button fx:id="editButton" alignment="CENTER" onAction="#handleEditPressed" prefHeight="27.0" prefWidth="80.0">Edit Profile</Button>
         <Button fx:id="logoutButton" alignment="BOTTOM_CENTER" onAction="#handleLogoutPressed" prefHeight="27.0" prefWidth="80.0">Logout</Button>

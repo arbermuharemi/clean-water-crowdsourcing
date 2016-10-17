@@ -3,6 +3,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,6 +24,7 @@ public class Main extends Application {
     private AnchorPane editProfileLayout;
     private AnchorPane createProfileLayout;
     private AnchorPane sourceReportLayout;
+    private BorderPane mapReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
 
@@ -167,13 +169,36 @@ public class Main extends Application {
             controller.setCurrentUser(user);
 
             window.setTitle("Submit Source Report");
-            Scene createProfileScene = new Scene(sourceReportLayout);
-            window.setScene(createProfileScene);
+            Scene createReportScene = new Scene(sourceReportLayout);
+            window.setScene(createReportScene);
             window.show();
         } catch(IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public void loadMap() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/GMap.fxml"));
+            mapReportLayout = loader.load();
+
+            GMapController controller = loader.getController();
+            controller.setMainApp(this);
+
+            window.setTitle("Water Report Map");
+            Scene createMapScene = new Scene(mapReportLayout);
+            window.setScene(createMapScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void closeMapView() {
+        loadApplication(ApplicationController.getCurrentUser());
     }
 
     public void addUser(User user) {
