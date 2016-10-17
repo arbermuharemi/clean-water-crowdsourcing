@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import main.java.model.User;
 
@@ -30,7 +31,7 @@ public class RegistrationScreenContoller {
     private TextField userField;
 
     @FXML
-    private TextField passField;
+    private PasswordField passField;
 
     @FXML
     private ComboBox<String> typeBox;
