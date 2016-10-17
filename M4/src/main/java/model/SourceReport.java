@@ -70,6 +70,9 @@ public class SourceReport {
         return _longitude;
     }
 
+    public int getReportNumber() { return _reportNumber.getValue(); }
+
+
     public SourceReport(int reportNumber, String reporterName, String date,
                         double longitude, double latitude, String waterType,
                         String waterCondition){
@@ -92,4 +95,19 @@ public class SourceReport {
                 "Water Type: " + get_waterType() + "\n" +
                 "Water Condition: " + get_waterCondition();
     }
+
+    public String getTitle() {
+        return "<h2>Report " + this.getReportNumber() + "</h2>";
+    }
+
+    public String getDescription() {
+        return  "<h2>Report " +  this.getReportNumber() + "</h2>" + "\n\n" +
+                "Reporter Name: " + get_reporterName() + "\n" +
+                "<br> Date: " +  get_date() + "\n" +
+                "<br> Longitude: " + get_longitude() + "\n" +
+                "<br> Latitude: " + get_latitude() +"\n" +
+                "<br> Water Type: " + get_waterType() + "\n" +
+                "<br> Water Condition: " + get_waterCondition() + "</h2>";
+    }
+
 }

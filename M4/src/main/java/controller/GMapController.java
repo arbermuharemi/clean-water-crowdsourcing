@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import com.sun.tools.javac.code.Source;
+
 import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.control.Button;
@@ -51,15 +51,18 @@ public class GMapController implements Initializable, MapComponentInitializedLis
             double latitude = report.get_latitude();
             double longitude = report.get_longitude();
             LatLong posPair = new LatLong(latitude, longitude);
-            option.position(posPair);
+            option.position(posPair)
+                    .visible(Boolean.TRUE)
+                    .title(report.getTitle());
             mapOptions.center(posPair);
+
             Marker myMarker = new Marker(option);
             map.addMarker(myMarker);
             map.addUIEventHandler(myMarker,
                     UIEventType.click,
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content(report.toString());
+                        infoWindowOptions.content(report.getDescription());
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, myMarker);
