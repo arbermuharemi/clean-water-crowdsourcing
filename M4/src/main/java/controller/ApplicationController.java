@@ -48,13 +48,19 @@ public class ApplicationController {
     public void setCurrentUser(User user) {
         currentUser = user;
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
-        if(currentUser.hasProfile()) {
+        if (currentUser.hasProfile()) {
             createButton.setDisable(true);
         } else {
             editButton.setDisable(true);
         }
-        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
-        if (myReports.size() == 0) {
+        if (currentUser.getType().equals("Worker")) {
+            // show water purity report button
+            // button.setVisible(true)
+        } else {
+            // make the button INVISIBLE
+            // button.setVisible(false)
+        }
+        if (myApp.getSourceReportList().size() == 0) {
             viewMapButton.setDisable(true);
         }
     }
