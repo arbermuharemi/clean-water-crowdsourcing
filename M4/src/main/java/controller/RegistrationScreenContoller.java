@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import main.java.model.AlertMessage;
 import main.java.model.User;
 
 
@@ -57,10 +58,20 @@ public class RegistrationScreenContoller {
 
     @FXML
     private void handleRegisterSubmitPressed() {
-        User newUser = new User(firstField.getText(), lastField.getText(), userField.getText(), passField.getText(), typeBox.getValue());
-        myApp.addUser(newUser);
-        myApp.loadApplication(newUser);
-
+        String validNameRegex = "^[a-zA-Z]+$";
+        String firstName = firstField.getText();
+        String lastName = lastField.getText();
+        String userName = userField.getText();
+        if (!firstName.matches(validNameRegex)
+                || !lastName.matches(validNameRegex)) {
+            AlertMessage.sendMessage("Invalid Name", "Your first and last " +
+                    "name can only contain letters");
+        } else {
+            User newUser = new User(firstName, lastName, userName,
+                    passField.getText(), typeBox.getValue());
+            myApp.addUser(newUser);
+            myApp.loadApplication(newUser);
+        }
     }
 
     @FXML
