@@ -24,6 +24,7 @@ public class Main extends Application {
     private AnchorPane editProfileLayout;
     private AnchorPane createProfileLayout;
     private AnchorPane sourceReportLayout;
+    private AnchorPane waterReportLayout;
     private BorderPane mapReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
@@ -170,6 +171,26 @@ public class Main extends Application {
 
             window.setTitle("Submit Source Report");
             Scene createReportScene = new Scene(sourceReportLayout);
+            window.setScene(createReportScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadWaterReport(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/SubmitWaterReportScreen.fxml"));
+            waterReportLayout = loader.load();
+
+            SubmitSourceReportScreenController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Submit Source Report");
+            Scene createReportScene = new Scene(waterReportLayout);
             window.setScene(createReportScene);
             window.show();
         } catch(IOException e) {

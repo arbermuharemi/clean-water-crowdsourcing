@@ -104,7 +104,7 @@ public class ApplicationController {
 
     @FXML
     private void handleSubmitReportPressed() {
-        myApp.loadSourceReportPage(currentUser);
+        myApp.loadWaterReport(currentUser);
     }
 
     @FXML
