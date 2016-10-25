@@ -208,9 +208,9 @@ public class Main extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
             viewReportLayout = loader.load();
-
             ViewSourceReportScreenController controller = loader.getController();
-
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
             window.setTitle("Submit Source Report");
             Scene createReportScene = new Scene(viewReportLayout);
             window.setScene(createReportScene);
@@ -257,6 +257,8 @@ public class Main extends Application {
     }
 
     public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
+
+    public ArrayList<PurityReport> getPurityReportList() { return purityReportList; }
 
     public static void main(String[] args) {
         launch(args);
