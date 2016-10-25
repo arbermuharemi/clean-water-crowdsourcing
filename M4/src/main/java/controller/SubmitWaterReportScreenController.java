@@ -7,6 +7,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import main.java.model.PurityReport;
+import main.java.model.Report;
 import main.java.model.User;
 
 import java.util.Date;
@@ -31,15 +32,14 @@ public class SubmitWaterReportScreenController {
     @FXML
     private TextField contaminantField;
 
-    private static int reportCounter = 0;
-
     private User currentUser;
 
     private Main myApp;
 
     private Date date;
 
-    ObservableList<String> myConditions = FXCollections.observableArrayList("Safe", "Treatable", "Unsafe");
+    private ObservableList<String> myConditions = FXCollections
+            .observableArrayList("Safe", "Treatable", "Unsafe");
 
 
     @FXML
@@ -64,11 +64,14 @@ public class SubmitWaterReportScreenController {
     private void handleDonePressed() {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        PurityReport report = new PurityReport(reportCounter, name, date
-                .toString(), Double.parseDouble(longitudeField.getText()),
-                Double.parseDouble(latitudeField.getText()), conditionValue.getValue().toString(),
-                Double.parseDouble(virusField.getText()), Double.parseDouble(contaminantField.getText()));
-        reportCounter++;
+        PurityReport report = new PurityReport(Report.generateReportNumber(),
+                name, date.toString(),
+                Double.parseDouble(longitudeField.getText()),
+                Double.parseDouble(latitudeField.getText()),
+                conditionValue.getValue().toString(),
+                Double.parseDouble(virusField.getText()),
+                Double.parseDouble(contaminantField.getText()));
+
         myApp.addPurityReport(report);
         myApp.loadApplication(currentUser);
     }
