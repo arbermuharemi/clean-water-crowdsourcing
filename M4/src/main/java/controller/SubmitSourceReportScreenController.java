@@ -66,7 +66,7 @@ public class SubmitSourceReportScreenController {
         try {
             longitude = Double.parseDouble(longitudeField.getText());
             latitude = Double.parseDouble(latitudeField.getText());
-            if (longitude > 90 || longitude < -90
+            if (latitude > 90 || latitude < -90
                     || longitude > 180 || longitude < -180) {
                 AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
                         "must be between -90 and 90; longitude must be " +
