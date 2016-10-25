@@ -11,7 +11,7 @@ public class User {
     private StringProperty _lastName = new SimpleStringProperty();
     private StringProperty _username = new SimpleStringProperty();
     private StringProperty _password = new SimpleStringProperty();
-    private StringProperty _type = new SimpleStringProperty();
+    private Type _type = Type.USER;
     private Profile userProfile;
     private boolean hasProfile;
 
@@ -28,7 +28,21 @@ public class User {
         _lastName.set(lastName);
         _username.set(username);
         _password.set(password);
-        _type.set(type);
+        type = type.toLowerCase();
+        switch(type.charAt(0)){
+            case 'u':
+                _type = Type.USER;
+                break;
+            case 'm':
+                _type = Type.MANAGER;
+                break;
+            case 'w':
+                _type = Type.WORKER;
+                break;
+            case 'a':
+                _type = Type.ADMIN;
+                break;
+        }
     }
 
     /**
@@ -89,14 +103,14 @@ public class User {
      *
      * @return the user's profile type
      */
-    public String getType() {return _type.get(); }
+    public Type getType() {return _type;}
 
 
     /**
      * A setter that sets the user's profile type (User, Worker, Admin, etc.)
      *
      */
-    public void setType(String userType) { _type.set(userType); }
+    public void setType(Type userType) { _type = userType; }
 
     /**
      * Associates a new Profile with a user
@@ -124,11 +138,11 @@ public class User {
         if(userProfile == null) {
             return "Name: " + _firstName.get() + " " + _lastName.get() + "\n" +
                     "Username: " + _username.get() + "\n" + "Password: " + _password.get() +
-                    "\n" + "Type: " + _type.get() + "\n";
+                    "\n" + "Type: " + _type + "\n";
         } else {
             return "Name: " + _firstName.get() + " " + _lastName.get() + "\n" +
                     "Username: " + _username.get() + "\n" + "Password: " + _password.get() +
-                    "\n" + "Type: " + _type.get() + "\n" + userProfile.toString() + "\n";
+                    "\n" + "Type: " + _type + "\n" + userProfile.toString() + "\n";
         }
 
     }
@@ -141,5 +155,8 @@ public class User {
      */
     public boolean hasProfile() {
         return hasProfile;
+    }
+    public enum Type {
+        USER, WORKER, MANAGER, ADMIN
     }
 }
