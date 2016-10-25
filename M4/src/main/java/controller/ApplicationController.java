@@ -93,7 +93,7 @@ public class ApplicationController {
     }
 
     @FXML
-    private void handleViewReportsPressed() {
+    private void handleViewSourceReportsPressed() {
         ArrayList<Report> list = myApp.getSourceReportList();
         for (Report report: list) {
             System.out.println(report.toString() + "\n");
