@@ -7,9 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import main.java.model.Report;
-import main.java.model.SourceReport;
-import main.java.model.User;
+import main.java.model.*;
+
 import java.util.Date;
 
 /**
@@ -62,15 +61,32 @@ public class SubmitSourceReportScreenController {
     private void handleDonePressed() {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        SourceReport report = new SourceReport(Report.generateReportNumber(), name, date
-                .toString(), Double.parseDouble(longitudeField.getText()),
-                Double.parseDouble(latitudeField.getText()),
-                typeField.getText(), conditionField.getText());
-        myApp.addSourceReport(report);
-        myApp.loadApplication(currentUser);
+        double longitude;
+        double latitude;
+        try {
+            longitude = Double.parseDouble(longitudeField.getText());
+            latitude = Double.parseDouble(latitudeField.getText());
+            if (longitude > 90 || longitude < -90
+                    || longitude > 180 || longitude < -180) {
+                AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
+                        "must be between -90 and 90; longitude must be " +
+                        "between -180 and 180.");
+            } else {
+                SourceReport report = new SourceReport(
+                        Report.generateReportNumber(),
+                        name,
+                        date.toString(),
+                        longitude,
+                        latitude,
+                        typeField.getText(),
+                        conditionField.getText());
+                myApp.addSourceReport(report);
+                myApp.loadApplication(currentUser);
+            }
+        } catch (NumberFormatException | NullPointerException e) {
+            AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
+                    "and/or longitude you entered are not in valid format.");
+        }
     }
-
-
-
 
 }

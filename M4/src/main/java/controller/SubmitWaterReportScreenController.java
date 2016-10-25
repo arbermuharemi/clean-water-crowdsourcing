@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import main.java.model.AlertMessage;
 import main.java.model.PurityReport;
 import main.java.model.Report;
 import main.java.model.User;
@@ -64,15 +65,31 @@ public class SubmitWaterReportScreenController {
     private void handleDonePressed() {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        PurityReport report = new PurityReport(Report.generateReportNumber(),
-                name, date.toString(),
-                Double.parseDouble(longitudeField.getText()),
-                Double.parseDouble(latitudeField.getText()),
-                conditionValue.getValue().toString(),
-                Double.parseDouble(virusField.getText()),
-                Double.parseDouble(contaminantField.getText()));
+        double longitude;
+        double latitude;
+        try {
+            longitude = Double.parseDouble(longitudeField.getText());
+            latitude = Double.parseDouble(latitudeField.getText());
+            if (longitude > 90 || longitude < -90
+                    || longitude > 180 || longitude < -180) {
+                AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
+                        "must be between -90 and 90; longitude must be " +
+                        "between -180 and 180.");
+            } else {
+                PurityReport report = new PurityReport(Report.generateReportNumber(),
+                        name, date.toString(),
+                        longitude,
+                        latitude,
+                        conditionValue.getValue().toString(),
+                        Double.parseDouble(virusField.getText()),
+                        Double.parseDouble(contaminantField.getText()));
 
-        myApp.addPurityReport(report);
-        myApp.loadApplication(currentUser);
+                myApp.addPurityReport(report);
+                myApp.loadApplication(currentUser);
+            }
+        } catch (NumberFormatException | NullPointerException e) {
+            AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
+                    "and/or longitude you entered are not in valid format.");
+        }
     }
 }
