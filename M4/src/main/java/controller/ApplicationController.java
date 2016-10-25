@@ -29,15 +29,13 @@ public class ApplicationController {
     private Button editButton;
 
     @FXML
-    private Button submitSourceReportButton;
-
-    @FXML
     private Button viewMapButton;
 
     @FXML
     private Button submitReportButton;
 
-
+    @FXML
+    private Button viewSourceReportsButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -100,6 +98,7 @@ public class ApplicationController {
         for (SourceReport report: list) {
             System.out.println(report.toString() + "\n");
         }
+        myApp.loadViewReport(currentUser);
     }
 
     @FXML

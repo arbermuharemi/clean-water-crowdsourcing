@@ -14,7 +14,7 @@
                 <Font name="System Bold" size="18.0" />
             </font></Label>
         <Button fx:id="submitSourceReportButton" alignment="CENTER" onAction="#handleSubmitSourcePressed" text="Submit Source Report" textOverrun="CLIP">Submit Source Report</Button>
-        <Button fx:id="viewReportsButton" alignment="CENTER" onAction="#handleViewReportsPressed">View Reports</Button>
+        <Button fx:id="viewSourceReportsButton" alignment="CENTER" onAction="#handleViewReportsPressed">View Source Reports</Button>
         <Button fx:id="viewMapButton" mnemonicParsing="false" onAction="#handleViewMapPressed">View Map Report</Button>
         <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreatePressed">Create Profile</Button>
         <Button fx:id="editButton" alignment="CENTER" onAction="#handleEditPressed">Edit Profile</Button>
