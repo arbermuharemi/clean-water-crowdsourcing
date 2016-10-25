@@ -78,4 +78,8 @@ public class PurityReport extends Report {
                 "<br> Virus PPM: " + get_virusPPM() +
                 "<br> Contaminant PPM: " + get_contaminantPPM() + "</h2>";
     }
+
+    public enum WaterCondition {
+        SAFE, TREATABLE, UNSAFE
+    }
 }
