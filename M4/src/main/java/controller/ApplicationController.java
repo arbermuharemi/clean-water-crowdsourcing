@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import main.java.model.AlertMessage;
 import main.java.model.SourceReport;
 import main.java.model.User;
 
@@ -33,6 +34,9 @@ public class ApplicationController {
     @FXML
     private Button viewMapButton;
 
+    @FXML
+    private Button submitReportButton;
+
 
 
     public void setMainApp(Main mainApp) {
@@ -47,6 +51,10 @@ public class ApplicationController {
     @FXML
     public void setCurrentUser(User user) {
         currentUser = user;
+        User.Type userType = currentUser.getType();
+        if (userType == User.Type.USER || userType == User.Type.ADMIN) {
+            submitReportButton.setDisable(true);
+        }
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
         if (currentUser.hasProfile()) {
             createButton.setDisable(true);
@@ -92,6 +100,11 @@ public class ApplicationController {
         for (SourceReport report: list) {
             System.out.println(report.toString() + "\n");
         }
+    }
+
+    @FXML
+    private void handleSubmitReportPressed() {
+        myApp.loadSourceReportPage(currentUser);
     }
 
     @FXML
