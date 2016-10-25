@@ -10,7 +10,7 @@ import javafx.beans.property.StringProperty;
  */
 public class PurityReport extends Report {
     private StringProperty _nameOfWorker = new SimpleStringProperty();
-    private StringProperty _waterOverallCondition = new SimpleStringProperty();
+    private WaterCondition _waterOverallCondition = WaterCondition.SAFE;
     private DoubleProperty _virusPPM = new SimpleDoubleProperty();
     private DoubleProperty _contaminantPPM = new SimpleDoubleProperty();
 
@@ -23,10 +23,10 @@ public class PurityReport extends Report {
     }
 
     public String get_waterOverallCondition() {
-        return _waterOverallCondition.get();
+        return _waterOverallCondition.toString();
     }
 
-    public StringProperty _waterOverallConditionProperty() {
+    public WaterCondition _waterOverallConditionProperty() {
         return _waterOverallCondition;
     }
 
@@ -52,7 +52,17 @@ public class PurityReport extends Report {
                         double contaminantPPM){
         super(reportNumber, date, latitude, longitude);
         _nameOfWorker.set(reporterName);
-        _waterOverallCondition.set(waterCondition);
+        switch(waterCondition.charAt(0)){
+            case 'u':
+                _waterOverallCondition = WaterCondition.UNSAFE;
+                break;
+            case 's':
+                _waterOverallCondition = WaterCondition.SAFE;
+                break;
+            case 't':
+                _waterOverallCondition = WaterCondition.TREATABLE;
+                break;
+        }
     }
 
     public String toString(){

@@ -7,11 +7,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.java.model.PurityReport;
 import main.java.model.SourceReport;
 import main.java.model.User;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -28,6 +30,7 @@ public class Main extends Application {
     private BorderPane mapReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
+    private static ArrayList<PurityReport> purityReportList = new ArrayList<>();
 
 
     @Override
@@ -185,7 +188,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../view/SubmitWaterReportScreen.fxml"));
             waterReportLayout = loader.load();
 
-            SubmitSourceReportScreenController controller = loader.getController();
+            SubmitWaterReportScreenController controller = loader.getController();
             controller.setMainApp(this);
             controller.setCurrentUser(user);
 
@@ -227,6 +230,8 @@ public class Main extends Application {
     }
 
     public void addSourceReport(SourceReport report) { sourceReportList.add(report); }
+
+    public void addPurityReport (PurityReport report) { purityReportList.add(report); }
 
     public ArrayList<User> getUserList() {
         return userArr;
