@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import main.java.model.Report;
 import main.java.model.SourceReport;
 import main.java.model.User;
 import java.util.Date;
@@ -19,8 +20,6 @@ public class SubmitSourceReportScreenController {
     private User currentUser;
 
     private Date date;
-
-    private static int reportCounter;
 
     private Main myApp;
 
@@ -63,11 +62,10 @@ public class SubmitSourceReportScreenController {
     private void handleDonePressed() {
         date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        SourceReport report = new SourceReport(reportCounter, name, date
+        SourceReport report = new SourceReport(Report.generateReportNumber(), name, date
                 .toString(), Double.parseDouble(longitudeField.getText()),
                 Double.parseDouble(latitudeField.getText()),
                 typeField.getText(), conditionField.getText());
-        reportCounter++;
         myApp.addSourceReport(report);
         myApp.loadApplication(currentUser);
     }

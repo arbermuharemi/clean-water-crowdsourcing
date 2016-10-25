@@ -55,11 +55,11 @@ public class SourceReport extends Report {
     }
 
     public String getTitle() {
-        return "<h2>Report " + this.getReportNumber() + "</h2>";
+        return "<h2>Report " + get_reportNumber() + "</h2>";
     }
 
     public String getDescription() {
-        return  "<h2>Report " +  this.getReportNumber() + "</h2>" + "\n\n" +
+        return  "<h2>Report " +  get_reportNumber() + "</h2>" + "\n\n" +
                 "Reporter Name: " + get_reporterName() + "\n" +
                 "<br> Date: " +  get_date() + "\n" +
                 "<br> Longitude: " + get_longitude() + "\n" +

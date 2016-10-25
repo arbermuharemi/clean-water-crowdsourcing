@@ -13,7 +13,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 public abstract class Report {
 
     private StringProperty _date = new SimpleStringProperty();
-    private IntegerProperty _reportNumber = new SimpleIntegerProperty();
+    private static IntegerProperty _reportNumber = new SimpleIntegerProperty();
     private DoubleProperty _latitude = new SimpleDoubleProperty();
     private DoubleProperty _longitude = new SimpleDoubleProperty();
 
@@ -33,7 +33,7 @@ public abstract class Report {
         return _date;
     }
 
-    public int get_reportNumber() {
+    public static int get_reportNumber() {
         return _reportNumber.get();
     }
 
@@ -57,7 +57,10 @@ public abstract class Report {
         return _longitude;
     }
 
-    public int getReportNumber() { return _reportNumber.getValue(); }
+    public static int generateReportNumber() {
+        _reportNumber.add(1);
+        return get_reportNumber();
+    }
 
     public abstract String toString();
 
