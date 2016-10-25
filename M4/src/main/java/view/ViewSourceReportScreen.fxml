@@ -24,7 +24,7 @@
               <RowConstraints minHeight="10.0" prefHeight="50" />
           </rowConstraints>
          <children>
-            <Label alignment="TOP_CENTER" layoutX="133.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label fx:id="viewReportsLabel" alignment="TOP_CENTER" layoutX="133.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
              <TextArea fx:id="viewSourceReports" GridPane.columnIndex="1" GridPane.rowIndex="1" />
              <Button fx:id="finishViewSourceButton" onAction="#handleDonePressed" GridPane.columnIndex="1" GridPane.rowIndex="3">Done</Button>
          </children>

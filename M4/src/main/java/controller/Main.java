@@ -8,6 +8,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.model.PurityReport;
+import main.java.model.Report;
 import main.java.model.SourceReport;
 import main.java.model.User;
 
@@ -30,8 +31,8 @@ public class Main extends Application {
     private AnchorPane viewReportLayout;
     private BorderPane mapReportLayout;
     private static ArrayList<User> userArr = new ArrayList<User>();
-    private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
-    private static ArrayList<PurityReport> purityReportList = new ArrayList<>();
+    private static ArrayList<Report> sourceReportList = new ArrayList<>();
+    private static ArrayList<Report> purityReportList = new ArrayList<>();
 
 
     @Override
@@ -203,13 +204,13 @@ public class Main extends Application {
         }
     }
 
-    public void loadViewReport(User user) {
+    public void loadViewSourceReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
             viewReportLayout = loader.load();
             ViewSourceReportScreenController controller = loader.getController();
-            controller.setMainApp(this);
+            controller.setMainApp(this, true);
             controller.setCurrentUser(user);
             window.setTitle("Submit Source Report");
             Scene createReportScene = new Scene(viewReportLayout);
@@ -256,9 +257,9 @@ public class Main extends Application {
         return userArr;
     }
 
-    public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
+    public ArrayList<Report> getSourceReportList() { return sourceReportList; }
 
-    public ArrayList<PurityReport> getPurityReportList() { return purityReportList; }
+    public ArrayList<Report> getPurityReportList() { return purityReportList; }
 
     public static void main(String[] args) {
         launch(args);

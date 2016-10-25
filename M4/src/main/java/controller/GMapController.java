@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
         import javafx.scene.control.Button;
+import main.java.model.Report;
 import netscape.javascript.JSObject;
 import main.java.model.SourceReport;
 
@@ -33,7 +34,7 @@ public class GMapController implements Initializable, MapComponentInitializedLis
     @Override
     public void mapInitialized() {
         MapOptions mapOptions = new MapOptions();
-        ArrayList<SourceReport> myReports = myApp.getSourceReportList();
+        ArrayList<Report> myReports = myApp.getSourceReportList();
         double latDefault = myReports.get(myReports.size() - 1).get_latitude();
         double longDefault = myReports.get(myReports.size() - 1).get_longitude();
         LatLong center = new LatLong(latDefault, longDefault);
@@ -46,7 +47,7 @@ public class GMapController implements Initializable, MapComponentInitializedLis
                 .zoomControl(false)
                 .mapType(MapTypeIdEnum.TERRAIN);
         map = mapView.createMap(mapOptions);
-        for (SourceReport report : myReports) {
+        for (Report report : myReports) {
             MarkerOptions option = new MarkerOptions();
             double latitude = report.get_latitude();
             double longitude = report.get_longitude();
