@@ -222,6 +222,24 @@ public class Main extends Application {
         }
     }
 
+    public void loadViewPurityReport(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
+            viewReportLayout = loader.load();
+            ViewSourceReportScreenController controller = loader.getController();
+            controller.setMainApp(this, false);
+            controller.setCurrentUser(user);
+            window.setTitle("Submit Purity Report");
+            Scene createReportScene = new Scene(viewReportLayout);
+            window.setScene(createReportScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     public void loadMap() {
         try {
             FXMLLoader loader = new FXMLLoader();

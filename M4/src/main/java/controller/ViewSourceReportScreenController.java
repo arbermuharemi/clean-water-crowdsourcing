@@ -39,17 +39,23 @@ public class ViewSourceReportScreenController {
     public void setMainApp(Main mainApp, boolean isSourceReport) {
         //boolean value is true for source reports false for purity reports
         myApp = mainApp;
-        mySourceReports = myApp.getSourceReportList();
-        String output = "";
-        for (Report s : mySourceReports) {
-            output += s + "\n\n";
-        }
-        viewSourceReports.setText(output);
 
         if (isSourceReport) {
             viewReportsLabel.setText("Source Reports");
+            mySourceReports = myApp.getSourceReportList();
+            String output = "";
+            for (Report s : mySourceReports) {
+                output += s + "\n\n";
+            }
+            viewSourceReports.setText(output);
         } else {
             viewReportsLabel.setText("Purity Reports");
+            mySourceReports = myApp.getPurityReportList();
+            String output = "";
+            for (Report s : mySourceReports) {
+                output += s + "\n\n";
+            }
+            viewSourceReports.setText(output);
         }
     }
 
