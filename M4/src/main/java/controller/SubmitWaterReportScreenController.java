@@ -47,6 +47,7 @@ public class SubmitWaterReportScreenController {
     @FXML
     private void initialize() {
         conditionValue.setItems(myConditions);
+        conditionValue.setValue("Safe");
     }
 
     @FXML
