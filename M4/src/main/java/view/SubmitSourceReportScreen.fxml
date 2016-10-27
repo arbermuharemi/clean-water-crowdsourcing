@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.SubmitSourceReportScreenController">
     <GridPane prefHeight="500.0" prefWidth="600.0">
         <columnConstraints>
@@ -31,9 +32,9 @@
             <Label fx:id="longitudeLabel" text="Longitude:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
             <TextField fx:id="longitudeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label fx:id="typeLabel" text="Water Type:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <TextField fx:id="typeField" prefWidth="50.0" promptText="Bottled, Stream, etc." GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ComboBox fx:id="typeField" promptText="Water Type" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="conditionLabel" text="Condition:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <TextField fx:id="conditionField" promptText="Waste, Treatable, etc." GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="conditionField" promptText="Water Condition" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Button fx:id="cancelButton" onAction="#handleCancelPressed" text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="0" />
             <Button fx:id="doneButton" onAction="#handleDonePressed" text="Done" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 

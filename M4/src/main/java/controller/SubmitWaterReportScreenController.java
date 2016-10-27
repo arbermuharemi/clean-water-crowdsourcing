@@ -12,6 +12,7 @@ import main.java.model.Report;
 import main.java.model.User;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by chitramahajani on 10/25/16.
@@ -76,7 +77,9 @@ public class SubmitWaterReportScreenController {
                         "must be between -90 and 90; longitude must be " +
                         "between -180 and 180.");
             } else {
-                PurityReport report = new PurityReport(Report.generateReportNumber(),
+                Random random = new Random();
+                PurityReport report = new PurityReport(
+                        random.nextInt(100),
                         name, date.toString(),
                         longitude,
                         latitude,

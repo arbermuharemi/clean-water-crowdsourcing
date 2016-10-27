@@ -19,7 +19,7 @@
         <Button fx:id="createButton" alignment="CENTER" onAction="#handleCreatePressed">Create Profile</Button>
         <Button fx:id="editButton" alignment="CENTER" onAction="#handleEditPressed">Edit Profile</Button>
         <Button fx:id="logoutButton" alignment="BOTTOM_CENTER" onAction="#handleLogoutPressed">Logout</Button>
-        <Button fx:id = "submitReportButton" alignment = "BOTTOM_CENTER" onAction = "#handleSubmitReportPressed">Submit Water Report</Button>
+        <Button fx:id = "submitReportButton" alignment = "BOTTOM_CENTER" onAction = "#handleSubmitReportPressed">Submit PurityReport</Button>
         <Button fx:id = "viewPurityReportsButton" alignment = "BOTTOM_CENTER" onAction = "#handleViewPurityReportsPressed">View Purity Reports</Button>
     </children>
 </VBox>

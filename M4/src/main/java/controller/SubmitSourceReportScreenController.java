@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import main.java.model.*;
 
 import java.util.Date;
+import java.util.Random;
 
 /**
  * Created by Yash on 10/12/2016.
@@ -29,10 +30,10 @@ public class SubmitSourceReportScreenController {
     private TextField longitudeField;
 
     @FXML
-    private TextField typeField;
+    private ComboBox<String> typeField;
 
     @FXML
-    private TextField conditionField;
+    private ComboBox<String> conditionField;
 
     @FXML
     private Button cancelButton;
@@ -40,8 +41,20 @@ public class SubmitSourceReportScreenController {
     @FXML
     private Button doneButton;
 
+    //private int reportNumber = myApp.getSourceReportList().size();
+
+    private ObservableList<String> myTypes = FXCollections
+            .observableArrayList("Bottled", "Stream", "Lake", "Other");
+
+    private ObservableList<String> myConditions = FXCollections
+            .observableArrayList("Waste", "Treatable", "Clean", "Other");
+
     @FXML
     private void initialize() {
+        typeField.setItems(myTypes);
+        typeField.setValue("Bottled");
+        conditionField.setItems(myConditions);
+        conditionField.setValue("Waste");
     }
 
     public void setCurrentUser(User user) {
@@ -72,14 +85,15 @@ public class SubmitSourceReportScreenController {
                         "must be between -90 and 90; longitude must be " +
                         "between -180 and 180.");
             } else {
+                Random random = new Random();
                 SourceReport report = new SourceReport(
-                        Report.generateReportNumber(),
+                        random.nextInt(100),
                         name,
                         date.toString(),
                         longitude,
                         latitude,
-                        typeField.getText(),
-                        conditionField.getText());
+                        typeField.getValue(),
+                        conditionField.getValue());
                 myApp.addSourceReport(report);
                 myApp.loadApplication(currentUser);
             }
