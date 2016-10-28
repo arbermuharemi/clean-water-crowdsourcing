@@ -204,7 +204,7 @@ public class Main extends Application {
         }
     }
 
-    public void loadViewWaterReport(User user, String reportType) {
+    public void loadViewSourceReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
@@ -212,7 +212,25 @@ public class Main extends Application {
             ViewSourceReportScreenController controller = loader.getController();
             controller.setMainApp(this, true);
             controller.setCurrentUser(user);
-            window.setTitle("View " +  reportType + " Reports");
+            window.setTitle("View Source Reports");
+            Scene createReportScene = new Scene(viewReportLayout);
+            window.setScene(createReportScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadViewPurityReport(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
+            viewReportLayout = loader.load();
+            ViewSourceReportScreenController controller = loader.getController();
+            controller.setMainApp(this, false);
+            controller.setCurrentUser(user);
+            window.setTitle("View Purity Report");
             Scene createReportScene = new Scene(viewReportLayout);
             window.setScene(createReportScene);
             window.show();

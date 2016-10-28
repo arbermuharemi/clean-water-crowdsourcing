@@ -106,7 +106,7 @@ public class ApplicationController {
         for (Report report: list) {
             System.out.println(report.toString() + "\n");
         }
-        myApp.loadViewWaterReport(currentUser, "Source");
+        myApp.loadViewSourceReport(currentUser);
     }
 
     @FXML
@@ -115,7 +115,7 @@ public class ApplicationController {
         for (Report report: list) {
             System.out.println(report.toString() + "\n");
         }
-        myApp.loadViewWaterReport(currentUser, "Purity");
+        myApp.loadViewPurityReport(currentUser);
     }
 
     @FXML
