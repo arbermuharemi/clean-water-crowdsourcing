@@ -1,5 +1,6 @@
 package main.java.controller;
 
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import main.java.model.User;
 
 import java.util.Date;
 import java.util.Random;
+
+
 
 /**
  * Created by chitramahajani on 10/25/16.
@@ -66,6 +69,7 @@ public class SubmitWaterReportScreenController {
     @FXML
     private void handleDonePressed() {
         date = new Date();
+        System.out.println(date.toString());
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
         double longitude;
         double latitude;
@@ -79,19 +83,29 @@ public class SubmitWaterReportScreenController {
                         "between -180 and 180.");
             } else {
                 Random random = new Random();
+                double virus = Double.parseDouble(virusField.getText());
+                double contaminant = Double.parseDouble(contaminantField.getText());
+                myApp.setMaxVirus(virus);
+                myApp.setMaxContaminant(contaminant);
+                System.out.println(name + " " + longitude + " " + latitude + " " + conditionValue.getValue().toString() + " " + virus
+                    + " " + contaminant);
+
                 PurityReport report = new PurityReport(
                         random.nextInt(100),
-                        name, date.toString(),
+                        name, date,
                         longitude,
                         latitude,
                         conditionValue.getValue().toString(),
-                        Double.parseDouble(virusField.getText()),
-                        Double.parseDouble(contaminantField.getText()));
+                        virus,
+                        contaminant);
 
                 myApp.addPurityReport(report);
+                myApp.addPurityLocation(latitudeField.getText() + ", " + longitudeField.getText());
+                String [] dateStrings = date.toString().split(" ");
+                myApp.addPurityYear(dateStrings[5]);
                 myApp.loadApplication(currentUser);
             }
-        } catch (NumberFormatException | NullPointerException e) {
+        } catch (NumberFormatException e/*| NullPointerException e*/) {
             AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
                     "and/or longitude you entered are not in valid format.");
         }

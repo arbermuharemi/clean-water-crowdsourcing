@@ -1,9 +1,12 @@
 package main.java.model;
 
+import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+
+import java.util.Date;
 
 /**
  * Created by Arber on 10/24/2016.
@@ -13,6 +16,7 @@ public class PurityReport extends Report {
     private WaterCondition _waterOverallCondition = WaterCondition.SAFE;
     private DoubleProperty _virusPPM = new SimpleDoubleProperty();
     private DoubleProperty _contaminantPPM = new SimpleDoubleProperty();
+    private String _year;
 
     public String get_nameOfWorker() {
         return _nameOfWorker.get();
@@ -46,12 +50,16 @@ public class PurityReport extends Report {
         return _contaminantPPM;
     }
 
-    public PurityReport(int reportNumber, String reporterName, String date,
+    public PurityReport(int reportNumber, String reporterName, Date date,
                         double longitude, double latitude,
                         String waterCondition, double virusPPM,
                         double contaminantPPM){
-        super(reportNumber, date, latitude, longitude);
+        super(reportNumber, date, longitude, latitude);
+        String [] dateString = date.toString().split(" ");
+        _year = dateString[5];
         _nameOfWorker.set(reporterName);
+        _virusPPM.set(virusPPM);
+        _contaminantPPM.set(contaminantPPM);
         switch(waterCondition.charAt(0)){
             case 'u':
                 _waterOverallCondition = WaterCondition.UNSAFE;
@@ -91,5 +99,19 @@ public class PurityReport extends Report {
 
     public enum WaterCondition {
         SAFE, TREATABLE, UNSAFE
+    }
+
+    public boolean includeInGraph(String position, String year) {
+        String [] doubles = position.split(", ");
+        double latitude = Double.parseDouble(doubles[0]);
+        double longitude = Double.parseDouble(doubles[1]);
+
+        if (this.get_latitude() == latitude
+                && this.get_longitude() == longitude
+                && _year.equals(year)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
