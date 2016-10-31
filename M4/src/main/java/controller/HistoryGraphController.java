@@ -74,7 +74,7 @@ public class HistoryGraphController {
                 toGraph.add(report);
             }
         }
-        myApp.loadGraph(toGraph, data, position, currentUser);
+        myApp.loadGraph(toGraph, data, position, year, currentUser);
 
 
     }

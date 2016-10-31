@@ -310,7 +310,7 @@ public class Main extends Application {
         }
     }
 
-    public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, User user) {
+    public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, String year, User user) {
         System.out.println(reportList.size());
         Axis xAxis = new NumberAxis(1, 12, 1);
         Axis yAxis;
@@ -329,7 +329,7 @@ public class Main extends Application {
             xAxis.setLabel("Month (January = 1)");
             yAxis.setLabel(data + " (ppm)");
             graph = new ScatterChart<>(xAxis, yAxis);
-            graph.setTitle(data + "Trend For Location" + position);
+            graph.setTitle(year + " " + data + " Trend For Location " + position);
             series.setName("Virus vs. Month");
             for(PurityReport report: reportList) {
                 System.out.println("test");
