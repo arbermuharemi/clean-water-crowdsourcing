@@ -13,6 +13,7 @@ import main.java.model.SourceReport;
 import main.java.model.User;
 import com.google.firebase.*;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -38,9 +39,9 @@ public class Main extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         FirebaseOptions options = new FirebaseOptions.Builder()
-                .setServiceAccount(new FileInputStream("src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
+                .setServiceAccount(new FileInputStream("M4/src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
