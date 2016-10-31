@@ -11,11 +11,13 @@ import main.java.model.PurityReport;
 import main.java.model.Report;
 import main.java.model.SourceReport;
 import main.java.model.User;
+import com.google.firebase.*;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+
 
 
 public class Main extends Application {
@@ -37,6 +39,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setServiceAccount(new FileInputStream("src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
+                .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
+                .build();
+        FirebaseApp.initializeApp(options);
+
         window = primaryStage;
         loadWelcome();
     }
