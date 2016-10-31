@@ -89,7 +89,7 @@ public class SubmitSourceReportScreenController {
                 SourceReport report = new SourceReport(
                         random.nextInt(100),
                         name,
-                        date.toString(),
+                        date,
                         longitude,
                         latitude,
                         typeField.getValue(),

@@ -38,7 +38,12 @@ public class ApplicationController {
     private Button viewSourceReportsButton;
 
     @FXML
+    private Button viewHistoryGraphButton;
+
+    @FXML
     private Button viewPurityReportsButton;
+
+    @FXML Button getViewHistoryGraphButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -53,13 +58,16 @@ public class ApplicationController {
     public void setCurrentUser(User user) {
         currentUser = user;
         User.Type userType = currentUser.getType();
+
         if (userType == User.Type.USER || userType == User.Type.ADMIN) {
             submitReportButton.setDisable(true);
         }
         if (userType == User.Type.MANAGER){
             viewPurityReportsButton.setDisable(false);
+            viewHistoryGraphButton.setDisable(false);
         }else {
             viewPurityReportsButton.setDisable(true);
+            viewHistoryGraphButton.setDisable(true);
         }
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
         if (currentUser.hasProfile()) {
@@ -130,5 +138,10 @@ public class ApplicationController {
 
     @FXML
     private void handleCreatePressed() { myApp.loadCreateProfile(currentUser);}
+
+    @FXML
+    private void handleHistoryGraphPressed() {
+        myApp.loadHistoryGraph(currentUser);
+    }
 
 }

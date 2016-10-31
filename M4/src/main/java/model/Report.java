@@ -7,29 +7,28 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
+import java.util.Date;
+
 /**
  * Created by Arber on 10/24/2016.
  */
 public abstract class Report {
 
-    private StringProperty _date = new SimpleStringProperty();
+    //private StringProperty _date = new SimpleStringProperty();
+    private Date _date = new Date();
     private IntegerProperty _reportNumber = new SimpleIntegerProperty();
     private DoubleProperty _latitude = new SimpleDoubleProperty();
     private DoubleProperty _longitude = new SimpleDoubleProperty();
 
-    public Report(int reportNumber, String date,
+    public Report(int reportNumber, Date date,
                   double longitude, double latitude){
-        _date.set(date);
+        _date = date;
         _reportNumber.set(reportNumber);
         _latitude.set(latitude);
         _longitude.set(longitude);
     }
 
-    public String get_date() {
-        return _date.get();
-    }
-
-    public StringProperty _dateProperty() {
+    public Date get_date() {
         return _date;
     }
 

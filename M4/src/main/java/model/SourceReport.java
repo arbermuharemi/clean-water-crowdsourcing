@@ -3,6 +3,8 @@ package main.java.model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.Date;
+
 /**
  * Created by vijay on 10/12/2016.
  */
@@ -35,7 +37,7 @@ public class SourceReport extends Report {
         return _waterCondition;
     }
 
-    public SourceReport(int reportNumber, String reporterName, String date,
+    public SourceReport(int reportNumber, String reporterName, Date date,
                         double longitude, double latitude, String waterType,
                         String waterCondition){
         super(reportNumber, date, latitude, longitude);
