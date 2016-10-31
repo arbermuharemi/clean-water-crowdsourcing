@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import com.google.firebase.database.*;
 
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
@@ -65,6 +66,11 @@ public class Main extends Application {
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference ref = database.getReference("PATH IN DATABASE");
+//        DatabaseReference usersRef = ref.child("users");    this creates a directory in the database called users
+//        String temp = "Vijay";                              adds my name as a string
+//        usersRef.setValue(temp);
 
         window = primaryStage;
         loadWelcome();
