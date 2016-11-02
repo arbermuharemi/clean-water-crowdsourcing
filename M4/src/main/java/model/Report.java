@@ -20,6 +20,9 @@ public abstract class Report {
     private DoubleProperty _latitude = new SimpleDoubleProperty();
     private DoubleProperty _longitude = new SimpleDoubleProperty();
 
+    public Report() {
+    }
+
     public Report(int reportNumber, Date date,
                   double longitude, double latitude){
         _date = date;

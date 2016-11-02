@@ -1,5 +1,6 @@
 package main.java.controller;
 import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.sun.tools.javac.code.Source;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,10 +23,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
+
 import com.google.firebase.database.*;
 
 import javafx.scene.chart.NumberAxis;
@@ -49,10 +48,17 @@ public class Main extends Application {
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<Report> sourceReportList = new ArrayList<>();
     private static ArrayList<Report> purityReportList = new ArrayList<>();
-    private static ObservableList<String> purityLocationsList = FXCollections.observableArrayList();
-    private static ObservableList<String> purityYearList = FXCollections.observableArrayList();
+    private static ArrayList<String> purityLocationsList = new ArrayList<>();
+    private static ArrayList<String> purityYearList = new ArrayList<>();
     private static double maxVirus = 0;
     private static double maxContaminant = 0;
+    FirebaseOptions options;
+    FirebaseDatabase database;
+    DatabaseReference userRef;
+    DatabaseReference sourceRef;
+    DatabaseReference purityRef;
+    DatabaseReference purityLocationRef;
+    DatabaseReference purityYearRef;
 
     /*private static ArrayList<LatLong> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();*/
@@ -61,17 +67,77 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FirebaseOptions options = new FirebaseOptions.Builder()
+        options = new FirebaseOptions.Builder()
                 .setServiceAccount(new FileInputStream("M4/src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref = database.getReference("PATH IN DATABASE");
-//        DatabaseReference usersRef = ref.child("users");    this creates a directory in the database called users
-//        String temp = "Vijay";                              adds my name as a string
-//        usersRef.setValue(temp);
+        database = database.getInstance();
+        userRef = database.getReference("users");
+        sourceRef = database.getReference("sourceReports");
+        purityRef = database.getReference("purityReports");
+        purityLocationRef = database.getReference("purityLocations");
+        purityYearRef = database.getReference("purityYears");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
+                userArr = (ArrayList<User>) dataSnapshot.getValue(t);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        sourceRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
+                sourceReportList = (ArrayList<Report>) dataSnapshot.getValue(t);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
+                purityReportList = (ArrayList<Report>) dataSnapshot.getValue(t);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityLocationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                purityLocationsList = (ArrayList<String>) dataSnapshot.getValue(t);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityYearRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                purityYearList = (ArrayList<String>) dataSnapshot.getValue(t);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         window = primaryStage;
         loadWelcome();
     }
@@ -391,24 +457,51 @@ public class Main extends Application {
 
     public void addUser(User user) {
         userArr.add(user);
+        ArrayList<User> myUserList = getUserList();
+        userRef.setValue(myUserList);
+        for (User u : myUserList) {
+            System.out.println(u);
+        }
     }
 
-    public void addSourceReport(SourceReport report) { sourceReportList.add(report); }
+    public void addSourceReport(SourceReport report) {
+        sourceReportList.add(report);
+        ArrayList<Report> mySourceReportList = getSourceReportList();
+        sourceRef.setValue(mySourceReportList);
+        for (Report r : mySourceReportList) {
+            System.out.println(r);
+        }
+    }
 
-    public void addPurityReport (PurityReport report) { purityReportList.add(report); }
+    public void addPurityReport (PurityReport report) {
+        purityReportList.add(report);
+        ArrayList<Report> myPurityReportList = getPurityReportList();
+        purityRef.setValue(myPurityReportList);
+        for (Report r : myPurityReportList) {
+            System.out.println(r);
+        }
+    }
 
     public void addPurityLocation (String position) {
         if( !(purityLocationsList.contains(position)) ) {
             purityLocationsList.add(position);
         }
-
+        ArrayList<String> myPurityLocationsList = getPurityLocationsList();
+        purityLocationRef.setValue(myPurityLocationsList);
+        for (String s : myPurityLocationsList) {
+            System.out.println(s);
+        }
     }
 
     public void addPurityYear (String year) {
         if ( !(purityYearList.contains(year))) {
             purityYearList.add(year);
         }
-
+        ArrayList<String> myPurityYearsList = getPurityYearList();
+        purityYearRef.setValue(myPurityYearsList);
+        for (String s : myPurityYearsList) {
+            System.out.println(s);
+        }
     }
 
     public ArrayList<User> getUserList() {
@@ -419,9 +512,9 @@ public class Main extends Application {
 
     public ArrayList<Report> getPurityReportList() { return purityReportList; }
 
-    public ObservableList<String> getPurityLocationsList() { return purityLocationsList; }
+    public ArrayList<String> getPurityLocationsList() { return purityLocationsList; }
 
-    public ObservableList<String> getPurityYearList() {return purityYearList; }
+    public ArrayList<String> getPurityYearList() {return purityYearList; }
 
     public void setMaxVirus(double virus) {
         if(virus >= maxVirus) {

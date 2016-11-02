@@ -41,8 +41,8 @@ public class HistoryGraphController {
     @FXML
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
-        ObservableList<String> locationList = myApp.getPurityLocationsList();
-        ObservableList<String> yearList = myApp.getPurityYearList();
+        ArrayList<String> locationList = myApp.getPurityLocationsList();
+        ArrayList<String> yearList = myApp.getPurityYearList();
         System.out.println(locationList);
         System.out.println(yearList);
         locationBox.setItems(locationList);
