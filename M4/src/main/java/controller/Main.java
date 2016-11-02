@@ -67,10 +67,9 @@ public class Main extends Application {
                 .build();
         FirebaseApp.initializeApp(options);
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference ref = database.getReference("PATH IN DATABASE");
-//        DatabaseReference usersRef = ref.child("users");    this creates a directory in the database called users
-//        String temp = "Vijay";                              adds my name as a string
-//        usersRef.setValue(temp);
+        DatabaseReference ref = database.getReference("users");
+        String temp = "Yash";
+        ref.setValue(temp);
 
         window = primaryStage;
         loadWelcome();
