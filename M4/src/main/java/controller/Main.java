@@ -1,6 +1,6 @@
 package main.java.controller;
 import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.sun.tools.javac.code.Source;
+//import com.sun.tools.javac.code.Source;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -383,6 +383,9 @@ public class Main extends Application {
     }
 
     public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, String year, User user) {
+        double[] monthSums  = new double[12];
+        double[] monthCount = new double[12];
+
         System.out.println(reportList.size());
         Axis xAxis = new NumberAxis(1, 12, 1);
         Axis yAxis;
@@ -409,11 +412,14 @@ public class Main extends Application {
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(date);
                 System.out.println(Calendar.MONTH);
+
                 int month = cal.get(Calendar.MONTH);
-                month++;
                 double virusPPM = report.get_virusPPM();
+                monthSums[month] += virusPPM;
+                monthCount[month]++;
+                month++;
                 System.out.println(virusPPM);
-                series.getData().add(new XYChart.Data((double)month, virusPPM));
+                series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
             }
         } else {
             int contaminant = (int) maxVirus;

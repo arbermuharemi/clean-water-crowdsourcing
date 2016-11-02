@@ -43,11 +43,13 @@ public class HistoryGraphController {
         myApp = mainApp;
         ArrayList<String> locationList = myApp.getPurityLocationsList();
         ArrayList<String> yearList = myApp.getPurityYearList();
+        ObservableList<String> graphLocationList = (ObservableList<String>)locationList;
+        ObservableList<String> graphYearList = (ObservableList<String>)yearList;
         System.out.println(locationList);
         System.out.println(yearList);
-        locationBox.setItems(locationList);
+        locationBox.setItems(graphLocationList);
         dataBox.setItems(dataList);
-        yearBox.setItems(yearList);
+        yearBox.setItems(graphYearList);
         dataBox.setValue("Virus");
     }
 
