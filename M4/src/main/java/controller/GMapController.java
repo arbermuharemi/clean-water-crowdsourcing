@@ -7,6 +7,7 @@ import com.lynden.gmapsfx.javascript.object.*;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
@@ -34,9 +35,10 @@ public class GMapController implements Initializable, MapComponentInitializedLis
     @Override
     public void mapInitialized() {
         MapOptions mapOptions = new MapOptions();
-        ArrayList<Report> myReports = myApp.getSourceReportList();
-        double latDefault = myReports.get(myReports.size() - 1).get_latitude();
-        double longDefault = myReports.get(myReports.size() - 1).get_longitude();
+        ArrayList<HashMap<String, Object>> myReports = myApp.getSourceReportList();
+        HashMap<String, Object> report = myReports.get(myReports.size() - 1);
+        double latDefault = (Double)report.get("_latitude");
+        double longDefault = (Double)report.get("_longitude");
         LatLong center = new LatLong(latDefault, longDefault);
         mapOptions.center(center).zoom(8)
                 .overviewMapControl(false)
@@ -47,14 +49,14 @@ public class GMapController implements Initializable, MapComponentInitializedLis
                 .zoomControl(false)
                 .mapType(MapTypeIdEnum.TERRAIN);
         map = mapView.createMap(mapOptions);
-        for (Report report : myReports) {
+        for (HashMap<String, Object> dummyReport : myReports) {
             MarkerOptions option = new MarkerOptions();
-            double latitude = report.get_latitude();
-            double longitude = report.get_longitude();
+            double latitude = (Double)dummyReport.get("_latitude");
+            double longitude = (Double)dummyReport.get("_longitude");
             LatLong posPair = new LatLong(latitude, longitude);
             option.position(posPair)
                     .visible(Boolean.TRUE)
-                    .title(report.getTitle());
+                    .title((String)dummyReport.get("title"));
             mapOptions.center(posPair);
 
             Marker myMarker = new Marker(option);
@@ -63,7 +65,7 @@ public class GMapController implements Initializable, MapComponentInitializedLis
                     UIEventType.click,
                     (JSObject obj) -> {
                         InfoWindowOptions infoWindowOptions = new InfoWindowOptions();
-                        infoWindowOptions.content(report.getDescription());
+                        infoWindowOptions.content((String)dummyReport.get("description"));
 
                         InfoWindow window = new InfoWindow(infoWindowOptions);
                         window.open(map, myMarker);

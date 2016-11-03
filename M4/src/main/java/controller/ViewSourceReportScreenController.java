@@ -25,7 +25,9 @@ import javafx.util.Callback;
 
 import javax.xml.transform.Source;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 
 /**
@@ -40,7 +42,7 @@ public class ViewSourceReportScreenController {
 
     private User currentUser;
 
-    private ObservableList<Report> mySourceReports = FXCollections.observableArrayList();
+    private ObservableList<HashMap<String, Object>> mySourceReports = FXCollections.observableArrayList();
 
     private boolean isSourceReport;
 
@@ -166,9 +168,9 @@ public class ViewSourceReportScreenController {
                 }
         );
 
-        ObservableList<Report> sourceReport = FXCollections
+        ObservableList<HashMap<String, Object>> sourceReport = FXCollections
                 .observableArrayList(myApp.getSourceReportList());
-        ObservableList<Report> purityReport = FXCollections
+        ObservableList<HashMap<String, Object>> purityReport = FXCollections
                 .observableArrayList(myApp.getPurityReportList());
 
         mySourceReports = FXCollections.concat(sourceReport, purityReport);

@@ -74,7 +74,7 @@ public class HistoryGraphController {
         ArrayList<PurityReport> toGraph = new ArrayList<>();
         for(HashMap<String, Object> dummy : reportList) {
             HashMap<String, Integer> dateMap = (HashMap<String, Integer>)dummy.get("_date");
-            Date date = new Date((Integer)dateMap.get("year"), (Integer)dateMap.get("month"), (Integer)dateMap.get("date"));
+            Date date = new Date(dateMap.get("year"), dateMap.get("month"), dateMap.get("date"));
             int reportNumber = (Integer)dummy.get("_reportNumber");
             String reporterName = (String)dummy.get("_nameOfWorker");
             double contaminantPPM = (Double)dummy.get("_contaminantPPM");
