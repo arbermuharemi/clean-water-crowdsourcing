@@ -111,19 +111,11 @@ public class ApplicationController {
 
     @FXML
     private void handleViewSourceReportsPressed() {
-        ArrayList<HashMap<String, Object>> list = myApp.getSourceReportList();
-        for (Report report: list) {
-            System.out.println(report.toString() + "\n");
-        }
         myApp.loadViewSourceReport(currentUser);
     }
 
     @FXML
     private void handleViewPurityReportsPressed() {
-        ArrayList<HashMap<String, Object>> list = myApp.getSourceReportList();
-        for (Report report: list) {
-            System.out.println(report.toString() + "\n");
-        }
         myApp.loadViewPurityReport(currentUser);
     }
 
