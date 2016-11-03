@@ -1,13 +1,17 @@
 package main.java.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import main.java.model.Report;
 import main.java.model.SourceReport;
 import main.java.model.User;
 
+import javax.swing.table.TableColumn;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +20,7 @@ import java.util.ArrayList;
 public class ViewSourceReportScreenController {
 
     @FXML
-    private TextArea viewSourceReports;
-
-    @FXML
-    private Label viewReportsLabel;
+    private TableView<Report> reportTable;
 
     private Main myApp;
 
@@ -29,7 +30,7 @@ public class ViewSourceReportScreenController {
 
     @FXML
     private void initialize() {
-        viewSourceReports.setEditable(false);
+        reportTable.setEditable(false);
     }
 
     public void setCurrentUser(User user) {
@@ -41,21 +42,34 @@ public class ViewSourceReportScreenController {
         myApp = mainApp;
 
         if (isSourceReport) {
-            viewReportsLabel.setText("Source Reports");
-            mySourceReports = myApp.getSourceReportList();
-            String output = "";
-            for (Report s : mySourceReports) {
-                output += s + "\n\n";
-            }
-            viewSourceReports.setText(output);
+            //viewReportsLabel.setText("Source Reports");
+            //mySourceReports = myApp.getSourceReportList();
+            ObservableList<Report> mySourceReports = FXCollections
+                    .observableArrayList(myApp.getSourceReportList());
+            //String output = "";
+            //for (Report s : mySourceReports) {
+            //    output += s + "\n\n";
+            //}
+            //viewSourceReports.setText(output);
+            //reportOverallConditionCol.setWidth(0);
+            //reportWaterConditionCol.setWidth(0);
+            //reportVirusCol.setWidth(0);
+            //reportContaminantCol.setWidth(0);
+            //reportTable.lookup("Water Condition").setVisible(false);
+            //reportTable.autosize();
+            reportTable.setItems(mySourceReports);
         } else {
-            viewReportsLabel.setText("Purity Reports");
-            mySourceReports = myApp.getPurityReportList();
-            String output = "";
-            for (Report s : mySourceReports) {
-                output += s + "\n\n";
-            }
-            viewSourceReports.setText(output);
+            ObservableList<Report> mySourceReports = FXCollections
+                    .observableArrayList(myApp.getSourceReportList());
+            //viewReportsLabel.setText("Purity Reports");
+            //mySourceReports = myApp.getPurityReportList();
+            //reportWaterTypeCol.setWidth(0);
+            reportTable.setItems(mySourceReports);
+            //String output = "";
+            //for (Report s : mySourceReports) {
+            //    output += s + "\n\n";
+            //}
+            //viewSourceReports.setText(output);
         }
     }
 

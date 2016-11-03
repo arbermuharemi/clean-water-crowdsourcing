@@ -1,5 +1,6 @@
 package main.java.controller;
 import com.lynden.gmapsfx.javascript.object.LatLong;
+import com.sun.media.sound.MidiDeviceReceiverEnvelope;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,8 +57,6 @@ public class Main extends Application {
 
     /*private static ArrayList<LatLong> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();*/
-
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -239,7 +238,7 @@ public class Main extends Application {
     public void loadViewSourceReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
+            loader.setLocation(Main.class.getResource("../view/ViewSourceReportTableScreen.fxml"));
             viewReportLayout = loader.load();
             ViewSourceReportScreenController controller = loader.getController();
             controller.setMainApp(this, true);
@@ -257,7 +256,7 @@ public class Main extends Application {
     public void loadViewPurityReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("../view/ViewSourceReportScreen.fxml"));
+            loader.setLocation(Main.class.getResource("../view/ViewSourceReportTableScreen.fxml"));
             viewReportLayout = loader.load();
             ViewSourceReportScreenController controller = loader.getController();
             controller.setMainApp(this, false);
