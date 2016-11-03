@@ -454,11 +454,8 @@ public class Main extends Application {
         }
         graph.getData().addAll(series);
         Button goBack = new Button("Return");
-        goBack.setOnAction(new EventHandler<ActionEvent> () {
-            @Override public void handle(ActionEvent e) {
-                loadApplication(user);
-            }
-        });
+        goBack.setOnAction((ActionEvent e) ->
+                loadApplication(user));
         VBox graphLayout = new VBox();
         graphLayout.setAlignment(Pos.CENTER);
         graphLayout.getChildren().addAll(graph, goBack);

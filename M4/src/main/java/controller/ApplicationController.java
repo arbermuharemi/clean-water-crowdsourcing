@@ -110,19 +110,19 @@ public class ApplicationController {
 
     @FXML
     private void handleViewSourceReportsPressed() {
-        ArrayList<Report> list = myApp.getSourceReportList();
-        for (Report report: list) {
-            System.out.println(report.toString() + "\n");
-        }
+        //ArrayList<Report> list = myApp.getSourceReportList();
+        //for (Report report: list) {
+        //    System.out.println(report.toString() + "\n");
+        //}
         myApp.loadViewSourceReport(currentUser);
     }
 
     @FXML
     private void handleViewPurityReportsPressed() {
-        ArrayList<Report> list = myApp.getSourceReportList();
-        for (Report report: list) {
-            System.out.println(report.toString() + "\n");
-        }
+        //ArrayList<Report> list = myApp.getSourceReportList();
+        //for (Report report: list) {
+        //    System.out.println(report.toString() + "\n");
+        //}
         myApp.loadViewPurityReport(currentUser);
     }
 
