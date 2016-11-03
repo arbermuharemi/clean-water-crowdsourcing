@@ -171,7 +171,6 @@ public class Main extends Application {
             ApplicationController controller = loader.getController();
             controller.setMainApp(this);
             controller.setCurrentUser(currentUser);
-
             window.setTitle("Login Page");
             Scene applicationScene = new Scene(applicationLayout);
             window.setScene(applicationScene);
