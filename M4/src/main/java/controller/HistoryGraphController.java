@@ -43,8 +43,8 @@ public class HistoryGraphController {
         myApp = mainApp;
         ArrayList<String> locationList = myApp.getPurityLocationsList();
         ArrayList<String> yearList = myApp.getPurityYearList();
-        ObservableList<String> graphLocationList = (ObservableList<String>)locationList;
-        ObservableList<String> graphYearList = (ObservableList<String>)yearList;
+        ObservableList<String> graphLocationList = FXCollections.observableArrayList(locationList);
+        ObservableList<String> graphYearList = FXCollections.observableArrayList(yearList);
         System.out.println(locationList);
         System.out.println(yearList);
         locationBox.setItems(graphLocationList);

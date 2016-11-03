@@ -474,27 +474,18 @@ public class Main extends Application {
         userArr.add(user);
         ArrayList<User> myUserList = getUserList();
         userRef.setValue(myUserList);
-        for (User u : myUserList) {
-            System.out.println(u);
-        }
     }
 
     public void addSourceReport(SourceReport report) {
         sourceReportList.add(report);
         ArrayList<Report> mySourceReportList = getSourceReportList();
         sourceRef.setValue(mySourceReportList);
-        for (Report r : mySourceReportList) {
-            System.out.println(r);
-        }
     }
 
     public void addPurityReport (PurityReport report) {
         purityReportList.add(report);
         ArrayList<Report> myPurityReportList = getPurityReportList();
         purityRef.setValue(myPurityReportList);
-        for (Report r : myPurityReportList) {
-            System.out.println(r);
-        }
     }
 
     public void addPurityLocation (String position) {
@@ -503,9 +494,6 @@ public class Main extends Application {
         }
         ArrayList<String> myPurityLocationsList = getPurityLocationsList();
         purityLocationRef.setValue(myPurityLocationsList);
-        for (String s : myPurityLocationsList) {
-            System.out.println(s);
-        }
     }
 
     public void addPurityYear (String year) {
@@ -514,9 +502,6 @@ public class Main extends Application {
         }
         ArrayList<String> myPurityYearsList = getPurityYearList();
         purityYearRef.setValue(myPurityYearsList);
-        for (String s : myPurityYearsList) {
-            System.out.println(s);
-        }
     }
 
     public ArrayList<User> getUserList() {
