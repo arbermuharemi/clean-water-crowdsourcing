@@ -45,7 +45,7 @@ public class Main extends Application {
     private AnchorPane viewReportLayout;
     private BorderPane mapReportLayout;
     private AnchorPane historyGraphLayout;
-    private static ArrayList<User> userArr = new ArrayList<User>();
+    private static ArrayList<User> userArr = new ArrayList<>();
     private static ArrayList<Report> sourceReportList = new ArrayList<>();
     private static ArrayList<Report> purityReportList = new ArrayList<>();
     private static ArrayList<String> purityLocationsList = new ArrayList<>();
@@ -82,7 +82,7 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
-                if ((ArrayList<User>) dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     userArr = (ArrayList<User>) dataSnapshot.getValue();
                 }
             }
@@ -96,7 +96,7 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
-                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     sourceReportList = (ArrayList<Report>) dataSnapshot.getValue();
                 }
             }
@@ -110,7 +110,7 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
-                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     purityReportList = (ArrayList<Report>) dataSnapshot.getValue();
                 }
             }
@@ -124,7 +124,7 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
-                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     purityLocationsList = (ArrayList<String>) dataSnapshot.getValue();
                 }
             }
@@ -138,7 +138,7 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
-                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null) {
                     purityYearList = (ArrayList<String>) dataSnapshot.getValue();
                 }
             }

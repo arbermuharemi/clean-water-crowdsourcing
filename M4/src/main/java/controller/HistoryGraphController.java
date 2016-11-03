@@ -70,14 +70,12 @@ public class HistoryGraphController {
         String data = dataBox.getValue();
         ArrayList<Report> reportList = myApp.getPurityReportList();
         ArrayList<PurityReport> toGraph = new ArrayList<>();
-        for(Report dummy: reportList) {
-            PurityReport report = (PurityReport)dummy;
+        for(Report dummy : reportList) {
+            PurityReport report = (PurityReport) dummy;
             if(report.includeInGraph(position, year)) {
                 toGraph.add(report);
             }
         }
         myApp.loadGraph(toGraph, data, position, year, currentUser);
-
-
     }
 }
