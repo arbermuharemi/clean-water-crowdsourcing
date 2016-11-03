@@ -41,13 +41,15 @@ public class HistoryGraphController {
     @FXML
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
-        ObservableList<String> locationList = myApp.getPurityLocationsList();
-        ObservableList<String> yearList = myApp.getPurityYearList();
+        ArrayList<String> locationList = myApp.getPurityLocationsList();
+        ArrayList<String> yearList = myApp.getPurityYearList();
+        ObservableList<String> graphLocationList = FXCollections.observableArrayList(locationList);
+        ObservableList<String> graphYearList = FXCollections.observableArrayList(yearList);
         System.out.println(locationList);
         System.out.println(yearList);
-        locationBox.setItems(locationList);
+        locationBox.setItems(graphLocationList);
         dataBox.setItems(dataList);
-        yearBox.setItems(yearList);
+        yearBox.setItems(graphYearList);
         dataBox.setValue("Virus");
     }
 

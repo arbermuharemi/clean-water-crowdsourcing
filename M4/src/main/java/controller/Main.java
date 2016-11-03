@@ -1,6 +1,5 @@
 package main.java.controller;
 import com.lynden.gmapsfx.javascript.object.LatLong;
-import com.sun.media.sound.MidiDeviceReceiverEnvelope;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,10 +22,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.util.*;
+
 import com.google.firebase.database.*;
 
 import javafx.scene.chart.NumberAxis;
@@ -50,26 +47,104 @@ public class Main extends Application {
     private static ArrayList<User> userArr = new ArrayList<User>();
     private static ArrayList<Report> sourceReportList = new ArrayList<>();
     private static ArrayList<Report> purityReportList = new ArrayList<>();
-    private static ObservableList<String> purityLocationsList = FXCollections.observableArrayList();
-    private static ObservableList<String> purityYearList = FXCollections.observableArrayList();
+    private static ArrayList<String> purityLocationsList = new ArrayList<>();
+    private static ArrayList<String> purityYearList = new ArrayList<>();
     private static double maxVirus = 0;
     private static double maxContaminant = 0;
+    FirebaseOptions options;
+    FirebaseDatabase database;
+    DatabaseReference userRef;
+    DatabaseReference sourceRef;
+    DatabaseReference purityRef;
+    DatabaseReference purityLocationRef;
+    DatabaseReference purityYearRef;
 
     /*private static ArrayList<LatLong> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();*/
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FirebaseOptions options = new FirebaseOptions.Builder()
+        options = new FirebaseOptions.Builder()
                 .setServiceAccount(new FileInputStream("M4/src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference ref = database.getReference("users");
-        String temp = "Yash";
-        ref.setValue(temp);
+        database = database.getInstance();
+        userRef = database.getReference("users");
+        sourceRef = database.getReference("sourceReports");
+        purityRef = database.getReference("purityReports");
+        purityLocationRef = database.getReference("purityLocations");
+        purityYearRef = database.getReference("purityYears");
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
+                if ((ArrayList<User>) dataSnapshot.getValue() != null) {
+                    userArr = (ArrayList<User>) dataSnapshot.getValue();
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        sourceRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
+                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                    sourceReportList = (ArrayList<Report>) dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
+                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                    purityReportList = (ArrayList<Report>) dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityLocationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                    purityLocationsList = (ArrayList<String>) dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        purityYearRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
+                if ((ArrayList<Report>) dataSnapshot.getValue() != null) {
+                    purityYearList = (ArrayList<String>) dataSnapshot.getValue();
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         window = primaryStage;
         loadWelcome();
     }
@@ -103,7 +178,6 @@ public class Main extends Application {
             ApplicationController controller = loader.getController();
             controller.setMainApp(this);
             controller.setCurrentUser(currentUser);
-
             window.setTitle("Login Page");
             Scene applicationScene = new Scene(applicationLayout);
             window.setScene(applicationScene);
@@ -315,6 +389,9 @@ public class Main extends Application {
     }
 
     public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, String year, User user) {
+        double[] monthSums  = new double[12];
+        double[] monthCount = new double[12];
+
         System.out.println(reportList.size());
         Axis xAxis = new NumberAxis(1, 12, 1);
         Axis yAxis;
@@ -341,11 +418,14 @@ public class Main extends Application {
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(date);
                 System.out.println(Calendar.MONTH);
+
                 int month = cal.get(Calendar.MONTH);
-                month++;
                 double virusPPM = report.get_virusPPM();
+                monthSums[month] += virusPPM;
+                monthCount[month]++;
+                month++;
                 System.out.println(virusPPM);
-                series.getData().add(new XYChart.Data((double)month, virusPPM));
+                series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
             }
         } else {
             int contaminant = (int) maxVirus;
@@ -389,24 +469,36 @@ public class Main extends Application {
 
     public void addUser(User user) {
         userArr.add(user);
+        ArrayList<User> myUserList = getUserList();
+        userRef.setValue(myUserList);
     }
 
-    public void addSourceReport(SourceReport report) { sourceReportList.add(report); }
+    public void addSourceReport(SourceReport report) {
+        sourceReportList.add(report);
+        ArrayList<Report> mySourceReportList = getSourceReportList();
+        sourceRef.setValue(mySourceReportList);
+    }
 
-    public void addPurityReport (PurityReport report) { purityReportList.add(report); }
+    public void addPurityReport (PurityReport report) {
+        purityReportList.add(report);
+        ArrayList<Report> myPurityReportList = getPurityReportList();
+        purityRef.setValue(myPurityReportList);
+    }
 
     public void addPurityLocation (String position) {
         if( !(purityLocationsList.contains(position)) ) {
             purityLocationsList.add(position);
         }
-
+        ArrayList<String> myPurityLocationsList = getPurityLocationsList();
+        purityLocationRef.setValue(myPurityLocationsList);
     }
 
     public void addPurityYear (String year) {
         if ( !(purityYearList.contains(year))) {
             purityYearList.add(year);
         }
-
+        ArrayList<String> myPurityYearsList = getPurityYearList();
+        purityYearRef.setValue(myPurityYearsList);
     }
 
     public ArrayList<User> getUserList() {
@@ -417,9 +509,9 @@ public class Main extends Application {
 
     public ArrayList<Report> getPurityReportList() { return purityReportList; }
 
-    public ObservableList<String> getPurityLocationsList() { return purityLocationsList; }
+    public ArrayList<String> getPurityLocationsList() { return purityLocationsList; }
 
-    public ObservableList<String> getPurityYearList() {return purityYearList; }
+    public ArrayList<String> getPurityYearList() {return purityYearList; }
 
     public void setMaxVirus(double virus) {
         if(virus >= maxVirus) {

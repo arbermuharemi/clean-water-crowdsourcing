@@ -15,6 +15,9 @@ public class User {
     private Profile userProfile;
     private boolean hasProfile;
 
+    public User() {
+    }
+
     /**
      * User constructor
      * @param firstName user's first name
@@ -29,6 +32,7 @@ public class User {
         _username.set(username);
         _password.set(password);
         type = type.toLowerCase();
+
         switch(type.charAt(0)){
             case 'u':
                 _type = Type.USER;

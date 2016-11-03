@@ -82,7 +82,7 @@ public class ApplicationController {
             // make the button INVISIBLE
             // button.setVisible(false)
         }
-        if (myApp.getSourceReportList().size() == 0) {
+        if (myApp.getSourceReportList() == null || myApp.getSourceReportList().size() == 0) {
             viewMapButton.setDisable(true);
         }
     }
