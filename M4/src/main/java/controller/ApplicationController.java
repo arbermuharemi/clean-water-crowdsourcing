@@ -9,6 +9,7 @@ import main.java.model.SourceReport;
 import main.java.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by chitramahajani on 9/20/16.
@@ -110,7 +111,7 @@ public class ApplicationController {
 
     @FXML
     private void handleViewSourceReportsPressed() {
-        ArrayList<Report> list = myApp.getSourceReportList();
+        ArrayList<HashMap<String, Object>> list = myApp.getSourceReportList();
         for (Report report: list) {
             System.out.println(report.toString() + "\n");
         }
@@ -119,7 +120,7 @@ public class ApplicationController {
 
     @FXML
     private void handleViewPurityReportsPressed() {
-        ArrayList<Report> list = myApp.getSourceReportList();
+        ArrayList<HashMap<String, Object>> list = myApp.getSourceReportList();
         for (Report report: list) {
             System.out.println(report.toString() + "\n");
         }
