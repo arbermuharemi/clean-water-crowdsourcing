@@ -44,7 +44,7 @@ public class Main extends Application {
     private AnchorPane viewReportLayout;
     private BorderPane mapReportLayout;
     private AnchorPane historyGraphLayout;
-    private static ArrayList<User> userArr = new ArrayList<>();
+    private static ArrayList<HashMap<String, String>> userArr = new ArrayList<>();
     private static ArrayList<Report> sourceReportList = new ArrayList<>();
     private static ArrayList<Report> purityReportList = new ArrayList<>();
     private static ArrayList<String> purityLocationsList = new ArrayList<>();
@@ -80,7 +80,7 @@ public class Main extends Application {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
                 if (dataSnapshot.getValue() != null) {
-                    userArr = (ArrayList<User>) dataSnapshot.getValue();
+                    userArr = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
                 }
             }
 
@@ -468,8 +468,14 @@ public class Main extends Application {
     }
 
     public void addUser(User user) {
-        userArr.add(user);
-        ArrayList<User> myUserList = getUserList();
+        HashMap<String, String> myUser = new HashMap<>();
+        myUser.put("firstName", user.getFirstName());
+        myUser.put("lastName", user.getLastName());
+        myUser.put("userName", user.getUserName());
+        myUser.put("password", user.getPassword());
+        myUser.put("type", user.getType().toString());
+        userArr.add(myUser);
+        ArrayList<HashMap<String, String>> myUserList = getUserList();
         userRef.setValue(myUserList);
     }
 
@@ -501,7 +507,7 @@ public class Main extends Application {
         purityYearRef.setValue(myPurityYearsList);
     }
 
-    public ArrayList<User> getUserList() {
+    public ArrayList<HashMap<String, String>> getUserList() {
         return userArr;
     }
 

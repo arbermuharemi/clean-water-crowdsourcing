@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import main.java.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by Yash on 9/20/2016.
@@ -46,12 +47,13 @@ public class LoginScreenController {
         User currentUser = new User(null, null, null, null, User.Type.USER.toString());
         String username = userField.getText();
         String password = passField.getText();
-        ArrayList<User> userList = myApp.getUserList();
+        ArrayList<HashMap<String, String>> userList = myApp.getUserList();
         for(int j = 0; j < userList.size() && !loadApp; j++) {
-            User user = userList.get(j);
-            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+            HashMap<String, String> user = userList.get(j);
+            if (user.get("userName").equals(username) && user.get("password").equals(password)) {
                 loadApp = true;
-                currentUser = user;
+                User myUser = new User(user.get("firstName"), user.get("lastName"), user.get("userName"), user.get("password"), user.get("type"));
+                currentUser = myUser;
 
             }
         }
