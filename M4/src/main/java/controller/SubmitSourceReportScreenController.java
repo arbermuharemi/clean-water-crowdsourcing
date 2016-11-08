@@ -78,7 +78,19 @@ public class SubmitSourceReportScreenController {
         double latitude;
         try {
             longitude = Double.parseDouble(longitudeField.getText());
+            String ls = longitude + "";
+            if(!ls.contains(".")){
+                ls += ".0";
+            }
+            longitude = Double.parseDouble(ls);
+
             latitude = Double.parseDouble(latitudeField.getText());
+            ls = latitude + "";
+            if(!ls.contains(".")){
+                ls += ".0";
+            }
+            latitude = Double.parseDouble(ls);
+
             if (latitude > 90 || latitude < -90
                     || longitude > 180 || longitude < -180) {
                 AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +

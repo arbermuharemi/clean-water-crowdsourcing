@@ -47,12 +47,12 @@ public class LoginScreenController {
         User currentUser = new User(null, null, null, null, User.Type.USER.toString());
         String username = userField.getText();
         String password = passField.getText();
-        ArrayList<HashMap<String, String>> userList = myApp.getUserList();
+        ArrayList<User> userList = myApp.getUserList();
         for(int j = 0; j < userList.size() && !loadApp; j++) {
-            HashMap<String, String> user = userList.get(j);
-            if (user.get("userName").equals(username) && user.get("password").equals(password)) {
+            User user = userList.get(j);
+            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                 loadApp = true;
-                User myUser = new User(user.get("firstName"), user.get("lastName"), user.get("userName"), user.get("password"), user.get("type"));
+                User myUser = user;
                 currentUser = myUser;
 
             }

@@ -168,18 +168,18 @@ public class ViewSourceReportScreenController {
                 }
         );
 
-        ObservableList<HashMap<String, Object>> sourceReport = FXCollections
-                .observableArrayList(myApp.getSourceReportList());
-        ObservableList<HashMap<String, Object>> purityReport = FXCollections
-                .observableArrayList(myApp.getPurityReportList());
-
-        mySourceReports = FXCollections.concat(sourceReport, purityReport);
-
-        reportsTable.setItems(mySourceReports);
-
-        reportsTable.getColumns().addAll(reportCol, reportNumCol, dateCol,
-                reporterNameCol, locationCol, typeCol, conditionCol, virusCol,
-                contaminationCol);
+//        ObservableList<SourceReport> sourceReport = FXCollections
+//                .observableArrayList(myApp.getSourceReportList());
+//        ObservableList<PurityReport> purityReport = FXCollections
+//                .observableArrayList(myApp.getPurityReportList());
+//
+//        mySourceReports = FXCollections.concat(sourceReport, purityReport);
+//
+//        reportsTable.setItems(mySourceReports);
+//
+//        reportsTable.getColumns().addAll(reportCol, reportNumCol, dateCol,
+//                reporterNameCol, locationCol, typeCol, conditionCol, virusCol,
+//                contaminationCol);
     }
 
     @FXML

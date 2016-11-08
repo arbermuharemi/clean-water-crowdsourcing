@@ -75,7 +75,9 @@ public class SubmitWaterReportScreenController {
         double latitude;
         try {
             longitude = Double.parseDouble(longitudeField.getText());
+            longitude +=0.0f;
             latitude = Double.parseDouble(latitudeField.getText());
+            latitude +=0.0f;
             if (latitude > 90 || latitude < -90
                     || longitude > 180 || longitude < -180) {
                 AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +

@@ -70,21 +70,9 @@ public class HistoryGraphController {
         String position = locationBox.getValue();
         String year = yearBox.getValue();
         String data = dataBox.getValue();
-        ArrayList<HashMap<String, Object>> reportList = myApp.getPurityReportList();
+        ArrayList<PurityReport> reportList = myApp.getPurityReportList();
         ArrayList<PurityReport> toGraph = new ArrayList<>();
-        for(HashMap<String, Object> dummy : reportList) {
-            HashMap<String, Integer> dateMap = (HashMap<String, Integer>)dummy.get("_date");
-            Date date = new Date(dateMap.get("year"), dateMap.get("month"), dateMap.get("date"));
-            int reportNumber = (Integer)dummy.get("_reportNumber");
-            String reporterName = (String)dummy.get("_nameOfWorker");
-            double contaminantPPM = (Double)dummy.get("_contaminantPPM");
-            double virusPPM = (Double)dummy.get("_virusPPM");
-            double latitude = (Double)dummy.get("_latitude");
-            double longitude = (Double)dummy.get("_longitude");
-            String condition = (String)dummy.get("_waterOverallCondition");
-            String description = (String)dummy.get("description");
-            String title = (String)dummy.get("title");
-            PurityReport report = new PurityReport(reportNumber, reporterName, date, longitude, latitude, condition, virusPPM, contaminantPPM);
+        for(PurityReport report : reportList) {
             if(report.includeInGraph(position, year)) {
                 toGraph.add(report);
             }

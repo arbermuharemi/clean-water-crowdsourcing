@@ -44,11 +44,14 @@ public class Main extends Application {
     private AnchorPane viewReportLayout;
     private BorderPane mapReportLayout;
     private AnchorPane historyGraphLayout;
-    private static ArrayList<HashMap<String, String>> userArr = new ArrayList<>();
-    private static ArrayList<HashMap<String, Object>> sourceReportList = new ArrayList<>();
-    private static ArrayList<HashMap<String, Object>> purityReportList = new ArrayList<>();
+    private static ArrayList<User> userArr = new ArrayList<>();
+    private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
+    private static ArrayList<PurityReport> purityReportList = new ArrayList<>();
     private static ArrayList<String> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();
+    private static ArrayList<HashMap<String, String>> userArrh = new ArrayList<>();
+    private static ArrayList<HashMap<String, Object>> sourceReportListh = new ArrayList<>();
+    private static ArrayList<HashMap<String, Object>> purityReportListh = new ArrayList<>();
     private static double maxVirus = 0;
     private static double maxContaminant = 0;
     FirebaseOptions options;
@@ -80,7 +83,10 @@ public class Main extends Application {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
                 if (dataSnapshot.getValue() != null) {
-                    userArr = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
+                    userArrh = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
+                    for(HashMap<String, String> a : userArrh){
+                        userArr.add(new User(a.get("firstName"), a.get("lastName"), a.get("userName"), a.get("password"), a.get("type")));
+                    }
                 }
             }
 
@@ -94,7 +100,18 @@ public class Main extends Application {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
                 if (dataSnapshot.getValue() != null) {
-                    sourceReportList = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    sourceReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    for(HashMap<String, Object> a : sourceReportListh){
+                        HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
+                        Date date = new Date();
+                        date.setDate(((Long)dateh.get("date")).intValue());
+                        date.setHours(((Long)dateh.get("hours")).intValue());
+                        date.setMinutes(((Long)dateh.get("minutes")).intValue());
+                        date.setMonth(((Long)dateh.get("month")).intValue());
+                        date.setSeconds(((Long)dateh.get("seconds")).intValue());
+                        date.setYear(((Long)dateh.get("year")).intValue());
+                        sourceReportList.add(new SourceReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_reporterName"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterType"), (String) a.get("_waterCondition")));
+                    }
                 }
             }
 
@@ -108,7 +125,18 @@ public class Main extends Application {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
                 if (dataSnapshot.getValue() != null) {
-                    purityReportList = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    purityReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    for(HashMap<String, Object> a : purityReportListh){
+                        HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
+                        Date date = new Date();
+                        date.setDate(((Long)dateh.get("date")).intValue());
+                        date.setHours(((Long)dateh.get("hours")).intValue());
+                        date.setMinutes(((Long)dateh.get("minutes")).intValue());
+                        date.setMonth(((Long)dateh.get("month")).intValue());
+                        date.setSeconds(((Long)dateh.get("seconds")).intValue());
+                        date.setYear(((Long)dateh.get("year")).intValue());
+                        purityReportList.add(new PurityReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_reporterName"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterOverallCondition"), ((Number) a.get("_virusPPM")).doubleValue(),((Number) a.get("_contaminantPPM")).doubleValue()));
+                    }
                 }
             }
 
@@ -465,68 +493,21 @@ public class Main extends Application {
     }
 
     public void addUser(User user) {
-        HashMap<String, String> myUser = new HashMap<>();
-        myUser.put("firstName", user.getFirstName());
-        myUser.put("lastName", user.getLastName());
-        myUser.put("userName", user.getUserName());
-        myUser.put("password", user.getPassword());
-        myUser.put("type", user.getType().toString());
-        userArr.add(myUser);
-        ArrayList<HashMap<String, String>> myUserList = getUserList();
-        userRef.setValue(myUserList);
+        userArr.add(user);
+       // ArrayList<HashMap<String, String>> myUserList = getUserList();
+        userRef.setValue(userArr);
     }
 
     public void addSourceReport(SourceReport report) {
-        HashMap<String, Object> myReport = new HashMap<>();
-        HashMap<String, Integer> myDate = new HashMap<>();
-        myDate.put("date", report.get_date().getDate());
-        myDate.put("day", report.get_date().getDay());
-        myDate.put("hours", report.get_date().getHours());
-        myDate.put("minutes", report.get_date().getMinutes());
-        myDate.put("month", report.get_date().getMonth());
-        myDate.put("seconds", report.get_date().getSeconds());
-        myDate.put("time", (Integer) ((int) report.get_date().getTime()));
-        myDate.put("timezoneOffset", report.get_date().getTimezoneOffset());
-        myDate.put("year", report.get_date().getYear());
-        myReport.put("_date", myDate);
-        myReport.put("_latitude", report.get_latitude());
-        myReport.put("_longitude", report.get_longitude());
-        myReport.put("_reportNumber", report.get_reportNumber());
-        myReport.put("_reporterName", report.get_reporterName());
-        myReport.put("_waterCondition", report.get_waterCondition());
-        myReport.put("_waterType", report.get_waterType());
-        myReport.put("description", report.getDescription());
-        myReport.put("title", report.getTitle());
-        sourceReportList.add(myReport);
-        ArrayList<HashMap<String, Object>> mySourceReportList = getSourceReportList();
-        sourceRef.setValue(mySourceReportList);
+        sourceReportList.add(report);
+       // ArrayList<HashMap<String, Object>> mySourceReportList = getSourceReportList();
+        sourceRef.setValue(sourceReportList);
     }
 
     public void addPurityReport (PurityReport report) {
-        HashMap<String, Object> myReport = new HashMap<>();
-        myReport.put("_contaminantPPM", report.get_contaminantPPM());
-        HashMap<String, Integer> myDate = new HashMap<>();
-        myDate.put("date", report.get_date().getDate());
-        myDate.put("day", report.get_date().getDay());
-        myDate.put("hours", report.get_date().getHours());
-        myDate.put("minutes", report.get_date().getMinutes());
-        myDate.put("month", report.get_date().getMonth());
-        myDate.put("seconds", report.get_date().getSeconds());
-        myDate.put("time", (Integer) ((int) report.get_date().getTime()));
-        myDate.put("timezoneOffset", report.get_date().getTimezoneOffset());
-        myDate.put("year", report.get_date().getYear());
-        myReport.put("_date", myDate);
-        myReport.put("_latitude", report.get_latitude());
-        myReport.put("_longitude", report.get_longitude());
-        myReport.put("_reportNumber", (Integer) report.get_reportNumber());
-        myReport.put("_nameOfWorker", report.get_nameOfWorker());
-        myReport.put("_virusPPM", report.get_virusPPM());
-        myReport.put("_waterOverallCondition", report.get_waterOverallCondition());
-        myReport.put("description", report.getDescription());
-        myReport.put("title", report.getTitle());
-        purityReportList.add(myReport);
-        ArrayList<HashMap<String, Object>> myPurityReportList = getPurityReportList();
-        purityRef.setValue(myPurityReportList);
+        purityReportList.add(report);
+        //ArrayList<HashMap<String, Object>> myPurityReportList = getPurityReportList();
+        purityRef.setValue(purityReportList);
     }
 
     public void addPurityLocation (String position) {
@@ -545,13 +526,13 @@ public class Main extends Application {
         purityYearRef.setValue(myPurityYearsList);
     }
 
-    public ArrayList<HashMap<String, String>> getUserList() {
+    public ArrayList<User> getUserList() {
         return userArr;
     }
 
-    public ArrayList<HashMap<String, Object>> getSourceReportList() { return sourceReportList; }
+    public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
 
-    public ArrayList<HashMap<String, Object>> getPurityReportList() { return purityReportList; }
+    public ArrayList<PurityReport> getPurityReportList() { return purityReportList; }
 
     public ArrayList<String> getPurityLocationsList() { return purityLocationsList; }
 
