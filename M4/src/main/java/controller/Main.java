@@ -54,6 +54,11 @@ public class Main extends Application {
     private static ArrayList<HashMap<String, Object>> purityReportListh = new ArrayList<>();
     private static double maxVirus = 0;
     private static double maxContaminant = 0;
+    private boolean isStarted1 = false;
+    private boolean isStarted2 = false;
+    private boolean isStarted3 = false;
+    private boolean isStarted4 = false;
+    private boolean isStarted5 = false;
     FirebaseOptions options;
     FirebaseDatabase database;
     DatabaseReference userRef;
@@ -67,6 +72,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        System.out.println("STARTED");
         options = new FirebaseOptions.Builder()
                 .setServiceAccount(new FileInputStream("M4/src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
@@ -82,7 +88,9 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<User>> t = new GenericTypeIndicator<List<User>>() {};
-                if (dataSnapshot.getValue() != null) {
+
+                if (dataSnapshot.getValue() != null && !isStarted1) {
+                    isStarted1=true;
                     userArrh = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
                     for(HashMap<String, String> a : userArrh){
                         userArr.add(new User(a.get("firstName"), a.get("lastName"), a.get("userName"), a.get("password"), a.get("type")));
@@ -99,7 +107,8 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
-                if (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null&& !isStarted2) {
+                    isStarted2=true;
                     sourceReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
                     for(HashMap<String, Object> a : sourceReportListh){
                         HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
@@ -124,7 +133,8 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
-                if (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null&& !isStarted3) {
+                    isStarted3=true;
                     purityReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
                     for(HashMap<String, Object> a : purityReportListh){
                         HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
@@ -135,7 +145,9 @@ public class Main extends Application {
                         date.setMonth(((Long)dateh.get("month")).intValue());
                         date.setSeconds(((Long)dateh.get("seconds")).intValue());
                         date.setYear(((Long)dateh.get("year")).intValue());
-                        purityReportList.add(new PurityReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_reporterName"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterOverallCondition"), ((Number) a.get("_virusPPM")).doubleValue(),((Number) a.get("_contaminantPPM")).doubleValue()));
+                        purityReportList.add(new PurityReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_nameOfWorker"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterOverallCondition"), ((Number) a.get("_virusPPM")).doubleValue(),((Number) a.get("_contaminantPPM")).doubleValue()));
+                        setMaxVirus(((Number) a.get("_virusPPM")).doubleValue());
+                        setMaxContaminant(((Number) a.get("_contaminantPPM")).doubleValue());
                     }
                 }
             }
@@ -149,7 +161,8 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
-                if (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null&& !isStarted4) {
+                    isStarted4=true;
                     purityLocationsList = (ArrayList<String>) dataSnapshot.getValue();
                 }
             }
@@ -163,7 +176,8 @@ public class Main extends Application {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
-                if (dataSnapshot.getValue() != null) {
+                if (dataSnapshot.getValue() != null&& !isStarted5) {
+                    isStarted5=true;
                     purityYearList = (ArrayList<String>) dataSnapshot.getValue();
                 }
             }
@@ -419,7 +433,9 @@ public class Main extends Application {
     public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, String year, User user) {
         double[] monthSums  = new double[12];
         double[] monthCount = new double[12];
-
+//        for(PurityReport pu: reportList){
+//            System.out.println(pu.toString());
+//        }
         System.out.println(reportList.size());
         Axis xAxis = new NumberAxis(1, 12, 1);
         Axis yAxis;
@@ -451,12 +467,16 @@ public class Main extends Application {
                 double virusPPM = report.get_virusPPM();
                 monthSums[month] += virusPPM;
                 monthCount[month]++;
-                month++;
                 System.out.println(virusPPM);
-                series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
+                //series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
+            }
+            for(int j = 0; j < monthSums.length; j++) {
+                System.out.println(monthSums[j]+" "+j);
+                int c = j+1;
+                series.getData().add(new XYChart.Data((double)c, monthSums[j]/monthCount[j]));
             }
         } else {
-            int contaminant = (int) maxVirus;
+            int contaminant = (int) maxContaminant;
             int count = 0;
             while (contaminant != 0) {
                 contaminant = contaminant/10;
@@ -464,20 +484,30 @@ public class Main extends Application {
             }
             double upperYBound = Math.pow(10, count);
             yAxis = new NumberAxis(0, upperYBound, upperYBound/10);
-            graph = new ScatterChart<>(xAxis, yAxis);
-            xAxis.setLabel("Month (January = 1");
-            yAxis.setLabel(data + " (ppm)");
-            series.setName("Contaminant vs. Month");
-            for(PurityReport report: reportList) {
 
+            xAxis.setLabel("Month (January = 1)");
+            yAxis.setLabel(data + " (ppm)");
+            graph = new ScatterChart<>(xAxis, yAxis);
+            graph.setTitle(year + " " + data + " Trend For Location " + position);
+            series.setName("Virus vs. Month");
+            for(PurityReport report: reportList) {
+                System.out.println("test");
                 Date date = report.get_date();
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(date);
                 System.out.println(Calendar.MONTH);
+
                 int month = cal.get(Calendar.MONTH);
-                System.out.println(month);
                 double contaminantPPM = report.get_contaminantPPM();
-                series.getData().add(new XYChart.Data(month, contaminantPPM));
+                monthSums[month] += contaminantPPM;
+                monthCount[month]++;
+                System.out.println(contaminantPPM);
+                //series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
+            }
+            for(int j = 0; j < monthSums.length; j++) {
+                System.out.println(monthSums[j]+" "+j);
+                int c = j+1;
+                series.getData().add(new XYChart.Data((double)c, monthSums[j]/monthCount[j]));
             }
         }
         graph.getData().addAll(series);
