@@ -42,7 +42,7 @@ public class ViewSourceReportScreenController {
 
     private User currentUser;
 
-    private ObservableList<HashMap<String, Object>> mySourceReports = FXCollections.observableArrayList();
+    private ObservableList<Report> mySourceReports = FXCollections.observableArrayList();
 
     private boolean isSourceReport;
 
@@ -84,7 +84,13 @@ public class ViewSourceReportScreenController {
         );
 
         reportNumCol.setCellValueFactory(
-                new PropertyValueFactory<>("reportNumber")
+                new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+                    @Override
+                    public ObservableValue call(TableColumn.CellDataFeatures dataFeatures) {
+                        Report report = (Report) dataFeatures.getValue();
+                        return new SimpleStringProperty(report.get_reportNumber()+"");
+                    }
+                }
         );
 
         dateCol.setCellValueFactory(
@@ -102,15 +108,41 @@ public class ViewSourceReportScreenController {
         );
 
         reporterNameCol.setCellValueFactory(
-                new PropertyValueFactory<>("reporterName")
+                new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+                    @Override
+                    public ObservableValue call(TableColumn.CellDataFeatures dataFeatures) {
+                        Report report = (Report) dataFeatures.getValue();
+                        if(report instanceof PurityReport){
+                            return new SimpleStringProperty(((PurityReport)report).get_nameOfWorker());
+                        }else {
+                            return new SimpleStringProperty(((SourceReport)report).get_reporterName());
+                        }
+                    }
+                }
         );
 
         locationCol.setCellValueFactory(
-                new PropertyValueFactory<>("location")
+                new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+                    @Override
+                    public ObservableValue call(TableColumn.CellDataFeatures dataFeatures) {
+                        Report report = (Report) dataFeatures.getValue();
+                        return new SimpleStringProperty(report.get_latitude()+" "+report.get_longitude());
+                    }
+                }
         );
 
         typeCol.setCellValueFactory(
-                new PropertyValueFactory<>("waterType")
+                new Callback<TableColumn.CellDataFeatures, ObservableValue>() {
+                    @Override
+                    public ObservableValue call(TableColumn.CellDataFeatures dataFeatures) {
+                        Report report = (Report) dataFeatures.getValue();
+                        if(report instanceof SourceReport) {
+                            return new SimpleStringProperty(((SourceReport) report).get_waterType());
+                        }else {
+                            return new SimpleStringProperty("");
+                        }
+                    }
+                }
         );
 
         conditionCol.setCellValueFactory(
@@ -168,18 +200,18 @@ public class ViewSourceReportScreenController {
                 }
         );
 
-//        ObservableList<SourceReport> sourceReport = FXCollections
-//                .observableArrayList(myApp.getSourceReportList());
-//        ObservableList<PurityReport> purityReport = FXCollections
-//                .observableArrayList(myApp.getPurityReportList());
-//
-//        mySourceReports = FXCollections.concat(sourceReport, purityReport);
-//
-//        reportsTable.setItems(mySourceReports);
-//
-//        reportsTable.getColumns().addAll(reportCol, reportNumCol, dateCol,
-//                reporterNameCol, locationCol, typeCol, conditionCol, virusCol,
-//                contaminationCol);
+        ObservableList<Report> sourceReport = FXCollections
+                .observableArrayList(myApp.getSourceReportList());
+        ObservableList<Report> purityReport = FXCollections
+                .observableArrayList(myApp.getPurityReportList());
+
+        mySourceReports = FXCollections.concat(sourceReport, purityReport);
+
+        reportsTable.setItems(mySourceReports);
+
+        reportsTable.getColumns().addAll(reportCol, reportNumCol, dateCol,
+                reporterNameCol, locationCol, typeCol, conditionCol, virusCol,
+                contaminationCol);
     }
 
     @FXML
