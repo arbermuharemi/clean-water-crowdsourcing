@@ -99,7 +99,7 @@ public class ViewSourceReportScreenController {
                     public ObservableValue call(TableColumn.CellDataFeatures dataFeatures) {
                         Report report = (Report) dataFeatures.getValue();
 
-                        String date = new SimpleDateFormat("mm/dd/yyyy " +
+                        String date = new SimpleDateFormat("MM/dd/yyyy " +
                                 "HH:mm").format(report.get_date());
 
                         return new SimpleStringProperty(date);
