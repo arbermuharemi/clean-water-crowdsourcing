@@ -1,14 +1,5 @@
 package main.java.controller;
 
-import javafx.scene.control.TableColumn;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.cell.PropertyValueFactory;
 import main.java.model.PurityReport;
 import main.java.model.Report;
 import main.java.model.SourceReport;
@@ -20,18 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-import javax.xml.transform.Source;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 
 
 /**
  * Created by chitramahajani on 10/25/16.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class ViewSourceReportScreenController {
 
@@ -41,8 +28,6 @@ public class ViewSourceReportScreenController {
     private Main myApp;
 
     private User currentUser;
-
-    private ObservableList<Report> mySourceReports = FXCollections.observableArrayList();
 
     private boolean isSourceReport;
 
@@ -205,7 +190,7 @@ public class ViewSourceReportScreenController {
         ObservableList<Report> purityReport = FXCollections
                 .observableArrayList(myApp.getPurityReportList());
 
-        mySourceReports = FXCollections.concat(sourceReport, purityReport);
+        ObservableList<Report> mySourceReports = FXCollections.concat(sourceReport, purityReport);
 
         reportsTable.setItems(mySourceReports);
 

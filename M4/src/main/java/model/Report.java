@@ -1,9 +1,7 @@
 package main.java.model;
 
-import javafx.beans.property.StringProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 
@@ -11,6 +9,7 @@ import java.util.Date;
 
 /**
  * Created by Arber on 10/24/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public abstract class Report {
 

@@ -9,10 +9,10 @@ import javafx.scene.control.Alert.AlertType;
 import main.java.model.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Yash on 9/20/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class LoginScreenController {
 
@@ -54,7 +54,6 @@ public class LoginScreenController {
                 loadApp = true;
                 User myUser = user;
                 currentUser = myUser;
-
             }
         }
         if (loadApp) {

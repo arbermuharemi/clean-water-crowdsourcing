@@ -1,20 +1,17 @@
 package main.java.controller;
 
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import main.java.model.PurityReport;
-import main.java.model.Report;
 import main.java.model.User;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  * Created by Yash on 10/30/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class HistoryGraphController {
 

@@ -1,6 +1,0 @@
-defaultTasks 'jar'
-apply plugin: 'java'
-
-dependencies {
-    compile 'com.google.firebase:firebase-server-sdk:3.0.1'
-}

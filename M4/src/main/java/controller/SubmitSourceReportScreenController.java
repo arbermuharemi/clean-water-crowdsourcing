@@ -1,6 +1,5 @@
 package main.java.controller;
 
-import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,12 +13,11 @@ import java.util.Random;
 
 /**
  * Created by Yash on 10/12/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class SubmitSourceReportScreenController {
 
     private User currentUser;
-
-    private Date date;
 
     private Main myApp;
 
@@ -72,7 +70,7 @@ public class SubmitSourceReportScreenController {
 
     @FXML
     private void handleDonePressed() {
-        date = new Date();
+        Date date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
         double longitude;
         double latitude;

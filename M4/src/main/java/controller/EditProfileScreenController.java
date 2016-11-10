@@ -9,6 +9,7 @@ import main.java.model.User;
 
 /**
  * Created by Yash on 10/3/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class EditProfileScreenController {
 

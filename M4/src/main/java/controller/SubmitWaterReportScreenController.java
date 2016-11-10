@@ -1,15 +1,12 @@
 package main.java.controller;
 
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 import main.java.model.AlertMessage;
 import main.java.model.PurityReport;
-import main.java.model.Report;
 import main.java.model.User;
 
 import java.util.Date;
@@ -19,6 +16,7 @@ import java.util.Random;
 
 /**
  * Created by chitramahajani on 10/25/16.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class SubmitWaterReportScreenController {
 
@@ -40,8 +38,6 @@ public class SubmitWaterReportScreenController {
     private User currentUser;
 
     private Main myApp;
-
-    private Date date;
 
     private ObservableList<String> myConditions = FXCollections
             .observableArrayList("Safe", "Treatable", "Unsafe");
@@ -68,7 +64,7 @@ public class SubmitWaterReportScreenController {
 
     @FXML
     private void handleDonePressed() {
-        date = new Date();
+        Date date = new Date();
         System.out.println(date.toString());
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
         double longitude;
@@ -89,7 +85,7 @@ public class SubmitWaterReportScreenController {
                 double contaminant = Double.parseDouble(contaminantField.getText());
                 myApp.setMaxVirus(virus);
                 myApp.setMaxContaminant(contaminant);
-                System.out.println(name + " " + longitude + " " + latitude + " " + conditionValue.getValue().toString() + " " + virus
+                System.out.println(name + " " + longitude + " " + latitude + " " + conditionValue.getValue() + " " + virus
                     + " " + contaminant);
 
                 PurityReport report = new PurityReport(
@@ -97,7 +93,7 @@ public class SubmitWaterReportScreenController {
                         name, date,
                         longitude,
                         latitude,
-                        conditionValue.getValue().toString(),
+                        conditionValue.getValue(),
                         virus,
                         contaminant);
 

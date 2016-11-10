@@ -1,6 +1,5 @@
 package main.java.model;
 
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -10,6 +9,7 @@ import java.util.Date;
 
 /**
  * Created by Arber on 10/24/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class PurityReport extends Report {
     private StringProperty _nameOfWorker = new SimpleStringProperty();
@@ -106,12 +106,8 @@ public class PurityReport extends Report {
         double latitude = Double.parseDouble(doubles[0]);
         double longitude = Double.parseDouble(doubles[1]);
 
-        if (this.get_latitude() == latitude
+        return this.get_latitude() == latitude
                 && this.get_longitude() == longitude
-                && _year.equals(year)) {
-            return true;
-        } else {
-            return false;
-        }
+                && _year.equals(year);
     }
 }

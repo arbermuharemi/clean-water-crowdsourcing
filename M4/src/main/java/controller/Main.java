@@ -1,10 +1,6 @@
 package main.java.controller;
-import com.lynden.gmapsfx.javascript.object.LatLong;
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,15 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import main.java.model.PurityReport;
-import main.java.model.Report;
 import main.java.model.SourceReport;
 import main.java.model.User;
 import com.google.firebase.*;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.*;
 
 import com.google.firebase.database.*;
@@ -33,17 +26,7 @@ import javafx.scene.chart.XYChart;
 
 public class Main extends Application {
     private Stage window;
-    private GridPane welcomeLayout;
-    private AnchorPane loginLayout;
-    private AnchorPane registrationLayout;
-    private HBox applicationLayout;
-    private AnchorPane editProfileLayout;
-    private AnchorPane createProfileLayout;
-    private AnchorPane sourceReportLayout;
-    private AnchorPane waterReportLayout;
     private AnchorPane viewReportLayout;
-    private BorderPane mapReportLayout;
-    private AnchorPane historyGraphLayout;
     private static ArrayList<User> userArr = new ArrayList<>();
     private static ArrayList<SourceReport> sourceReportList = new ArrayList<>();
     private static ArrayList<PurityReport> purityReportList = new ArrayList<>();
@@ -195,7 +178,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/Welcome.fxml"));
-            welcomeLayout = loader.load();
+            GridPane welcomeLayout = loader.load();
 
             WelcomeController controller = loader.getController();
             controller.setMainApp(this);
@@ -215,7 +198,7 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/ApplicationScreen.fxml"));
-            applicationLayout = loader.load();
+            HBox applicationLayout = loader.load();
 
             ApplicationController controller = loader.getController();
             controller.setMainApp(this);
@@ -235,7 +218,7 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/LoginScreen.fxml"));
-            loginLayout = loader.load();
+            AnchorPane loginLayout = loader.load();
 
             LoginScreenController controller = loader.getController();
             controller.setMainApp(this);
@@ -254,9 +237,9 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/RegistrationScreen.fxml"));
-            registrationLayout = loader.load();
+            AnchorPane registrationLayout = loader.load();
 
-            RegistrationScreenContoller controller = loader.getController();
+            RegistrationScreenController controller = loader.getController();
             controller.setMainApp(this);
 
             window.setTitle("Registration Page");
@@ -274,7 +257,7 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/EditProfileScreen.fxml"));
-            editProfileLayout = loader.load();
+            AnchorPane editProfileLayout = loader.load();
 
             EditProfileScreenController controller = loader.getController();
             controller.setMainApp(this);
@@ -295,7 +278,7 @@ public class Main extends Application {
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/CreateProfileScreen.fxml"));
-            createProfileLayout = loader.load();
+            AnchorPane createProfileLayout = loader.load();
 
             CreateProfileScreenController controller = loader.getController();
             controller.setMainApp(this);
@@ -315,7 +298,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/SubmitSourceReportScreen.fxml"));
-            sourceReportLayout = loader.load();
+            AnchorPane sourceReportLayout = loader.load();
 
             SubmitSourceReportScreenController controller = loader.getController();
             controller.setMainApp(this);
@@ -335,7 +318,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/SubmitWaterReportScreen.fxml"));
-            waterReportLayout = loader.load();
+            AnchorPane waterReportLayout = loader.load();
 
             SubmitWaterReportScreenController controller = loader.getController();
             controller.setMainApp(this);
@@ -391,7 +374,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/GMap.fxml"));
-            mapReportLayout = loader.load();
+            BorderPane mapReportLayout = loader.load();
 
             GMapController controller = loader.getController();
             controller.setMainApp(this);
@@ -414,7 +397,7 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/HistoryGraph.fxml"));
-            historyGraphLayout = loader.load();
+            AnchorPane historyGraphLayout = loader.load();
 
             HistoryGraphController controller = loader.getController();
             controller.setMainApp(this);

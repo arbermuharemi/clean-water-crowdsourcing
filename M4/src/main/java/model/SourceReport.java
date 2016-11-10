@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * Created by vijay on 10/12/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class SourceReport extends Report {
     private StringProperty _reporterName = new SimpleStringProperty();

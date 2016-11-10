@@ -11,14 +11,11 @@ import javafx.scene.control.TextField;
 import main.java.model.AlertMessage;
 import main.java.model.User;
 
-
-
-import java.io.FileInputStream;
-
 /**
  * Created by Yash on 9/28/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
-public class RegistrationScreenContoller {
+public class RegistrationScreenController {
 
     private Main myApp;
 

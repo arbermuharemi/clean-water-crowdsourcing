@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 
 /**
  * Created by Yash on 9/20/2016.
+ * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class WelcomeController implements Initializable {
 

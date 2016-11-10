@@ -7,14 +7,11 @@ import com.lynden.gmapsfx.javascript.object.*;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 
 import javafx.fxml.FXML;
         import javafx.fxml.Initializable;
-        import javafx.scene.control.Button;
-import main.java.model.Report;
 import netscape.javascript.JSObject;
 import main.java.model.SourceReport;
 
@@ -51,8 +48,8 @@ public class GMapController implements Initializable, MapComponentInitializedLis
         map = mapView.createMap(mapOptions);
         for (SourceReport dummyReport : myReports) {
             MarkerOptions option = new MarkerOptions();
-            double latitude = (Double)dummyReport.get_latitude();
-            double longitude = (Double)dummyReport.get_longitude();
+            double latitude = dummyReport.get_latitude();
+            double longitude = dummyReport.get_longitude();
             LatLong posPair = new LatLong(latitude, longitude);
             option.position(posPair)
                     .visible(Boolean.TRUE)
