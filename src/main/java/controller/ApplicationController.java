@@ -32,9 +32,6 @@ public class ApplicationController {
     private Button submitReportButton;
 
     @FXML
-    private Button viewSourceReportsButton;
-
-    @FXML
     private Button viewHistoryGraphButton;
 
     @FXML

@@ -24,12 +24,6 @@ public class LoginScreenController {
     @FXML
     private PasswordField passField;
 
-    @FXML
-    private Button homeButton;
-
-    @FXML
-    private Button signupButton;
-
     @FXML Button submitButton;
 
     public void setMainApp(Main mainApp) {

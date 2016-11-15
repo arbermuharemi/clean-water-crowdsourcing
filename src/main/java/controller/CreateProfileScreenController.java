@@ -33,12 +33,6 @@ public class CreateProfileScreenController {
     @FXML
     private TextField zipField;
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button doneButton;
-
 
     public void setCurrentUser(User user) {
         currentUser = user;

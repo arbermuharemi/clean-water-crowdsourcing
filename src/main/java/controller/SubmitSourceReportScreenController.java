@@ -33,12 +33,6 @@ public class SubmitSourceReportScreenController {
     @FXML
     private ComboBox<String> conditionField;
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button doneButton;
-
     //private int reportNumber = myApp.getSourceReportList().size();
 
     private ObservableList<String> myTypes = FXCollections

@@ -15,12 +15,6 @@ public class WelcomeController implements Initializable {
 
     private Main myApp;
 
-    @FXML
-    private Button registerButton;
-
-    @FXML
-    private Button loginButton;
-
     public void initialize(URL location, ResourceBundle resources) {}
 
     public void setMainApp(Main mainApp) {

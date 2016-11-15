@@ -35,12 +35,6 @@ public class EditProfileScreenController {
     @FXML
     private TextField zipField;
 
-    @FXML
-    private Button cancelButton;
-
-    @FXML
-    private Button doneButton;
-
     private Profile userProfile;
 
     public void setCurrentUser(User user) {

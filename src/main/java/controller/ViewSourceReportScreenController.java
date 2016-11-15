@@ -36,7 +36,6 @@ public class ViewSourceReportScreenController {
     public void setMainApp(Main mainApp) {
         //boolean value is true for source reports false for purity reports
         myApp = mainApp;
-        System.out.println("my app is (inside setMainApp" + myApp);
         TableColumn reportCol = new TableColumn("Report Type");
         TableColumn reportNumCol = new TableColumn("Report Number");
         TableColumn dateCol = new TableColumn("Date");
