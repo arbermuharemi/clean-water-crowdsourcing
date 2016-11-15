@@ -454,9 +454,13 @@ public class Main extends Application {
                 //series.getData().add(new XYChart.Data((double)month, monthSums[month--]/monthCount[month--]));
             }
             for(int j = 0; j < monthSums.length; j++) {
-                System.out.println(monthSums[j]+" "+j);
+
                 int c = j+1;
-                series.getData().add(new XYChart.Data((double)c, monthSums[j]/monthCount[j]));
+                System.out.println(monthSums[j]+" "+monthCount[j] + " " +c);
+                if(monthCount[j] != 0) {
+                    series.getData().add(new XYChart.Data((double)c, monthSums[j]/monthCount[j]));
+                }
+
             }
         } else {
             int contaminant = (int) maxContaminant;
