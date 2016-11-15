@@ -1,6 +1,7 @@
 package test.java;
 
 import main.java.controller.ApplicationController;
+import main.java.model.User;
 import org.junit.Before;
 import org.testng.annotations.Test;
 
@@ -10,18 +11,42 @@ import org.testng.annotations.Test;
  */
 public class ArberJUnitTests {
     private ApplicationController applicationController;
+    private User userType;
+    private User managerType;
+    private User adminType;
 
     @Before
-    public void setUpApplicationController() {
+    public void setupApplicationController() throws NoSuchFieldException {
         applicationController = new ApplicationController();
-        //Class<?> appControllerClass = applicationController.getClass();
-        //Field[] appControllerClassFields = appControllerClass.getFields();
-        //applicationController.submitReportButton.isDisabled();
     }
 
     @Test
-    public void checkProperThing() {
+    public void checkSubmitReportDisabledIfUserTypeUser() {
+        applicationController.setCurrentUser();
         applicationController.submitReportButton.isDisabled();
     }
 
+    @Test
+    public void checkSubmitReportDisabledIfUserTypeAdmin() {
+        applicationController.setCurrentUser();
+        applicationController.submitReportButton.isDisabled();
+    }
+
+    @Test
+    public void checkViewPurityReportAndViewHistoryReportDisabledIfUserTypeManager() {
+        applicationController.setCurrentUser();
+        applicationController.submitReportButton.isDisabled();
+    }
+
+    @Test
+    public void checkViewPurityReportAndViewHistoryReportEnabledIfUserNotTypeManager() {
+        applicationController.setCurrentUser();
+        applicationController.submitReportButton.isDisabled();
+    }
+
+    @Test
+    public void checkCreateProfileDisabledIfUserHasNoProfile() {
+        applicationController.setCurrentUser();
+        applicationController.submitReportButton.isDisabled();
+    }
 }
