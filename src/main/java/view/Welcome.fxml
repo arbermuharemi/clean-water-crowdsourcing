@@ -37,11 +37,11 @@
          <Font name="System Bold" size="18.0"/>
         </font>
     </Label>
-    <Button fx:id="loginButton" alignment="CENTER"
+    <Button alignment="CENTER"
             onAction="#handleLoginPressed" prefHeight="27.0" prefWidth="70.0"
             GridPane.columnIndex="1" GridPane.rowIndex="1">Login
     </Button>
-    <Button fx:id="registerButton" alignment="CENTER"
+    <Button alignment="CENTER"
             onAction="#handleRegisterPressed" prefHeight="2.0" prefWidth="71.0"
             GridPane.columnIndex="1" GridPane.rowIndex="2">Register
     </Button>

@@ -29,7 +29,7 @@
                 text="Submit Source Report" textOverrun="CLIP">Submit Source
             Report
         </Button>
-        <Button fx:id="viewSourceReportsButton" alignment="CENTER"
+        <Button alignment="CENTER"
                 onAction="#handleViewSourceReportsPressed">View Source
             Reports
         </Button>

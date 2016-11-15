@@ -51,9 +51,9 @@
                GridPane.rowIndex="4"/>
         <ComboBox fx:id="conditionField" promptText="Water Condition"
                   GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-        <Button fx:id="cancelButton" onAction="#handleCancelPressed"
+        <Button onAction="#handleCancelPressed"
                 text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-        <Button fx:id="doneButton" onAction="#handleDonePressed" text="Done"
+        <Button onAction="#handleDonePressed" text="Done"
                 GridPane.columnIndex="1" GridPane.rowIndex="5"/>
 
 

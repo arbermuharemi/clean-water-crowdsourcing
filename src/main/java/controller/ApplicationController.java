@@ -17,25 +17,25 @@ public class ApplicationController {
     private static User currentUser;
 
     @FXML
-    private Label applicationMessage;
+    public Label applicationMessage;
 
     @FXML
-    private Button createButton;
+    public Button createButton;
 
     @FXML
-    private Button editButton;
+    public Button editButton;
 
     @FXML
-    private Button viewMapButton;
+    public Button viewMapButton;
 
     @FXML
-    private Button submitReportButton;
+    public Button submitReportButton;
 
     @FXML
-    private Button viewHistoryGraphButton;
+    public Button viewHistoryGraphButton;
 
     @FXML
-    private Button viewPurityReportsButton;
+    public Button viewPurityReportsButton;
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -57,7 +57,7 @@ public class ApplicationController {
         if (userType == User.Type.MANAGER){
             viewPurityReportsButton.setDisable(false);
             viewHistoryGraphButton.setDisable(false);
-        }else {
+        } else {
             viewPurityReportsButton.setDisable(true);
             viewHistoryGraphButton.setDisable(true);
         }

@@ -2,7 +2,6 @@ package main.java.controller;
 
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 import java.net.URL;
 import java.util.ResourceBundle;

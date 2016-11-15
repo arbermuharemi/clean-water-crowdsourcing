@@ -46,8 +46,7 @@ public class LoginScreenController {
             User user = userList.get(j);
             if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
                 loadApp = true;
-                User myUser = user;
-                currentUser = myUser;
+                currentUser = user;
             }
         }
         if (loadApp) {
