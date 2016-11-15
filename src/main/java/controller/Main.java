@@ -32,9 +32,9 @@ public class Main extends Application {
     private static ArrayList<PurityReport> purityReportList = new ArrayList<>();
     private static ArrayList<String> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();
-    private static ArrayList<HashMap<String, String>> userArrh = new ArrayList<>();
-    private static ArrayList<HashMap<String, Object>> sourceReportListh = new ArrayList<>();
-    private static ArrayList<HashMap<String, Object>> purityReportListh = new ArrayList<>();
+    private static ArrayList<HashMap<String, String>> userArrDatabase = new ArrayList<>();
+    private static ArrayList<HashMap<String, Object>> sourceReportListDatabase = new ArrayList<>();
+    private static ArrayList<HashMap<String, Object>> purityReportListDatabase = new ArrayList<>();
     private static double maxVirus = 0;
     private static double maxContaminant = 0;
     private boolean isStarted1 = false;
@@ -42,13 +42,12 @@ public class Main extends Application {
     private boolean isStarted3 = false;
     private boolean isStarted4 = false;
     private boolean isStarted5 = false;
-    FirebaseOptions options;
-    FirebaseDatabase database;
-    DatabaseReference userRef;
-    DatabaseReference sourceRef;
-    DatabaseReference purityRef;
-    DatabaseReference purityLocationRef;
-    DatabaseReference purityYearRef;
+    private FirebaseOptions options;
+    private DatabaseReference userRef;
+    private DatabaseReference sourceRef;
+    private DatabaseReference purityRef;
+    private DatabaseReference purityLocationRef;
+    private DatabaseReference purityYearRef;
 
     /*private static ArrayList<LatLong> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();*/
@@ -56,17 +55,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("STARTED");
-        options = new FirebaseOptions.Builder()
+        FirebaseOptions options = new FirebaseOptions.Builder()
                 .setServiceAccount(new FileInputStream("src/main/java/model/cs2340-software-smiths-4665dd93b180.json"))
                 .setDatabaseUrl("https://cs2340-software-smiths.firebaseio.com/")
                 .build();
         FirebaseApp.initializeApp(options);
-        database = database.getInstance();
-        userRef = database.getReference("users");
-        sourceRef = database.getReference("sourceReports");
-        purityRef = database.getReference("purityReports");
-        purityLocationRef = database.getReference("purityLocations");
-        purityYearRef = database.getReference("purityYears");
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("users");
+        DatabaseReference sourceRef = database.getReference("sourceReports");
+        DatabaseReference purityRef = database.getReference("purityReports");
+        DatabaseReference purityLocationRef = database.getReference("purityLocations");
+        DatabaseReference purityYearRef = database.getReference("purityYears");
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -74,8 +73,8 @@ public class Main extends Application {
 
                 if (dataSnapshot.getValue() != null && !isStarted1) {
                     isStarted1=true;
-                    userArrh = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
-                    for(HashMap<String, String> a : userArrh){
+                    userArrDatabase = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
+                    for(HashMap<String, String> a : userArrDatabase){
                         userArr.add(new User(a.get("firstName"), a.get("lastName"), a.get("userName"), a.get("password"), a.get("type")));
                     }
                 }
@@ -92,16 +91,16 @@ public class Main extends Application {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
                 if (dataSnapshot.getValue() != null&& !isStarted2) {
                     isStarted2=true;
-                    sourceReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
-                    for(HashMap<String, Object> a : sourceReportListh){
-                        HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
+                    sourceReportListDatabase = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    for(HashMap<String, Object> a : sourceReportListDatabase){
+                        HashMap<String, Object> dateDatabase = (HashMap<String, Object>) a.get("_date");
                         Date date = new Date();
-                        date.setDate(((Long)dateh.get("date")).intValue());
-                        date.setHours(((Long)dateh.get("hours")).intValue());
-                        date.setMinutes(((Long)dateh.get("minutes")).intValue());
-                        date.setMonth(((Long)dateh.get("month")).intValue());
-                        date.setSeconds(((Long)dateh.get("seconds")).intValue());
-                        date.setYear(((Long)dateh.get("year")).intValue());
+                        date.setDate(((Long)dateDatabase.get("date")).intValue());
+                        date.setHours(((Long)dateDatabase.get("hours")).intValue());
+                        date.setMinutes(((Long)dateDatabase.get("minutes")).intValue());
+                        date.setMonth(((Long)dateDatabase.get("month")).intValue());
+                        date.setSeconds(((Long)dateDatabase.get("seconds")).intValue());
+                        date.setYear(((Long)dateDatabase.get("year")).intValue());
                         sourceReportList.add(new SourceReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_reporterName"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterType"), (String) a.get("_waterCondition")));
                     }
                 }
@@ -118,16 +117,16 @@ public class Main extends Application {
                 //GenericTypeIndicator<List<Report>> t = new GenericTypeIndicator<List<Report>>() {};
                 if (dataSnapshot.getValue() != null&& !isStarted3) {
                     isStarted3=true;
-                    purityReportListh = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
-                    for(HashMap<String, Object> a : purityReportListh){
-                        HashMap<String, Object> dateh = (HashMap<String, Object>) a.get("_date");
+                    purityReportListDatabase = (ArrayList<HashMap<String, Object>>) dataSnapshot.getValue();
+                    for(HashMap<String, Object> a : purityReportListDatabase){
+                        HashMap<String, Object> dateDatabase = (HashMap<String, Object>) a.get("_date");
                         Date date = new Date();
-                        date.setDate(((Long)dateh.get("date")).intValue());
-                        date.setHours(((Long)dateh.get("hours")).intValue());
-                        date.setMinutes(((Long)dateh.get("minutes")).intValue());
-                        date.setMonth(((Long)dateh.get("month")).intValue());
-                        date.setSeconds(((Long)dateh.get("seconds")).intValue());
-                        date.setYear(((Long)dateh.get("year")).intValue());
+                        date.setDate(((Long)dateDatabase.get("date")).intValue());
+                        date.setHours(((Long)dateDatabase.get("hours")).intValue());
+                        date.setMinutes(((Long)dateDatabase.get("minutes")).intValue());
+                        date.setMonth(((Long)dateDatabase.get("month")).intValue());
+                        date.setSeconds(((Long)dateDatabase.get("seconds")).intValue());
+                        date.setYear(((Long)dateDatabase.get("year")).intValue());
                         purityReportList.add(new PurityReport(((Long)a.get("_reportNumber")).intValue(),(String) a.get("_nameOfWorker"), date, ((Number)a.get("_longitude")).doubleValue(),((Number) a.get("_latitude")).doubleValue(), (String)a.get("_waterOverallCondition"), ((Number) a.get("_virusPPM")).doubleValue(),((Number) a.get("_contaminantPPM")).doubleValue()));
                         setMaxVirus(((Number) a.get("_virusPPM")).doubleValue());
                         setMaxContaminant(((Number) a.get("_contaminantPPM")).doubleValue());
@@ -340,7 +339,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../view/ViewSourceReportTableScreen.fxml"));
             viewReportLayout = loader.load();
             ViewSourceReportScreenController controller = loader.getController();
-            controller.setMainApp(this, true);
+            controller.setMainApp(this);
             controller.setCurrentUser(user);
             window.setTitle("View Source Reports");
             Scene createReportScene = new Scene(viewReportLayout);
@@ -358,7 +357,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("../view/ViewSourceReportTableScreen.fxml"));
             viewReportLayout = loader.load();
             ViewSourceReportScreenController controller = loader.getController();
-            controller.setMainApp(this, false);
+            controller.setMainApp(this);
             controller.setCurrentUser(user);
             window.setTitle("View Purity Report");
             Scene createReportScene = new Scene(viewReportLayout);
@@ -440,7 +439,6 @@ public class Main extends Application {
             graph.setTitle(year + " " + data + " Trend For Location " + position);
             series.setName("Virus vs. Month");
             for(PurityReport report: reportList) {
-                System.out.println("test");
                 Date date = report.get_date();
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(date);
@@ -478,7 +476,6 @@ public class Main extends Application {
             graph.setTitle(year + " " + data + " Trend For Location " + position);
             series.setName("Virus vs. Month");
             for(PurityReport report: reportList) {
-                System.out.println("test");
                 Date date = report.get_date();
                 Calendar cal = new GregorianCalendar();
                 cal.setTime(date);

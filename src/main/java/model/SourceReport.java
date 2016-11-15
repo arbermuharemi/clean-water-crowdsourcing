@@ -18,24 +18,12 @@ public class SourceReport extends Report {
         return _reporterName.get();
     }
 
-    public StringProperty _reporterNameProperty() {
-        return _reporterName;
-    }
-
     public String get_waterType() {
         return _waterType.get();
     }
 
-    public StringProperty _waterTypeProperty() {
-        return _waterType;
-    }
-
     public String get_waterCondition() {
         return _waterCondition.get();
-    }
-
-    public StringProperty _waterConditionProperty() {
-        return _waterCondition;
     }
 
     public SourceReport(int reportNumber, String reporterName, Date date,

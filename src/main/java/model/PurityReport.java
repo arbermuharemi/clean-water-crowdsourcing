@@ -22,32 +22,16 @@ public class PurityReport extends Report {
         return _nameOfWorker.get();
     }
 
-    public StringProperty _nameOfWorkerProperty() {
-        return _nameOfWorker;
-    }
-
     public String get_waterOverallCondition() {
         return _waterOverallCondition.toString();
-    }
-
-    public WaterCondition _waterOverallConditionProperty() {
-        return _waterOverallCondition;
     }
 
     public double get_virusPPM() {
         return _virusPPM.get();
     }
 
-    public DoubleProperty _virusPPMProperty() {
-        return _virusPPM;
-    }
-
     public double get_contaminantPPM() {
         return _contaminantPPM.get();
-    }
-
-    public DoubleProperty _contaminantPPMProperty() {
-        return _contaminantPPM;
     }
 
     public PurityReport(int reportNumber, String reporterName, Date date,
@@ -82,22 +66,22 @@ public class PurityReport extends Report {
                 "Water Condition: " + get_waterOverallCondition();
     }
 
-    public String getTitle() {
-        return "<h2>Report " + get_reportNumber() + "</h2>";
-    }
+    //public String getTitle() {
+    //    return "<h2>Report " + get_reportNumber() + "</h2>";
+    //}
+    //
+    //public String getDescription() {
+    //    return  "<h2>Report " +  get_reportNumber() + "</h2>" + "\n\n" +
+    //            "Worker Name: " + get_nameOfWorker() + "\n" +
+    //            "<br> Date: " +  get_date() + "\n" +
+    //            "<br> Longitude: " + get_longitude() + "\n" +
+    //            "<br> Latitude: " + get_virusPPM() +"\n" +
+    //            "<br> Overall Water Condition: " + get_waterOverallCondition() +
+    //            "<br> Virus PPM: " + get_virusPPM() +
+    //            "<br> Contaminant PPM: " + get_contaminantPPM() + "</h2>";
+    //}
 
-    public String getDescription() {
-        return  "<h2>Report " +  get_reportNumber() + "</h2>" + "\n\n" +
-                "Worker Name: " + get_nameOfWorker() + "\n" +
-                "<br> Date: " +  get_date() + "\n" +
-                "<br> Longitude: " + get_longitude() + "\n" +
-                "<br> Latitude: " + get_virusPPM() +"\n" +
-                "<br> Overall Water Condition: " + get_waterOverallCondition() +
-                "<br> Virus PPM: " + get_virusPPM() +
-                "<br> Contaminant PPM: " + get_contaminantPPM() + "</h2>";
-    }
-
-    public enum WaterCondition {
+    private enum WaterCondition {
         SAFE, TREATABLE, UNSAFE
     }
 

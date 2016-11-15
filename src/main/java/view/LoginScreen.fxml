@@ -31,9 +31,9 @@
             <RowConstraints minHeight="10.0" prefHeight="50"/>
             <RowConstraints minHeight="10.0" prefHeight="50"/>
         </rowConstraints>
-        <Label fx:id="UserLabel" text="Username:" GridPane.columnIndex="0"
+        <Label text="Username:" GridPane.columnIndex="0"
                GridPane.rowIndex="1"/>
-        <Label fx:id="PassLabel" text="Password:" GridPane.columnIndex="0"
+        <Label text="Password:" GridPane.columnIndex="0"
                GridPane.rowIndex="2"/>
         <TextField fx:id="userField" prefWidth="313.0"
                    promptText="Enter Username Here" GridPane.columnIndex="1"

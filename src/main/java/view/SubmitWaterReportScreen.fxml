@@ -31,31 +31,31 @@
             <RowConstraints minHeight="10.0" prefHeight="50"/>
             <RowConstraints minHeight="10.0" prefHeight="50"/>
         </rowConstraints>
-        <Label fx:id="applicationMessage" alignment="CENTER" prefHeight="23.0"
+        <Label alignment="CENTER" prefHeight="23.0"
                prefWidth="221.0" textAlignment="CENTER" GridPane.columnIndex="1"
                GridPane.rowIndex="0">Submit Water Report
         </Label>
-        <Label fx:id="latitudeLabel" text="Latitude:" GridPane.columnIndex="0"
+        <Label text="Latitude:" GridPane.columnIndex="0"
                GridPane.rowIndex="1"/>
         <TextField fx:id="latitudeField" GridPane.columnIndex="1"
                    GridPane.rowIndex="1"/>
-        <Label fx:id="longitudeLabel" text="Longitude:" GridPane.columnIndex="0"
+        <Label text="Longitude:" GridPane.columnIndex="0"
                GridPane.rowIndex="2"/>
         <TextField fx:id="longitudeField" GridPane.columnIndex="1"
                    GridPane.rowIndex="2"/>
-        <Label fx:id="conditionLabel" text="Condition:" GridPane.columnIndex="0"
+        <Label text="Condition:" GridPane.columnIndex="0"
                GridPane.rowIndex="5"/>
         <ComboBox fx:id="conditionValue" promptText="Water Condition"
                   GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-        <Button fx:id="cancelButton" onAction="#handleCancelPressed"
+        <Button onAction="#handleCancelPressed"
                 text="Cancel" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
-        <Button fx:id="doneButton" onAction="#handleDonePressed" text="Done"
+        <Button onAction="#handleDonePressed" text="Done"
                 GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-        <Label fx:id="virusLabel" text="Virus PPM:" GridPane.columnIndex="0"
+        <Label text="Virus PPM:" GridPane.columnIndex="0"
                GridPane.rowIndex="3"/>
         <TextField fx:id="virusField" GridPane.columnIndex="1"
                    GridPane.rowIndex="3"/>
-        <Label fx:id="contaminantLabel" text="Contaminant PPM:"
+        <Label text="Contaminant PPM:"
                GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <TextField fx:id="contaminantField" GridPane.columnIndex="1"
                    GridPane.rowIndex="4"/>

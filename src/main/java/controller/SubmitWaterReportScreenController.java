@@ -85,8 +85,6 @@ public class SubmitWaterReportScreenController {
                 double contaminant = Double.parseDouble(contaminantField.getText());
                 myApp.setMaxVirus(virus);
                 myApp.setMaxContaminant(contaminant);
-                System.out.println(name + " " + longitude + " " + latitude + " " + conditionValue.getValue() + " " + virus
-                    + " " + contaminant);
 
                 PurityReport report = new PurityReport(
                         random.nextInt(100),

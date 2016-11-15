@@ -40,8 +40,6 @@ public class ApplicationController {
     @FXML
     private Button viewPurityReportsButton;
 
-    @FXML Button getViewHistoryGraphButton;
-
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
     }
@@ -72,13 +70,14 @@ public class ApplicationController {
         } else {
             editButton.setDisable(true);
         }
-        if (currentUser.getType() == User.Type.WORKER) {
+        // For future implementation
+        //if (currentUser.getType() == User.Type.WORKER) {
             // show water purity report button
             // button.setVisible(true)
-        } else {
+        //} else {
             // make the button INVISIBLE
             // button.setVisible(false)
-        }
+        //}
         if (myApp.getSourceReportList() == null || myApp.getSourceReportList().size() == 0) {
             viewMapButton.setDisable(true);
         }

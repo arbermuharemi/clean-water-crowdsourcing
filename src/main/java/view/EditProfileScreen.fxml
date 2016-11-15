@@ -26,31 +26,31 @@
             <RowConstraints minHeight="10.0" prefHeight="50"/>
             <RowConstraints minHeight="10.0" prefHeight="50"/>
         </rowConstraints>
-        <Label fx:id="applicationMessage" GridPane.columnIndex="1"
+        <Label GridPane.columnIndex="1"
                GridPane.rowIndex="0" prefHeight="23.0" prefWidth="221.0">Edit
             Profile
         </Label>
-        <Label fx:id="emailLabel" text="Email:" GridPane.columnIndex="0"
+        <Label text="Email:" GridPane.columnIndex="0"
                GridPane.rowIndex="1"/>
         <TextField fx:id="emailField" GridPane.columnIndex="1"
                    GridPane.rowIndex="1"/>
-        <Label fx:id="phoneLabel" text="Phone Number:" GridPane.columnIndex="0"
+        <Label text="Phone Number:" GridPane.columnIndex="0"
                GridPane.rowIndex="2"/>
         <TextField fx:id="phoneField" GridPane.columnIndex="1"
                    GridPane.rowIndex="2"/>
-        <Label fx:id="streetLabel" text="Street Address:"
+        <Label text="Street Address:"
                GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <TextField fx:id="streetField" prefWidth="313.0"
                    GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-        <Label fx:id="cityLabel" text="City:" GridPane.columnIndex="0"
+        <Label text="City:" GridPane.columnIndex="0"
                GridPane.rowIndex="4"/>
         <TextField fx:id="cityField" GridPane.columnIndex="1"
                    GridPane.rowIndex="4"/>
-        <Label fx:id="stateLabel" text="State:" GridPane.columnIndex="0"
+        <Label text="State:" GridPane.columnIndex="0"
                GridPane.rowIndex="5"/>
         <TextField fx:id="stateField" GridPane.columnIndex="1"
                    GridPane.rowIndex="5"/>
-        <Label fx:id="zipLabel" text="Zip Code:" GridPane.columnIndex="0"
+        <Label text="Zip Code:" GridPane.columnIndex="0"
                GridPane.rowIndex="6"/>
         <TextField fx:id="zipField" GridPane.columnIndex="1"
                    GridPane.rowIndex="6"/>

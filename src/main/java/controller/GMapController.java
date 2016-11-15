@@ -16,7 +16,8 @@ import netscape.javascript.JSObject;
 import main.java.model.SourceReport;
 
 
-public class GMapController implements Initializable, MapComponentInitializedListener {
+public class GMapController implements Initializable,
+        MapComponentInitializedListener {
 
     @FXML
     private GoogleMapView mapView;

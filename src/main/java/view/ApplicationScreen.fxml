@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="applicationPage" alignment="center" prefHeight="432.0"
+<HBox alignment="center" prefHeight="432.0"
       prefWidth="421.0" spacing="40" xmlns="http://javafx.com/javafx/8.0.76-ea"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="main.java.controller.ApplicationController">
-    <VBox fx:id="columnOne" alignment="center" prefHeight="432.0"
+    <VBox alignment="center" prefHeight="432.0"
           prefWidth="421.0" spacing="40"
           xmlns="http://javafx.com/javafx/8.0.76-ea"
           xmlns:fx="http://javafx.com/fxml/1">
@@ -24,7 +24,7 @@
                 <Font name="System Bold" size="18.0"/>
             </font>
         </Label>
-        <Button fx:id="submitSourceReportButton" alignment="CENTER"
+        <Button alignment="CENTER"
                 onAction="#handleSubmitSourcePressed"
                 text="Submit Source Report" textOverrun="CLIP">Submit Source
             Report
@@ -42,7 +42,7 @@
         <Button fx:id="editButton" alignment="CENTER"
                 onAction="#handleEditPressed">Edit Profile
         </Button>
-        <Button fx:id="logoutButton" alignment="BOTTOM_CENTER"
+        <Button alignment="BOTTOM_CENTER"
                 onAction="#handleLogoutPressed">Logout
         </Button>
         <Button fx:id="submitReportButton" alignment="BOTTOM_CENTER"
@@ -53,7 +53,7 @@
             Reports
         </Button>
     </VBox>
-    <VBox fx:id="column2" alignment="center" prefHeight="432.0"
+    <VBox alignment="center" prefHeight="432.0"
           prefWidth="421.0" spacing="40"
           xmlns="http://javafx.com/javafx/8.0.76-ea"
           xmlns:fx="http://javafx.com/fxml/1">

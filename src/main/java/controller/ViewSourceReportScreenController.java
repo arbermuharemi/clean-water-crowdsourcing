@@ -29,13 +29,11 @@ public class ViewSourceReportScreenController {
 
     private User currentUser;
 
-    private boolean isSourceReport;
-
-    public void setCurrentUser(User user) {
+    void setCurrentUser(User user) {
         currentUser = user;
     }
 
-    public void setMainApp(Main mainApp, boolean isSourceReport) {
+    public void setMainApp(Main mainApp) {
         //boolean value is true for source reports false for purity reports
         myApp = mainApp;
         System.out.println("my app is (inside setMainApp" + myApp);
@@ -202,20 +200,6 @@ public class ViewSourceReportScreenController {
     @FXML
     private void handleExitClicked() {
         myApp.loadApplication(currentUser);
-    }
-
-    @FXML
-    private void initialize() {
-
-        //if (isSourceReport) {
-        //    ObservableList<Report> mySourceReports = FXCollections
-        //            .observableArrayList(myApp.getSourceReportList());
-        //    reportTable.setItems(mySourceReports);
-        //} else {
-        //    ObservableList<Report> mySourceReports = FXCollections
-        //            .observableArrayList(myApp.getSourceReportList());
-        //    reportTable.setItems(mySourceReports);
-        //}
     }
 
     @FXML
