@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * This class's purpose is to: <DESCRIBE PURPOSE>
  */
 public class LoginScreenController {
-
+    private User currentUser;
     private Main myApp;
 
     @FXML
@@ -38,11 +38,11 @@ public class LoginScreenController {
     @FXML
     private void handleSubmitPressed() {
         boolean loadApp = false;
-        User currentUser = new User(null, null, null, null, User.Type.USER.toString());
+        currentUser = new User(null, null, null, null, User.Type.USER.toString());
         String username = userField.getText();
         String password = passField.getText();
         ArrayList<User> userList = myApp.getUserList();
-        loadApp = isValidLogin(currentUser, username, password, userList);
+        loadApp = isValidLogin(username, password, userList);
         if (loadApp) {
             myApp.loadApplication(currentUser);
         } else {
@@ -55,13 +55,12 @@ public class LoginScreenController {
 
     /**
      * tests to make sure the user is valid
-     * @param currentUser the user you're testing is valid
-     * @param username the username you're checking against the currentUser
-     * @param password the password you're checking against the currentUser
+     * @param username the username you're checking against the list
+     * @param password the password you're checking against the list
      * @param userList the List of Users from the database
      * @return whether the login is valid or not.
      */
-    public boolean isValidLogin(User currentUser, String username, String password, ArrayList<User> userList) {
+    public boolean isValidLogin(String username, String password, ArrayList<User> userList) {
         boolean loadApp = false;
         for(int j = 0; j < userList.size() && !loadApp; j++) {
             User user = userList.get(j);

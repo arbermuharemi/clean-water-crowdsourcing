@@ -31,7 +31,7 @@ public class WilliamJUnitTests {
         userList.add(u1);
         System.out.print(u1);
         System.out.println(c);
-        assertTrue(c.isValidLogin(u1, "wilche", "pass", userList));
+        assertTrue(c.isValidLogin("wilche", "pass", userList));
     }
 
     /**
@@ -43,7 +43,7 @@ public class WilliamJUnitTests {
         ArrayList<User> userList = new ArrayList<User>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
         userList.add(u1);
-        assertTrue(!c.isValidLogin(u1, "wilche", "bleh", userList));
+        assertTrue(!c.isValidLogin("wilche", "bleh", userList));
     }
 
 
@@ -55,7 +55,7 @@ public class WilliamJUnitTests {
         c = new LoginScreenController();
         ArrayList<User> userList = new ArrayList<User>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
-        assertTrue(!c.isValidLogin(u1, "wilche", "pass", userList));
+        assertTrue(!c.isValidLogin("wilche", "pass", userList));
     }
 
     /**
@@ -67,7 +67,7 @@ public class WilliamJUnitTests {
         ArrayList<User> userList = new ArrayList<User>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
         userList.add(u1);
-        assertTrue(!c.isValidLogin(u1, "pew pew", "pass", userList));
+        assertTrue(!c.isValidLogin("pew pew", "pass", userList));
     }
 
 }
