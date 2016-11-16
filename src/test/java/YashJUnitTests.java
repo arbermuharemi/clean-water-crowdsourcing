@@ -65,12 +65,4 @@ public class YashJUnitTests {
                 profile.get_city(), profile.get_state(), profile.get_zipcode());
     }
 
-    @Test
-    public void testValidProfile() throws Exception {
-        Profile profile = new Profile("ysingh@gmail.com", "1ab34567890", "123 Boot Road", "Atlanta", "Georgia", "30332");
-        int a = controller.isValidProfile(profile.get_email(), profile.get_phoneNumber(), profile.get_streetAddress(),
-                profile.get_city(), profile.get_state(), profile.get_zipcode());
-        assertTrue(1 == a);
-    }
-
 }
