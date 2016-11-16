@@ -1,6 +1,8 @@
 package test.java;
 
+import javafx.scene.control.TextField;
 import main.java.controller.ApplicationController;
+import main.java.controller.SubmitSourceReportScreenController;
 import main.java.model.User;
 import org.junit.Before;
 import org.testng.annotations.Test;
@@ -10,43 +12,111 @@ import org.testng.annotations.Test;
  * This class's purpose is to:
  */
 public class RishabhJUnitTests {
-    private ApplicationController applicationController;
+    private SubmitSourceReportScreenController myController;
     private User userType;
     private User managerType;
     private User adminType;
+    String longitude;
+    String latitude;
 
     @Before
     public void setupApplicationController() throws NoSuchFieldException {
-        applicationController = new ApplicationController();
+        myController = new SubmitSourceReportScreenController();
     }
 
-    @Test
-    public void checkSubmitReportDisabledIfUserTypeUser() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNegativeOutOfBoundsLongitudePositive() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "-100";
+        longitude = "30";
+        myController.isValidSourceReport(longitude, latitude);
     }
 
-    @Test
-    public void checkSubmitReportDisabledIfUserTypeAdmin() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudePositiveOutOfBoundsLongitudePositive() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "100";
+        longitude = "30";
+        myController.isValidSourceReport(longitude, latitude);
     }
 
-    @Test
-    public void checkViewPurityReportAndViewHistoryReportDisabledIfUserTypeManager() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNegativeOutOfBoundsLongitudeNegative() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "-100";
+        longitude = "-30";
+        myController.isValidSourceReport(longitude, latitude);
     }
 
-    @Test
-    public void checkViewPurityReportAndViewHistoryReportEnabledIfUserNotTypeManager() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudePositiveOutOfBoundsLongitudeNegative() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "100";
+        longitude = "-30";
+        myController.isValidSourceReport(longitude, latitude);
     }
 
-    @Test
-    public void checkCreateProfileDisabledIfUserHasNoProfile() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNegativeLongitudeNegativeOutOfBounds() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "-70";
+        longitude = "-200";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNegativeLongitudePositiveOutOfBounds() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "-70";
+        longitude = "200";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudePositiveLongitudeNegativeOutOfBounds() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "70";
+        longitude = "-200";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudePositiveLongitudePositiveOutOfBounds() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "70";
+        longitude = "200";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNegativeLongitudeNotParsable() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "-70";
+        longitude = "Cheese";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudePositiveLongitudeNotParsable() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "70";
+        longitude = "Cheese";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNotParsableLongitudeNegative() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "Cheese";
+        longitude = "-20";
+        myController.isValidSourceReport(longitude, latitude);
+    }
+
+    @Test(expectedExceptions = NumberFormatException.class)
+    public void checkLatitudeNotParsableLongitudePositive() {
+        myController = new SubmitSourceReportScreenController();
+        latitude = "Cheese";
+        longitude = "20";
+        myController.isValidSourceReport(longitude, latitude);
     }
 }

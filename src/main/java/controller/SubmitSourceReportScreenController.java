@@ -68,7 +68,7 @@ public class SubmitSourceReportScreenController {
         double longitude = 0;
         double latitude = 0;
         try {
-            isValidSourceReport(longitudeField, latitudeField);
+            isValidSourceReport(longitudeField.getText(), latitudeField.getText());
             longitude = Double.parseDouble(longitudeField.getText());
             latitude = Double.parseDouble(latitudeField.getText());
             Random random = new Random();
@@ -89,9 +89,9 @@ public class SubmitSourceReportScreenController {
         }
     }
 
-    void isValidSourceReport(TextField longField, TextField latField) {
-        double longitude = Double.parseDouble(longField.getText());
-        double latitude = Double.parseDouble(latField.getText());
+    public void isValidSourceReport(String longField, String latField) throws NumberFormatException {
+        double longitude = Double.parseDouble(longField);
+        double latitude = Double.parseDouble(latField);
             if (latitude > 90 || latitude < -90
                     || longitude > 180 || longitude < -180) {
                 throw new NumberFormatException();
