@@ -39,8 +39,7 @@ public class RegistrationScreenController {
     private void initialize() {
         typeBox.setItems(typeList);
         typeBox.setValue("User");
-
-}
+    }
 
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
@@ -48,19 +47,26 @@ public class RegistrationScreenController {
 
     @FXML
     private void handleRegisterSubmitPressed() {
-        String validNameRegex = "^[a-zA-Z]+$";
         String firstName = firstField.getText();
         String lastName = lastField.getText();
         String userName = userField.getText();
-        if (!firstName.matches(validNameRegex)
-                || !lastName.matches(validNameRegex)) {
-            AlertMessage.sendMessage("Invalid Name", "Your first and last " +
-                    "name can only contain letters");
-        } else {
+        try {
+            checkValidName(firstName, lastName);
             User newUser = new User(firstName, lastName, userName,
                     passField.getText(), typeBox.getValue());
             myApp.addUser(newUser);
             myApp.loadApplication(newUser);
+        } catch (Exception e) {
+            AlertMessage.sendMessage("Invalid Name", "Your first and last " +
+                    "name can only contain letters");
+        }
+    }
+
+    public void checkValidName(String firstName, String lastName) throws Exception {
+        String validNameRegex = "^[a-zA-Z]+$";
+        if (!firstName.matches(validNameRegex)
+                || !lastName.matches(validNameRegex)) {
+            throw new Exception();
         }
     }
 
