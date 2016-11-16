@@ -1,9 +1,6 @@
 package test.java;
 
-import javafx.scene.control.TextField;
-import main.java.controller.ApplicationController;
 import main.java.controller.SubmitSourceReportScreenController;
-import main.java.model.User;
 import org.junit.Before;
 import org.testng.annotations.Test;
 

@@ -7,16 +7,14 @@ import org.testng.annotations.Test;
 
 /**
  * Created by vijay on 11/15/2016.
+ * This is a JUnit test that tests WaterReports
  */
 public class VijayJUnitTests {
     private SubmitWaterReportScreenController myController;
-    private User userType;
-    private User managerType;
-    private User adminType;
-    String longitude;
-    String latitude;
-    String contaminant;
-    String virus;
+    private String longitude;
+    private String latitude;
+    private String contaminant;
+    private String virus;
 
     @Before
     public void setupApplicationController() throws NoSuchFieldException {
@@ -138,7 +136,7 @@ public class VijayJUnitTests {
         myController = new SubmitWaterReportScreenController();
         latitude = "20";
         longitude = "20";
-        contaminant = "wheee";
+        contaminant = "nope";
         virus = "100";
         myController.isValidWaterReport(longitude, latitude, contaminant,virus);
     }
@@ -149,7 +147,7 @@ public class VijayJUnitTests {
         latitude = "20";
         longitude = "20";
         contaminant = "100";
-        virus = "wheee";
+        virus = "nope";
         myController.isValidWaterReport(longitude, latitude, contaminant,virus);
     }
 

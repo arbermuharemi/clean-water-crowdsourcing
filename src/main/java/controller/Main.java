@@ -52,6 +52,11 @@ public class Main extends Application {
     /*private static ArrayList<LatLong> purityLocationsList = new ArrayList<>();
     private static ArrayList<String> purityYearList = new ArrayList<>();*/
 
+    /**
+     * Runs as soon as the program starts, first method that runs. Sets up the database and loads the welcome screen.
+     * @param primaryStage the first stage you want to load
+     * @throws Exception when database errors
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         System.out.println("STARTED");
@@ -173,6 +178,9 @@ public class Main extends Application {
         loadWelcome();
     }
 
+    /**
+     * loads the welcome screen
+     */
     public void loadWelcome() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -192,6 +200,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * Loads the application for the specific user
+     * @param currentUser the current logged in user
+     */
     public void loadApplication(User currentUser) {
         try {
 
@@ -212,6 +224,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the login screen
+     */
     public void loadLogin() {
         try {
 
@@ -231,6 +246,10 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * loads the registration screen
+     */
     public void loadRegister() {
         try {
 
@@ -251,6 +270,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the edit profile screen for the user
+     * @param user the user who's profile you're editing
+     */
     public void loadEditProfile(User user) {
         try {
 
@@ -272,6 +295,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the Create Profile Screen
+     * @param user the user whose profile you're creating
+     */
     public void loadCreateProfile(User user) {
         try {
 
@@ -293,6 +320,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the submit source report screen
+     * @param user the user who is submitting a report
+     */
     public void loadSourceReportPage(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -313,6 +344,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the submit water report screen
+     * @param user the user who is submitting a report
+     */
     public void loadWaterReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -333,6 +368,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the view source report table screen
+     * @param user the user who is viewing the source report
+     */
     public void loadViewSourceReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -351,6 +390,10 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the purity report screen
+     * @param user the user who is viewing the purity report
+     */
     public void loadViewPurityReport(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -369,6 +412,9 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the map screen
+     */
     public void loadMap() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -388,10 +434,17 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * closes the map view
+     */
     public void closeMapView() {
         loadApplication(ApplicationController.getCurrentUser());
     }
 
+    /**
+     * loads the history graph scene
+     * @param user the user who is loading the history graph
+     */
     public void loadHistoryGraph(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -412,6 +465,14 @@ public class Main extends Application {
         }
     }
 
+    /**
+     * loads the graph.
+     * @param reportList the list of data points to be plotted
+     * @param data the virus/contaminant type
+     * @param position the location the user is looking at
+     * @param year the year the user is looking at
+     * @param user the user who is looking at the graph
+     */
     public void loadGraph(ArrayList<PurityReport> reportList, String data, String position, String year, User user) {
         double[] monthSums  = new double[12];
         double[] monthCount = new double[12];
@@ -506,24 +567,40 @@ public class Main extends Application {
         window.show();
     }
 
+    /**
+     * adds the user to the database
+     * @param user the user you want to add
+     */
     public void addUser(User user) {
         userArr.add(user);
        // ArrayList<HashMap<String, String>> myUserList = getUserList();
         userRef.setValue(userArr);
     }
 
+    /**
+     * adds the Source Report to the database
+     * @param report the source report you want to add
+     */
     public void addSourceReport(SourceReport report) {
         sourceReportList.add(report);
        // ArrayList<HashMap<String, Object>> mySourceReportList = getSourceReportList();
         sourceRef.setValue(sourceReportList);
     }
 
+    /**
+     * adds the purity report to the database
+     * @param report the purity report you want to add
+     */
     public void addPurityReport (PurityReport report) {
         purityReportList.add(report);
         //ArrayList<HashMap<String, Object>> myPurityReportList = getPurityReportList();
         purityRef.setValue(purityReportList);
     }
 
+    /**
+     * adds the purity report location to the database
+     * @param position the location you want to add
+     */
     public void addPurityLocation (String position) {
         if( !(purityLocationsList.contains(position)) ) {
             purityLocationsList.add(position);
@@ -532,6 +609,10 @@ public class Main extends Application {
         purityLocationRef.setValue(myPurityLocationsList);
     }
 
+    /**
+     * adds the year to the database
+     * @param year the year you want to add
+     */
     public void addPurityYear (String year) {
         if ( !(purityYearList.contains(year))) {
             purityYearList.add(year);
@@ -540,30 +621,62 @@ public class Main extends Application {
         purityYearRef.setValue(myPurityYearsList);
     }
 
+    /**
+     * gets the list of users
+     * @return an arraylist of all the users from the database
+     */
     public ArrayList<User> getUserList() {
         return userArr;
     }
 
+    /**
+     * gets the list of source report list
+     * @return an arraylist of all the source report list from the database
+     */
     public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<PurityReport> getPurityReportList() { return purityReportList; }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getPurityLocationsList() { return purityLocationsList; }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> getPurityYearList() {return purityYearList; }
 
+    /**
+     *
+     * @param virus
+     */
     public void setMaxVirus(double virus) {
         if(virus >= maxVirus) {
             maxVirus = virus;
         }
     }
 
+    /**
+     *
+     * @param contaminant
+     */
     public void setMaxContaminant(double contaminant) {
         if(contaminant >= maxContaminant) {
             maxContaminant = contaminant;
         }
     }
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }

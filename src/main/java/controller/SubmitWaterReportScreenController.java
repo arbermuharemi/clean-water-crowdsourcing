@@ -67,8 +67,8 @@ public class SubmitWaterReportScreenController {
         Date date = new Date();
         System.out.println(date.toString());
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        double longitude=0;
-        double latitude=0;
+        double longitude;
+        double latitude;
         try {
             isValidWaterReport(longitudeField.getText(), latitudeField.getText(),contaminantField.getText(),virusField.getText());
             longitude = Double.parseDouble(longitudeField.getText());
@@ -103,7 +103,8 @@ public class SubmitWaterReportScreenController {
         }
     }
 
-    public void isValidWaterReport(String longField, String latField, String contField, String virusField) {
+    public void isValidWaterReport(String longField, String latField, String
+            contField, String virusField) throws NumberFormatException {
         double longitude = Double.parseDouble(longField);
         double latitude = Double.parseDouble(latField);
         double contaminant = Double.parseDouble(contField);
