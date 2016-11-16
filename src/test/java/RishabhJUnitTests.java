@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.testng.annotations.Test;
 
 /**
- * Created by Arber on 11/15/2016.
- * This class's purpose is to: <DESCRIBE PURPOSE>
+ * Created by Rishabh on 11/15/2016.
+ * This class's purpose is to:
  */
-public class ArberJUnitTests {
+public class RishabhJUnitTests {
     private ApplicationController applicationController;
     private User userType;
     private User managerType;

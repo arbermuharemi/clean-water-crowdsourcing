@@ -65,45 +65,36 @@ public class SubmitSourceReportScreenController {
     private void handleDonePressed() {
         Date date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        double longitude;
-        double latitude;
+        double longitude = 0;
+        double latitude = 0;
         try {
+            isValidSourceReport(longitudeField, latitudeField);
             longitude = Double.parseDouble(longitudeField.getText());
-            String ls = longitude + "";
-            if(!ls.contains(".")){
-                ls += ".0";
-            }
-            longitude = Double.parseDouble(ls);
-
             latitude = Double.parseDouble(latitudeField.getText());
-            ls = latitude + "";
-            if(!ls.contains(".")){
-                ls += ".0";
-            }
-            latitude = Double.parseDouble(ls);
-
-            if (latitude > 90 || latitude < -90
-                    || longitude > 180 || longitude < -180) {
+            Random random = new Random();
+            SourceReport report = new SourceReport(
+                    random.nextInt(100),
+                    name,
+                    date,
+                    longitude,
+                    latitude,
+                    typeField.getValue(),
+                    conditionField.getValue());
+            myApp.addSourceReport(report);
+            myApp.loadApplication(currentUser);
+            } catch (NumberFormatException | NullPointerException e) {
+                System.out.println(e.getMessage());
                 AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
-                        "must be between -90 and 90; longitude must be " +
-                        "between -180 and 180.");
-            } else {
-                Random random = new Random();
-                SourceReport report = new SourceReport(
-                        random.nextInt(100),
-                        name,
-                        date,
-                        longitude,
-                        latitude,
-                        typeField.getValue(),
-                        conditionField.getValue());
-                myApp.addSourceReport(report);
-                myApp.loadApplication(currentUser);
-            }
-        } catch (NumberFormatException | NullPointerException e) {
-            AlertMessage.sendMessage("Invalid Coordinates", "The latitude " +
-                    "and/or longitude you entered are not in valid format.");
+                        "and/or longitude you entered are not in valid format.");
         }
     }
 
-}
+    void isValidSourceReport(TextField longField, TextField latField) {
+        double longitude = Double.parseDouble(longField.getText());
+        double latitude = Double.parseDouble(latField.getText());
+            if (latitude > 90 || latitude < -90
+                    || longitude > 180 || longitude < -180) {
+                throw new NumberFormatException();
+            }
+        }
+    }

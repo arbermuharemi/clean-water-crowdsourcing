@@ -61,11 +61,11 @@ public class Main extends Application {
                 .build();
         FirebaseApp.initializeApp(options);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference userRef = database.getReference("users");
-        DatabaseReference sourceRef = database.getReference("sourceReports");
-        DatabaseReference purityRef = database.getReference("purityReports");
-        DatabaseReference purityLocationRef = database.getReference("purityLocations");
-        DatabaseReference purityYearRef = database.getReference("purityYears");
+        userRef = database.getReference("users");
+        sourceRef = database.getReference("sourceReports");
+        purityRef = database.getReference("purityReports");
+        purityLocationRef = database.getReference("purityLocations");
+        purityYearRef = database.getReference("purityYears");
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
