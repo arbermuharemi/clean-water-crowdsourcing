@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.testng.annotations.Test;
 import main.java.controller.Main;
 import main.java.model.Profile;
-
+import static junit.framework.Assert.assertTrue;
 
 
 import org.junit.Before;
@@ -63,6 +63,14 @@ public class YashJUnitTests {
         Profile profile = new Profile("ysingh@gmail.com", "134567890", "123 Boot Road", "Atlanta", "Georgia", "3a332");
         controller.isValidProfile(profile.get_email(), profile.get_phoneNumber(), profile.get_streetAddress(),
                 profile.get_city(), profile.get_state(), profile.get_zipcode());
+    }
+
+    @Test
+    public void testValidProfile() throws Exception {
+        Profile profile = new Profile("ysingh@gmail.com", "1ab34567890", "123 Boot Road", "Atlanta", "Georgia", "30332");
+        int a = controller.isValidProfile(profile.get_email(), profile.get_phoneNumber(), profile.get_streetAddress(),
+                profile.get_city(), profile.get_state(), profile.get_zipcode());
+        assertTrue(1 == a);
     }
 
 }

@@ -63,7 +63,7 @@ public class CreateProfileScreenController {
 
     }
 
-    public void isValidProfile(String email, String phoneNumber, String streetAddress, String city, String state, String zipCode) throws Exception {
+    public int isValidProfile(String email, String phoneNumber, String streetAddress, String city, String state, String zipCode) throws Exception {
         String isValidEmail = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
         String isValidPhone = "^\\\\(?([0-9]{3})\\\\)?[-.\\\\s]?([0-9]{3})[-.\\\\s]?([0-9]{4})$";
         String isValidStreet = "^[0-9a-zA-Z\\.]+$";
@@ -73,6 +73,8 @@ public class CreateProfileScreenController {
         if(!email.matches(isValidEmail) || !phoneNumber.matches(isValidPhone) || !streetAddress.matches(isValidStreet)
                 || !city.matches(isValidCity) || !state.matches(isValidState) || !zipCode.matches(isValidZip)) {
             throw new Exception("Invalid Profile Input");
+        } else {
+            return 1;
         }
 
 
