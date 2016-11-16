@@ -37,6 +37,10 @@ public class ApplicationController {
     @FXML
     private Button viewPurityReportsButton;
 
+    /**
+     * A method that sets the Main app for referencing database objects
+     * @param mainApp the Main object that determines what the app being used is
+     */
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
     }
@@ -46,6 +50,11 @@ public class ApplicationController {
         myApp.loadWelcome();
     }
 
+    /**
+     * Sets the app's current user and modified the UI depending on what the
+     * user can and can't do
+     * @param user the user that will become the current user
+     */
     @FXML
     public void setCurrentUser(User user) {
         currentUser = user;
@@ -67,19 +76,23 @@ public class ApplicationController {
         } else {
             editButton.setDisable(true);
         }
-        // For future implementation
-        //if (currentUser.getType() == User.Type.WORKER) {
-            // show water purity report button
-            // button.setVisible(true)
-        //} else {
-            // make the button INVISIBLE
-            // button.setVisible(false)
-        //}
         if (myApp.getSourceReportList() == null || myApp.getSourceReportList().size() == 0) {
             viewMapButton.setDisable(true);
         }
+        // For future implementation
+        //if (currentUser.getType() == User.Type.WORKER) {
+        // show water purity report button
+        // button.setVisible(true)
+        //} else {
+        // make the button INVISIBLE
+        // button.setVisible(false)
+        //}
     }
 
+    /**
+     * Gets the app's current user.
+     * @return User the user that is currently using the app
+     */
     public static User getCurrentUser() {
         return currentUser;
     }
