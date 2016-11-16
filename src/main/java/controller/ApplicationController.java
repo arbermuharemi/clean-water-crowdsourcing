@@ -37,19 +37,6 @@ public class ApplicationController {
     @FXML
     private Button viewPurityReportsButton;
 
-    /**
-     * Added public constructor to avoid NPE in JUnit
-     */
-    public ApplicationController() {
-        applicationMessage = new Label("Test");
-        createButton = new Button();
-        editButton = new Button();
-        viewMapButton = new Button();
-        submitReportButton = new Button();
-        viewHistoryGraphButton = new Button();
-        viewPurityReportsButton = new Button();
-    }
-
     public void setMainApp(Main mainApp) {
         myApp = mainApp;
     }
