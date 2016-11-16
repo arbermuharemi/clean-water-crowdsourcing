@@ -1,52 +1,67 @@
 package test.java;
 
-import main.java.controller.ApplicationController;
+import main.java.controller.RegistrationScreenController;
 import main.java.model.User;
 import org.junit.Before;
 import org.testng.annotations.Test;
 
+import static junit.framework.Assert.assertTrue;
+
 /**
  * Created by Arber on 11/15/2016.
- * This class's purpose is to: <DESCRIBE PURPOSE>
+ * This class's purpose is to: Test that users' Types are properly set and
+ * that their first and last names are valid
  */
 public class ArberJUnitTests {
-    private ApplicationController applicationController;
-    private User userType;
-    private User managerType;
-    private User adminType;
+    private RegistrationScreenController controller;
 
     @Before
-    public void setupApplicationController() throws NoSuchFieldException {
-        applicationController = new ApplicationController();
+    public void setUpController() {
+        controller = new RegistrationScreenController();
     }
 
     @Test
-    public void checkSubmitReportDisabledIfUserTypeUser() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    public void testUserTypeSet() {
+        User.Type expectedType = User.Type.USER;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "User");
+        assertTrue(userTypeUser.getType().equals(expectedType));
     }
 
     @Test
-    public void checkSubmitReportDisabledIfUserTypeAdmin() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    public void testWorkerTypeSet() {
+        User.Type expectedType = User.Type.WORKER;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "Worker");
+        assertTrue(userTypeUser.getType().equals(expectedType));
     }
 
     @Test
-    public void checkViewPurityReportAndViewHistoryReportDisabledIfUserTypeManager() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    public void testManagerTypeSet() {
+        User.Type expectedType = User.Type.MANAGER;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "Manager");
+        assertTrue(userTypeUser.getType().equals(expectedType));
     }
 
     @Test
-    public void checkViewPurityReportAndViewHistoryReportEnabledIfUserNotTypeManager() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    public void testAdminTypeSet() {
+        User.Type expectedType = User.Type.ADMIN;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "Admin");
+        assertTrue(userTypeUser.getType().equals(expectedType));
     }
 
-    @Test
-    public void checkCreateProfileDisabledIfUserHasNoProfile() {
-        //applicationController.setCurrentUser();
-        applicationController.submitReportButton.isDisabled();
+    @Test(expectedExceptions = Exception.class)
+    public void testInvalidFirstName() throws Exception {
+        User invalidFirstNameValidLastName = new User("1234", "Last",
+                "userName", "password", "Manager");
+        controller.checkValidName(invalidFirstNameValidLastName.getFirstName
+                (), invalidFirstNameValidLastName.getLastName());
     }
+
+    @Test(expectedExceptions = Exception.class)
+    public void testInvalidLastName() throws Exception {
+        User invalidFirstNameValidLastName = new User("First", "1234",
+                "userName", "password", "Manager");
+        controller.checkValidName(invalidFirstNameValidLastName.getFirstName
+                (), invalidFirstNameValidLastName.getLastName());
+    }
+
 }

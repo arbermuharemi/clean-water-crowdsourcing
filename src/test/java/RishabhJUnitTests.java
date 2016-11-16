@@ -13,11 +13,8 @@ import org.testng.annotations.Test;
  */
 public class RishabhJUnitTests {
     private SubmitSourceReportScreenController myController;
-    private User userType;
-    private User managerType;
-    private User adminType;
-    String longitude;
-    String latitude;
+    private String longitude;
+    private String latitude;
 
     @Before
     public void setupApplicationController() throws NoSuchFieldException {
