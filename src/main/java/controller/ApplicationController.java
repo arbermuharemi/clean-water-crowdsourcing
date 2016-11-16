@@ -17,25 +17,25 @@ public class ApplicationController {
     private static User currentUser;
 
     @FXML
-    Label applicationMessage;
+    private Label applicationMessage;
 
     @FXML
-    Button createButton;
+    private Button createButton;
 
     @FXML
-    Button editButton;
+    private Button editButton;
 
     @FXML
-    Button viewMapButton;
+    private Button viewMapButton;
 
     @FXML
-    Button submitReportButton;
+    private Button submitReportButton;
 
     @FXML
-    Button viewHistoryGraphButton;
+    private Button viewHistoryGraphButton;
 
     @FXML
-    Button viewPurityReportsButton;
+    private Button viewPurityReportsButton;
 
     /**
      * Added public constructor to avoid NPE in JUnit
