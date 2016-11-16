@@ -14,7 +14,8 @@ import static junit.framework.Assert.assertTrue;
  *
  */
 public class WilliamJUnitTests {
-    LoginScreenController c;
+    private LoginScreenController c;
+
     @Before
     public void setUpController() {
         c = new LoginScreenController();
@@ -26,7 +27,7 @@ public class WilliamJUnitTests {
     @Test
     public void test1() {
         c = new LoginScreenController();
-        ArrayList<User> userList = new ArrayList<User>();
+        ArrayList<User> userList = new ArrayList<>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
         userList.add(u1);
         System.out.print(u1);
@@ -40,7 +41,7 @@ public class WilliamJUnitTests {
     @Test
     public void test2() {
         c = new LoginScreenController();
-        ArrayList<User> userList = new ArrayList<User>();
+        ArrayList<User> userList = new ArrayList<>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
         userList.add(u1);
         assertTrue(!c.isValidLogin("wilche", "bleh", userList));
@@ -53,8 +54,7 @@ public class WilliamJUnitTests {
     @Test
     public void test3() {
         c = new LoginScreenController();
-        ArrayList<User> userList = new ArrayList<User>();
-        User u1 = new User("William", "Cheng", "wilche", "pass", "u");
+        ArrayList<User> userList = new ArrayList<>();
         assertTrue(!c.isValidLogin("wilche", "pass", userList));
     }
 
@@ -64,7 +64,7 @@ public class WilliamJUnitTests {
     @Test
     public void test4() {
         c = new LoginScreenController();
-        ArrayList<User> userList = new ArrayList<User>();
+        ArrayList<User> userList = new ArrayList<>();
         User u1 = new User("William", "Cheng", "wilche", "pass", "u");
         userList.add(u1);
         assertTrue(!c.isValidLogin("pew pew", "pass", userList));

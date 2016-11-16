@@ -37,7 +37,7 @@ public class LoginScreenController {
 
     @FXML
     private void handleSubmitPressed() {
-        boolean loadApp = false;
+        boolean loadApp;
         currentUser = new User(null, null, null, null, User.Type.USER.toString());
         String username = userField.getText();
         String password = passField.getText();

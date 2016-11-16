@@ -1,10 +1,7 @@
 package test.java;
 import main.java.controller.CreateProfileScreenController;
-import org.junit.Before;
 import org.testng.annotations.Test;
-import main.java.controller.Main;
 import main.java.model.Profile;
-import static junit.framework.Assert.assertTrue;
 
 
 import org.junit.Before;
