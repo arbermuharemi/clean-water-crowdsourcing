@@ -42,13 +42,7 @@ public class LoginScreenController {
         String username = userField.getText();
         String password = passField.getText();
         ArrayList<User> userList = myApp.getUserList();
-        for(int j = 0; j < userList.size() && !loadApp; j++) {
-            User user = userList.get(j);
-            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                loadApp = true;
-                currentUser = user;
-            }
-        }
+        loadApp = isValidLogin(currentUser, username, password, userList);
         if (loadApp) {
             myApp.loadApplication(currentUser);
         } else {
@@ -59,9 +53,28 @@ public class LoginScreenController {
         }
     }
 
+    /**
+     * tests to make sure the user is valid
+     * @param currentUser the user you're testing is valid
+     * @param username the username you're checking against the currentUser
+     * @param password the password you're checking against the currentUser
+     * @param userList the List of Users from the database
+     * @return whether the login is valid or not.
+     */
+    public boolean isValidLogin(User currentUser, String username, String password, ArrayList<User> userList) {
+        boolean loadApp = false;
+        for(int j = 0; j < userList.size() && !loadApp; j++) {
+            User user = userList.get(j);
+            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                loadApp = true;
+                currentUser = user;
+            }
+        }
+        return loadApp;
+    }
+
     @FXML
     private void handleSignUpPressed() {
         myApp.loadRegister();
     }
-
 }
