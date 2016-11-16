@@ -48,6 +48,20 @@ public class ArberJUnitTests {
         assertTrue(userTypeUser.getType().equals(expectedType));
     }
 
+    @Test
+    public void testDefaultTypeWithNonEmptyStringSet() {
+        User.Type expectedType = User.Type.USER;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "NoType");
+        assertTrue(userTypeUser.getType().equals(expectedType));
+    }
+
+    @Test
+    public void testDefaultTypeWithEmptyStringSet() {
+        User.Type expectedType = User.Type.USER;
+        User userTypeUser = new User("foo", "bar", "bam", "baz", "");
+        assertTrue(userTypeUser.getType().equals(expectedType));
+    }
+
     @Test(expectedExceptions = Exception.class)
     public void testInvalidFirstName() throws Exception {
         User invalidFirstNameValidLastName = new User("1234", "Last",

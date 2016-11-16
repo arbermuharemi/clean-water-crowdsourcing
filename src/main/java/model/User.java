@@ -33,19 +33,26 @@ public class User {
         _password.set(password);
         type = type.toLowerCase();
 
-        switch(type.charAt(0)){
-            case 'u':
-                _type = Type.USER;
-                break;
-            case 'm':
-                _type = Type.MANAGER;
-                break;
-            case 'w':
-                _type = Type.WORKER;
-                break;
-            case 'a':
-                _type = Type.ADMIN;
-                break;
+        if (type.isEmpty()) {
+            _type = Type.USER;
+        } else {
+            switch(type.charAt(0)){
+                case 'u':
+                    _type = Type.USER;
+                    break;
+                case 'm':
+                    _type = Type.MANAGER;
+                    break;
+                case 'w':
+                    _type = Type.WORKER;
+                    break;
+                case 'a':
+                    _type = Type.ADMIN;
+                    break;
+                default:
+                    _type = Type.USER;
+                    break;
+            }
         }
     }
 
