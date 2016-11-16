@@ -14,6 +14,7 @@ import org.junit.Before;
 
 /**
  * Created by Yash on 11/15/2016.
+ * These are JUnit tests for the validity of a profile that is being created
  */
 public class YashJUnitTests {
     private CreateProfileScreenController controller;
