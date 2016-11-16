@@ -26,13 +26,16 @@ public class Profile {
      * @param zipCode the profile's zip code
      */
     public Profile(String email, String phoneNumber, String streetAddress, String city, String state, String zipCode) {
-        _email.set(email);
-        _phoneNumber.set(phoneNumber);
-        _streetAddress.set(streetAddress);
-        _city.set(city);
-        _state.set(state);
-        _zipcode.set(zipCode);
+           _email.set(email);
+           _phoneNumber.set(phoneNumber);
+           _streetAddress.set(streetAddress);
+           _city.set(city);
+           _state.set(state);
+           _zipcode.set(zipCode);
+
     }
+
+
 
     /**
      * A getter that returns the profile's email

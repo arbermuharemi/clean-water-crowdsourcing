@@ -65,8 +65,8 @@ public class SubmitSourceReportScreenController {
     private void handleDonePressed() {
         Date date = new Date();
         String name = currentUser.getFirstName() + " " + currentUser.getLastName();
-        double longitude = 0;
-        double latitude = 0;
+        double longitude;
+        double latitude;
         try {
             isValidSourceReport(longitudeField.getText(), latitudeField.getText());
             longitude = Double.parseDouble(longitudeField.getText());
