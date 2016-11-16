@@ -30,7 +30,4 @@ public class WelcomeController implements Initializable {
         myApp.loadRegister();
     }
 
-
-
-
 }

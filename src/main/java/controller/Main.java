@@ -623,7 +623,7 @@ public class Main extends Application {
 
     /**
      * gets the list of users
-     * @return an arraylist of all the users from the database
+     * @return an arrayList of all the users from the database
      */
     public ArrayList<User> getUserList() {
         return userArr;
@@ -631,7 +631,7 @@ public class Main extends Application {
 
     /**
      * gets the list of source report list
-     * @return an arraylist of all the source report list from the database
+     * @return an arrayList of all the source report list from the database
      */
     public ArrayList<SourceReport> getSourceReportList() { return sourceReportList; }
 
