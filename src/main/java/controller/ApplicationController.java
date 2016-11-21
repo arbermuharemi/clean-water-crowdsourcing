@@ -37,6 +37,9 @@ public class ApplicationController {
     @FXML
     private Button viewPurityReportsButton;
 
+    @FXML
+    private Button deleteUserButton;
+
     /**
      * A method that sets the Main app for referencing database objects
      * @param mainApp the Main object that determines what the app being used is
@@ -69,6 +72,11 @@ public class ApplicationController {
         } else {
             viewPurityReportsButton.setDisable(true);
             viewHistoryGraphButton.setDisable(true);
+        }
+        if (userType == User.Type.ADMIN) {
+            deleteUserButton.setDisable(false);
+        } else {
+            deleteUserButton.setDisable(true);
         }
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
         if (currentUser.hasProfile()) {
@@ -140,6 +148,11 @@ public class ApplicationController {
     @FXML
     private void handleHistoryGraphPressed() {
         myApp.loadHistoryGraph(currentUser);
+    }
+
+    @FXML
+    private void handleDeleteUserPressed() {
+        myApp.loadDeletePressed(currentUser);
     }
 
 }

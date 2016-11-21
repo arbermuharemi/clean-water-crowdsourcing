@@ -569,6 +569,26 @@ public class Main extends Application {
         window.show();
     }
 
+    public void loadDeletePressed(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/DeleteUser.fxml"));
+            AnchorPane deleteUserLayout = loader.load();
+
+            DeleteUserController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Delete User");
+            Scene deleteUserScene = new Scene(deleteUserLayout);
+            window.setScene(deleteUserScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     /**
      * adds the user to the database
      * @param user the user you want to add
@@ -576,6 +596,11 @@ public class Main extends Application {
     public void addUser(User user) {
         userArr.add(user);
        // ArrayList<HashMap<String, String>> myUserList = getUserList();
+        userRef.setValue(userArr);
+    }
+
+    public void removeUser(int index) {
+        userArr.remove(index);
         userRef.setValue(userArr);
     }
 
@@ -677,7 +702,7 @@ public class Main extends Application {
 
     public void writeSecurity(String message) {
         try {
-            File secLog = new File("C:\\Users\\Yash\\Documents\\2340\\cs2340-software-smiths\\src\\main\\Security.txt");
+            File secLog = new File("C:\\Users\\Yash\\Documents\\2340\\cs2340-software-smiths\\src\\main\\java\\controller\\Security.txt");
             FileWriter fw = new FileWriter(secLog, true);
             Date date = new Date();
             fw.write(date.toString() + " " + message + "\n");

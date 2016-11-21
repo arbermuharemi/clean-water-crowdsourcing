@@ -52,6 +52,7 @@
                 onAction="#handleViewPurityReportsPressed">View Purity
             Reports
         </Button>
+
     </VBox>
     <VBox alignment="center" prefHeight="432.0"
           prefWidth="421.0" spacing="40"
@@ -65,6 +66,10 @@
                 onAction="#handleHistoryGraphPressed"
                 text="View HistoryGraph" textOverrun="CLIP">View History
             Graph
+        </Button>
+        <Button fx:id="deleteUserButton" alignment="CENTER"
+                onAction="#handleDeleteUserPressed"
+                text="Delete User" textOverrun="CLIP">Delete User
         </Button>
 
     </VBox>
