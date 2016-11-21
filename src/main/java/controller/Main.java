@@ -13,7 +13,9 @@ import main.java.model.SourceReport;
 import main.java.model.User;
 import com.google.firebase.*;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
@@ -671,6 +673,18 @@ public class Main extends Application {
         if(contaminant >= maxContaminant) {
             maxContaminant = contaminant;
         }
+    }
+
+    public void writeSecurity(String message) {
+        try {
+            File secLog = new File("C:\\Users\\Yash\\Documents\\2340\\cs2340-software-smiths\\src\\main\\Security.txt");
+            FileWriter fw = new FileWriter(secLog, true);
+            fw.write(message + "\n");
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("File does not exist");
+        }
+
     }
 
     /**
