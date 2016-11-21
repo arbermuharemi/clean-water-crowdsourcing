@@ -1,7 +1,6 @@
 package test.java;
 
 import main.java.controller.SubmitWaterReportScreenController;
-import main.java.model.User;
 import org.junit.Before;
 import org.testng.annotations.Test;
 

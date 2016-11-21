@@ -2,6 +2,7 @@ package main.java.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import main.java.model.AlertMessage;
 import main.java.model.Profile;
 import main.java.model.User;
 
@@ -58,7 +59,7 @@ public class CreateProfileScreenController {
             currentUser.addProfile(profile);
             myApp.loadApplication(currentUser);
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            AlertMessage.sendMessage("Invalid Profile", "You have not entered valid information for your profile.");
         }
 
     }
