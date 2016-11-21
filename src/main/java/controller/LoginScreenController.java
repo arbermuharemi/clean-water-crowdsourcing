@@ -62,13 +62,21 @@ public class LoginScreenController {
      */
     public boolean isValidLogin(String username, String password, ArrayList<User> userList) {
         boolean loadApp = false;
+        String logUser = username;
+        String toLog = "";
         for(int j = 0; j < userList.size() && !loadApp; j++) {
             User user = userList.get(j);
-            if (user.getUserName().equals(username) && user.getPassword().equals(password)) {
+            toLog = "LOGIN ATTEMPT ";
+            if(user.getUserName().equals(username) && user.getPassword().equals(password)) {
                 loadApp = true;
                 currentUser = user;
+                toLog += "by " + username + ": Success";
+            } else {
+                loadApp = false;
+                toLog += "Incorrect username or password";
             }
         }
+        myApp.writeSecurity(toLog);
         return loadApp;
     }
 

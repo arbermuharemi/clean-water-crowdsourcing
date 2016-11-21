@@ -679,9 +679,11 @@ public class Main extends Application {
         try {
             File secLog = new File("C:\\Users\\Yash\\Documents\\2340\\cs2340-software-smiths\\src\\main\\Security.txt");
             FileWriter fw = new FileWriter(secLog, true);
-            fw.write(message + "\n");
+            Date date = new Date();
+            fw.write(date.toString() + " " + message + "\n");
             fw.close();
         } catch (IOException e) {
+
             System.out.println("File does not exist");
         }
 
