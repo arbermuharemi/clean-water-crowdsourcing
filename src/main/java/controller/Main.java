@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.chart.Axis;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -82,7 +83,7 @@ public class Main extends Application {
                     isStarted1=true;
                     userArrDatabase = (ArrayList<HashMap<String, String>>) dataSnapshot.getValue();
                     for(HashMap<String, String> a : userArrDatabase){
-                        userArr.add(new User(a.get("firstName"), a.get("lastName"), a.get("userName"), a.get("password"), a.get("type")));
+                        userArr.add(new User(a.get("firstName"), a.get("lastName"), a.get("userName"), a.get("password"), a.get("type"), a.get("banned"), a.get("logCount")));
                     }
                 }
             }
@@ -569,7 +570,7 @@ public class Main extends Application {
         window.show();
     }
 
-    public void loadDeletePressed(User user) {
+    public void loadDeleteUser(User user) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("../view/DeleteUser.fxml"));
@@ -589,18 +590,89 @@ public class Main extends Application {
         }
     }
 
+    public void loadBanUser(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/BanUser.fxml"));
+            AnchorPane banUserLayout = loader.load();
+
+            BanUserController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Ban User");
+            Scene banUserScene = new Scene(banUserLayout);
+            window.setScene(banUserScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void loadUnblockUser(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/UnblockUserScreen.fxml"));
+            AnchorPane unblockUserLayout = loader.load();
+
+            UnblockUserController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Unblock User");
+            Scene unblockUserScene = new Scene(unblockUserLayout);
+            window.setScene(unblockUserScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     /**
      * adds the user to the database
      * @param user the user you want to add
      */
     public void addUser(User user) {
-        userArr.add(user);
+        boolean contains = false;
+        for(int j = 0; j < userArr.size(); j++) {
+            if(userArr.get(j).getUserName().equals(user.getUserName())) {
+                contains = true;
+            }
+        }
+        if(!contains) {
+            userArr.add(user);
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Username Exists");
+            alert.setContentText("This username is taken!");
+            alert.showAndWait();
+        }
+
        // ArrayList<HashMap<String, String>> myUserList = getUserList();
         userRef.setValue(userArr);
     }
 
     public void removeUser(int index) {
         userArr.remove(index);
+        userRef.setValue(userArr);
+    }
+
+    public void banUser(int index) {
+        User toBan = userArr.get(index);
+        toBan.setBanned("TRUE");
+        userRef.setValue(userArr);
+    }
+
+    public void incrementLog(int index) {
+        userArr.get(index).incrementLogCount();
+        userRef.setValue(userArr);
+    }
+
+    public void resetLog(int index) {
+        userArr.get(index).resetLogCount();
         userRef.setValue(userArr);
     }
 

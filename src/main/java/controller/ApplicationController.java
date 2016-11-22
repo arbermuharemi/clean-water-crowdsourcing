@@ -40,6 +40,12 @@ public class ApplicationController {
     @FXML
     private Button deleteUserButton;
 
+    @FXML
+    private Button banUserButton;
+
+    @FXML
+    private Button unblockUserButton;
+
     /**
      * A method that sets the Main app for referencing database objects
      * @param mainApp the Main object that determines what the app being used is
@@ -75,8 +81,12 @@ public class ApplicationController {
         }
         if (userType == User.Type.ADMIN) {
             deleteUserButton.setDisable(false);
+            banUserButton.setDisable(false);
+            unblockUserButton.setDisable(false);
         } else {
             deleteUserButton.setDisable(true);
+            banUserButton.setDisable(true);
+            unblockUserButton.setDisable(true);
         }
         applicationMessage.setText("Welcome " + currentUser.getFirstName());
         if (currentUser.hasProfile()) {
@@ -152,7 +162,15 @@ public class ApplicationController {
 
     @FXML
     private void handleDeleteUserPressed() {
-        myApp.loadDeletePressed(currentUser);
+        myApp.loadDeleteUser(currentUser);
     }
+
+    @FXML
+    private void handleBanUserPressed() {
+        myApp.loadBanUser(currentUser);
+    }
+
+    @FXML
+    private void handleUnblockPressed() { myApp.loadUnblockUser(currentUser); }
 
 }

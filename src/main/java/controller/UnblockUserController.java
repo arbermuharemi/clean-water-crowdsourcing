@@ -9,9 +9,9 @@ import main.java.model.User;
 import java.util.ArrayList;
 
 /**
- * Created by Yash on 11/21/2016.
+ * Created by Yash on 11/22/2016.
  */
-public class DeleteUserController {
+public class UnblockUserController {
     private User currentUser;
     private Main myApp;
 
@@ -41,17 +41,17 @@ public class DeleteUserController {
     private void handleSubmitPressed() {
         String userId = userField.getText();
         ArrayList<User> userList = myApp.getUserList();
-        int indexRemove = 0;
-        boolean toRemove = false;
-        for(int j = 0; j < userList.size() && !toRemove; j++) {
+        int indexUnblock = 0;
+        boolean toUnblock = false;
+        for(int j = 0; j < userList.size() && !toUnblock; j++) {
             if(userList.get(j).getUserName().equals(userId)) {
-                toRemove = true;
-                indexRemove = j;
+                toUnblock = true;
+                indexUnblock = j;
             }
         }
-        if(toRemove) {
-            myApp.removeUser(indexRemove);
-            myApp.writeSecurity("USER " + userId + " REMOVED by admin " + currentUser.getUserName());
+        if(toUnblock) {
+            myApp.resetLog(indexUnblock);
+            myApp.writeSecurity("USER " + userId + " UNBLOCKED by admin " + currentUser.getUserName());
             myApp.loadApplication(currentUser);
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -16,6 +16,7 @@ import java.util.ArrayList;
  */
 public class LoginScreenController {
     private User currentUser;
+    private User toBlock;
     private Main myApp;
 
     @FXML
@@ -38,13 +39,27 @@ public class LoginScreenController {
     @FXML
     private void handleSubmitPressed() {
         boolean loadApp;
-        currentUser = new User(null, null, null, null, User.Type.USER.toString());
+        boolean isBlocked;
+        boolean isBanned;
+        currentUser = new User(null, null, null, null, User.Type.USER.toString(), "FALSE", "0");
         String username = userField.getText();
         String password = passField.getText();
         ArrayList<User> userList = myApp.getUserList();
         loadApp = isValidLogin(username, password, userList);
+        isBlocked = Integer.parseInt(currentUser.getLogCount()) == 3;
+        isBanned = currentUser.getBanned().equals("TRUE");
         if (loadApp) {
             myApp.loadApplication(currentUser);
+        } else if(!loadApp && isBanned) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("User Banned");
+            alert.setContentText("You were banned bro, you fucked up.");
+            alert.showAndWait();
+        } else if(!loadApp && !isBanned && isBlocked) {
+            Alert alert = new Alert(AlertType.INFORMATION);
+            alert.setTitle("User Blocked");
+            alert.setContentText("You failed to login too many times, you must request an admin to unblock your account.");
+            alert.showAndWait();
         } else {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Credentials Error");
@@ -62,23 +77,75 @@ public class LoginScreenController {
      */
     public boolean isValidLogin(String username, String password, ArrayList<User> userList) {
         boolean loadApp = false;
+        boolean userNotPass = false;
         String logUser = username;
         String toLog = "";
         for(int j = 0; j < userList.size() && !loadApp; j++) {
             User user = userList.get(j);
             toLog = "LOGIN ATTEMPT ";
-            if(user.getUserName().equals(username) && user.getPassword().equals(password)) {
-                loadApp = true;
-                currentUser = user;
-                toLog += "by " + username + ": Success";
+            boolean isBanned = user.getBanned().equals("TRUE");
+            boolean isBlocked = Integer.parseInt(user.getLogCount()) == 3;
+            if (user.getUserName().equals(username)) {
+                if (isBanned) {
+                    toLog += "by " + username + ": Failure, User Banned";
+                    loadApp = false;
+                    j = userList.size();
+                    currentUser = user;
+                } else if (!isBanned && isBlocked) {
+                    toLog += "by " + username + ": Failure, User Blocked due to Excessive Login Attempts";
+                    loadApp = false;
+                    j = userList.size();
+                    currentUser = user;
+                } else if (!isBanned && !isBlocked && !(user.getPassword().equals(password))) {
+                    toLog += "by " + username + ": Failure, Bad Password";
+                    currentUser = user;
+                    myApp.incrementLog(j);
+                    loadApp = false;
+                    j = userList.size();
+                } else {
+                    toLog += "by " + username + ": Success";
+                    loadApp = true;
+                    currentUser = user;
+                    myApp.resetLog(j);
+                }
             } else {
+                toLog += "Unknown Username";
                 loadApp = false;
-                toLog += "Incorrect username or password";
             }
         }
         myApp.writeSecurity(toLog);
         return loadApp;
+            //System.out.println(j + " " + user.getUserName().equals(username));
+            /*if(user.getUserName().equals(username) && user.getPassword().equals(password)) {
+                if(user.getBanned().equals("TRUE")) {
+                    currentUser = user;
+                    toLog += "by " + username + ": Failure, User Banned";
+                    loadApp = false;
+                    j = userList.size();
+
+                } else {
+                    loadApp = true;
+                    currentUser = user;
+                    toLog += "by " + username + ": Success";
+                }
+            } else if(user.getUserName().equals(username) && !(user.getPassword().equals(password))){
+                currentUser = user;
+                currentUser.incrementLogCount();
+                j = userList.size();
+                loadApp = false;
+                userNotPass = true;
+            } else {
+                System.out.println(j + " Incorrect pass and user");
+                loadApp = false;
+                toLog += "Unknown Username";
+            }
+        }
+        if(userNotPass && !currentUser.getBanned().equals("TRUE")) {
+            toLog = "LOGIN ATTEMPT by " + username + ": Failure, bad password";
+        }*/
     }
+
+
 
     @FXML
     private void handleSignUpPressed() {

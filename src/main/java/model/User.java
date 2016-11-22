@@ -1,5 +1,6 @@
 package main.java.model;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -11,9 +12,12 @@ public class User {
     private StringProperty _lastName = new SimpleStringProperty();
     private StringProperty _username = new SimpleStringProperty();
     private StringProperty _password = new SimpleStringProperty();
+    private String _isBanned = "FALSE";
+    private String logCount = "0";
     private Type _type = Type.USER;
     private Profile userProfile;
     private boolean hasProfile;
+
 
     public User() {
     }
@@ -26,12 +30,14 @@ public class User {
      * @param password user's password
      * @param type user's profile type
      */
-    public User(String firstName, String lastName, String username, String password, String type) {
+    public User(String firstName, String lastName, String username, String password, String type, String banned, String log) {
         _firstName.set(firstName);
         _lastName.set(lastName);
         _username.set(username);
         _password.set(password);
+        _isBanned = banned;
         type = type.toLowerCase();
+        logCount = log;
 
         if (type.isEmpty()) {
             _type = Type.USER;
@@ -156,6 +162,41 @@ public class User {
                     "\n" + "Type: " + _type + "\n" + userProfile.toString() + "\n";
         }
 
+    }
+
+    /**
+     * sets the banned status of a user's account
+     * @param banned the status of the user's account
+     */
+    public void setBanned(String banned) {
+        _isBanned = banned;
+    }
+
+    /**
+     *
+     * @return the status of the user's account
+     */
+    public String getBanned() {
+        return _isBanned;
+    }
+
+    public void incrementLogCount() {
+        Integer i = Integer.parseInt(logCount);
+        i++;
+        logCount = i.toString();
+    }
+
+    public void resetLogCount() {
+        Integer i = 0;
+        logCount = i.toString();
+    }
+
+    public void setLogCount(String count) {
+        logCount = count;
+    }
+
+    public String getLogCount() {
+        return logCount;
     }
 
     /**

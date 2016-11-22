@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Created by Yash on 11/21/2016.
  */
-public class DeleteUserController {
+public class BanUserController {
     private User currentUser;
     private Main myApp;
 
@@ -41,18 +41,23 @@ public class DeleteUserController {
     private void handleSubmitPressed() {
         String userId = userField.getText();
         ArrayList<User> userList = myApp.getUserList();
-        int indexRemove = 0;
-        boolean toRemove = false;
-        for(int j = 0; j < userList.size() && !toRemove; j++) {
+        int indexBan = 0;
+        boolean toBan = false;
+        for(int j = 0; j < userList.size() && !toBan; j++) {
             if(userList.get(j).getUserName().equals(userId)) {
-                toRemove = true;
-                indexRemove = j;
+                toBan = true;
+                indexBan = j;
             }
         }
-        if(toRemove) {
-            myApp.removeUser(indexRemove);
-            myApp.writeSecurity("USER " + userId + " REMOVED by admin " + currentUser.getUserName());
+        if(toBan) {
+            myApp.banUser(indexBan);
+            myApp.writeSecurity("USER " + userId + " BANNED by admin" + currentUser.getUserName());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setContentText(userId + " was successfully banned.");
+            alert.showAndWait();
             myApp.loadApplication(currentUser);
+
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Error");

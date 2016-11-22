@@ -53,7 +53,7 @@ public class RegistrationScreenController {
         try {
             checkValidName(firstName, lastName);
             User newUser = new User(firstName, lastName, userName,
-                    passField.getText(), typeBox.getValue());
+                    passField.getText(), typeBox.getValue(), "FALSE", "0");
             myApp.addUser(newUser);
             myApp.loadApplication(newUser);
         } catch (Exception e) {

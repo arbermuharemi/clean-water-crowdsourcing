@@ -71,6 +71,14 @@
                 onAction="#handleDeleteUserPressed"
                 text="Delete User" textOverrun="CLIP">Delete User
         </Button>
+        <Button fx:id="banUserButton" alignment="CENTER"
+                onAction="#handleBanUserPressed"
+                text="Ban User" textOverrun="CLIP">Ban User
+        </Button>
+        <Button fx:id="unblockUserButton" alignment="CENTER"
+                onAction="#handleUnblockPressed"
+                text="Unblock User" textOverrun="CLIP">Unblock User
+        </Button>
 
     </VBox>
 
