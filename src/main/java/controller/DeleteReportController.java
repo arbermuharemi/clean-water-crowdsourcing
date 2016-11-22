@@ -74,6 +74,7 @@ public class DeleteReportController {
                 if(report.get_reportNumber() == reportNumber) {
                     myApp.deletePurityReport(j);
                     foundReport = true;
+                    myApp.writeSecurity("PURITY REPORT " + reportNumber + " DELETED by manager " + currentUser.getUserName());
                 }
             }
         } else {
@@ -83,6 +84,7 @@ public class DeleteReportController {
                 if(report.get_reportNumber() == reportNumber) {
                     myApp.deleteSourceReport(j);
                     foundReport = true;
+                    myApp.writeSecurity("SOURCE REPORT " + reportNumber + " DELETED by manager " + currentUser.getUserName());
                 }
             }
         }
