@@ -24,14 +24,13 @@
                 <Font name="System Bold" size="18.0"/>
             </font>
         </Label>
-        <Button alignment="CENTER"
+        <Button fx:id="submitSourceReportButton" alignment="CENTER"
                 onAction="#handleSubmitSourcePressed"
                 text="Submit Source Report" textOverrun="CLIP">Submit Source
             Report
         </Button>
-        <Button alignment="CENTER"
-                onAction="#handleViewSourceReportsPressed">View Source
-            Reports
+        <Button fx:id="viewReportsButton" alignment="CENTER"
+                onAction="#handleViewReportsPressed">View Reports
         </Button>
         <Button fx:id="viewMapButton" mnemonicParsing="false"
                 onAction="#handleViewMapPressed">View Map Report
@@ -42,15 +41,9 @@
         <Button fx:id="editButton" alignment="CENTER"
                 onAction="#handleEditPressed">Edit Profile
         </Button>
-        <Button alignment="BOTTOM_CENTER"
-                onAction="#handleLogoutPressed">Logout
-        </Button>
-        <Button fx:id="submitReportButton" alignment="BOTTOM_CENTER"
-                onAction="#handleSubmitReportPressed">Submit PurityReport
-        </Button>
-        <Button fx:id="viewPurityReportsButton" alignment="BOTTOM_CENTER"
-                onAction="#handleViewPurityReportsPressed">View Purity
-            Reports
+
+        <Button fx:id="submitPurityReportButton" alignment="BOTTOM_CENTER"
+                onAction="#handleSubmitPurityReportPressed">Submit PurityReport
         </Button>
 
     </VBox>
@@ -78,6 +71,13 @@
         <Button fx:id="unblockUserButton" alignment="CENTER"
                 onAction="#handleUnblockPressed"
                 text="Unblock User" textOverrun="CLIP">Unblock User
+        </Button>
+        <Button fx:id="deleteReportButton" alignment="CENTER"
+                onAction="#handleDeleteReportPressed"
+                text="Delete Report" textOverrun="CLIP">Delete Report
+        </Button>
+        <Button alignment="BOTTOM_CENTER"
+                onAction="#handleLogoutPressed">Logout
         </Button>
 
     </VBox>

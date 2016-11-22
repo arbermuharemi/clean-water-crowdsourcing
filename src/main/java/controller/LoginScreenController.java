@@ -53,8 +53,9 @@ public class LoginScreenController {
         } else if(!loadApp && isBanned) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("User Banned");
-            alert.setContentText("You were banned bro, you fucked up.");
+            alert.setContentText("You've been banned. You cannot submit reports, but you can still view them.");
             alert.showAndWait();
+            myApp.loadApplication(currentUser);
         } else if(!loadApp && !isBanned && isBlocked) {
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("User Blocked");

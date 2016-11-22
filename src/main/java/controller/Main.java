@@ -630,11 +630,32 @@ public class Main extends Application {
         }
     }
 
+    public void loadDeleteReport(User user) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(Main.class.getResource("../view/DeleteReport.fxml"));
+            AnchorPane deleteReportLayout = loader.load();
+
+            DeleteReportController controller = loader.getController();
+            controller.setMainApp(this);
+            controller.setCurrentUser(user);
+
+            window.setTitle("Delete Report");
+            Scene deleteReportScene = new Scene(deleteReportLayout);
+            window.setScene(deleteReportScene);
+            window.show();
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     /**
      * adds the user to the database
      * @param user the user you want to add
+     * @return false if the username already exists and true if it does not
      */
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         boolean contains = false;
         for(int j = 0; j < userArr.size(); j++) {
             if(userArr.get(j).getUserName().equals(user.getUserName())) {
@@ -649,10 +670,12 @@ public class Main extends Application {
             alert.setTitle("Username Exists");
             alert.setContentText("This username is taken!");
             alert.showAndWait();
+            return false;
         }
 
        // ArrayList<HashMap<String, String>> myUserList = getUserList();
         userRef.setValue(userArr);
+        return true;
     }
 
     public void removeUser(int index) {
@@ -674,6 +697,16 @@ public class Main extends Application {
     public void resetLog(int index) {
         userArr.get(index).resetLogCount();
         userRef.setValue(userArr);
+    }
+
+    public void deletePurityReport(int index) {
+        purityReportList.remove(index);
+        purityRef.setValue(purityReportList);
+    }
+
+    public void deleteSourceReport(int index) {
+        sourceReportList.remove(index);
+        sourceRef.setValue(sourceReportList);
     }
 
     /**

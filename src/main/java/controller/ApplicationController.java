@@ -29,13 +29,16 @@ public class ApplicationController {
     private Button viewMapButton;
 
     @FXML
-    private Button submitReportButton;
+    private Button submitSourceReportButton;
+
+    @FXML
+    private Button submitPurityReportButton;
 
     @FXML
     private Button viewHistoryGraphButton;
 
     @FXML
-    private Button viewPurityReportsButton;
+    private Button viewReportsButton;
 
     @FXML
     private Button deleteUserButton;
@@ -45,6 +48,9 @@ public class ApplicationController {
 
     @FXML
     private Button unblockUserButton;
+
+    @FXML
+    private Button deleteReportButton;
 
     /**
      * A method that sets the Main app for referencing database objects
@@ -69,15 +75,18 @@ public class ApplicationController {
         currentUser = user;
         User.Type userType = currentUser.getType();
 
+
         if (userType == User.Type.USER || userType == User.Type.ADMIN) {
-            submitReportButton.setDisable(true);
+            submitPurityReportButton.setDisable(true);
         }
         if (userType == User.Type.MANAGER){
-            viewPurityReportsButton.setDisable(false);
+            //viewReportsButton.setDisable(false);
             viewHistoryGraphButton.setDisable(false);
+            deleteReportButton.setDisable(false);
         } else {
-            viewPurityReportsButton.setDisable(true);
+            //viewReportsButton.setDisable(true);
             viewHistoryGraphButton.setDisable(true);
+            deleteReportButton.setDisable(true);
         }
         if (userType == User.Type.ADMIN) {
             deleteUserButton.setDisable(false);
@@ -96,6 +105,10 @@ public class ApplicationController {
         }
         if (myApp.getSourceReportList() == null || myApp.getSourceReportList().size() == 0) {
             viewMapButton.setDisable(true);
+        }
+        if(currentUser.getBanned().equals("TRUE")) {
+            submitSourceReportButton.setDisable(true);
+            submitPurityReportButton.setDisable(true);
         }
         // For future implementation
         //if (currentUser.getType() == User.Type.WORKER) {
@@ -133,17 +146,17 @@ public class ApplicationController {
     }
 
     @FXML
-    private void handleViewSourceReportsPressed() {
+    private void handleViewReportsPressed() {
         myApp.loadViewSourceReport(currentUser);
     }
 
-    @FXML
+    /*@FXML
     private void handleViewPurityReportsPressed() {
         myApp.loadViewPurityReport(currentUser);
-    }
+    }*/
 
     @FXML
-    private void handleSubmitReportPressed() {
+    private void handleSubmitPurityReportPressed() {
         myApp.loadWaterReport(currentUser);
     }
 
@@ -172,5 +185,8 @@ public class ApplicationController {
 
     @FXML
     private void handleUnblockPressed() { myApp.loadUnblockUser(currentUser); }
+
+    @FXML
+    private void handleDeleteReportPressed() { myApp.loadDeleteReport(currentUser); }
 
 }

@@ -54,8 +54,12 @@ public class RegistrationScreenController {
             checkValidName(firstName, lastName);
             User newUser = new User(firstName, lastName, userName,
                     passField.getText(), typeBox.getValue(), "FALSE", "0");
-            myApp.addUser(newUser);
-            myApp.loadApplication(newUser);
+            boolean proceed = myApp.addUser(newUser);
+            if(proceed) {
+                myApp.loadApplication(newUser);
+            } else {
+                myApp.loadRegister();
+            }
         } catch (Exception e) {
             AlertMessage.sendMessage("Invalid Name", "Your first and last " +
                     "name can only contain letters");
