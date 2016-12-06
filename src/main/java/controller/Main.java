@@ -808,6 +808,7 @@ public class Main extends Application {
     public void writeSecurity(String message) {
         try {
             File secLog = new File("C:\\Users\\Yash\\Documents\\2340\\cs2340-software-smiths\\src\\main\\java\\controller\\Security.txt");
+            //File secLog = new File(getClass().getResource("Security.txt").toString());
             FileWriter fw = new FileWriter(secLog, true);
             Date date = new Date();
             fw.write(date.toString() + " " + message + "\n");
