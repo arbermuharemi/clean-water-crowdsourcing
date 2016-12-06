@@ -8,7 +8,10 @@ import javafx.scene.chart.Axis;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
 import main.java.model.PurityReport;
 import main.java.model.SourceReport;
 import main.java.model.User;
@@ -69,6 +72,14 @@ public class Main extends Application {
                 .build();
         FirebaseApp.initializeApp(options);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //String path = getClass().getResource("UnderTheSea.mp3").toString();
+        //Media media = new Media(path);
+        //MediaPlayer mp = new MediaPlayer(media);
+        //mp.stop();
+        String path = getClass().getResource("UnderTheSea.mp3").toString();
+        Media media = new Media(path);
+        MediaPlayer mp = new MediaPlayer(media);
+        mp.play();
         userRef = database.getReference("users");
         sourceRef = database.getReference("sourceReports");
         purityRef = database.getReference("purityReports");
