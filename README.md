@@ -1,4 +1,4 @@
-# clean_water_crowdsourcing
+# clean-water-crowdsourcing
 A JavaFX application that supports finding clean drinking water and reporting on testing results. In many parts of the world, access to clean water is a severe problem. Many times, water is available, but people do not know where to get it. Other times, water may appear clean, but has unacceptable levels of contaminants.
 
 # Functionality
